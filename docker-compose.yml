@@ -1,0 +1,9 @@
+services:
+  reporter-bot:
+    build: .
+    command: python main.py
+    env_file:
+      - .env
+    volumes:
+      - ./:/app
+    restart: unless-stopped

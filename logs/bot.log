@@ -1,0 +1,63 @@
+2025-10-24 13:35:08 | INFO     | bot.database.connection:create_tables:113 - Таблицы базы данных успешно созданы
+2025-10-24 13:35:08 | INFO     | __main__:on_startup:46 - Database initialized
+2025-10-24 13:35:08 | INFO     | bot.services.scheduler_service:start:37 - APSheduler starting, current Baku time: 2025-10-24 17:35:08 +04
+2025-10-24 13:35:08 | INFO     | bot.services.scheduler_service:_schedule_daily_notifications:83 - Ежедневные уведомления запланированы на 18:00 и 19:00 (Baku)
+2025-10-24 13:35:08 | INFO     | bot.services.scheduler_service:_schedule_hourly_reminders:92 - Ежечасные напоминания каждые 60 мин (только 18:00–23:59).
+2025-10-24 13:35:08 | INFO     | bot.services.scheduler_service:_schedule_daily_admin_report:101 - Ежедневный отчёт админу запланирован на 23:59 (Baku).
+2025-10-24 13:35:08 | INFO     | bot.services.scheduler_service:_schedule_weekly_report:111 - Недельный отчёт запланирован на день недели=4 00:00 (Baku).
+2025-10-24 13:35:08 | INFO     | bot.services.scheduler_service:start:48 - Kick-all scheduled at 17:35:18 (Baku)
+2025-10-24 13:35:08 | INFO     | bot.services.scheduler_service:start:51 - Планировщик успешно запущен
+2025-10-24 13:35:08 | INFO     | __main__:on_startup:50 - Scheduler started
+2025-10-24 13:35:09 | INFO     | __main__:on_startup:63 - Bot started successfully
+2025-10-24 13:35:09 | INFO     | __main__:main:139 - Starting bot polling...
+2025-10-24 13:35:11 | INFO     | bot.services.scheduler_service:shutdown:63 - Планировщик остановлен
+2025-10-24 13:35:11 | INFO     | __main__:on_shutdown:75 - Scheduler stopped
+2025-10-24 13:35:11 | ERROR    | __main__:on_shutdown:95 - Error on shutdown: 'DatabaseManager' object has no attribute 'close'
+2025-10-24 13:35:15 | INFO     | bot.database.connection:create_tables:113 - Таблицы базы данных успешно созданы
+2025-10-24 13:35:15 | INFO     | __main__:on_startup:46 - Database initialized
+2025-10-24 13:35:15 | INFO     | bot.services.scheduler_service:start:37 - APSheduler starting, current Baku time: 2025-10-24 17:35:15 +04
+2025-10-24 13:35:15 | INFO     | bot.services.scheduler_service:_schedule_daily_notifications:83 - Ежедневные уведомления запланированы на 18:00 и 19:00 (Baku)
+2025-10-24 13:35:15 | INFO     | bot.services.scheduler_service:_schedule_hourly_reminders:92 - Ежечасные напоминания каждые 60 мин (только 18:00–23:59).
+2025-10-24 13:35:15 | INFO     | bot.services.scheduler_service:_schedule_daily_admin_report:101 - Ежедневный отчёт админу запланирован на 23:59 (Baku).
+2025-10-24 13:35:15 | INFO     | bot.services.scheduler_service:_schedule_weekly_report:111 - Недельный отчёт запланирован на день недели=4 00:00 (Baku).
+2025-10-24 13:35:15 | INFO     | bot.services.scheduler_service:start:48 - Kick-all scheduled at 17:35:25 (Baku)
+2025-10-24 13:35:15 | INFO     | bot.services.scheduler_service:start:51 - Планировщик успешно запущен
+2025-10-24 13:35:15 | INFO     | __main__:on_startup:50 - Scheduler started
+2025-10-24 13:35:16 | INFO     | __main__:on_startup:63 - Bot started successfully
+2025-10-24 13:35:16 | INFO     | __main__:main:139 - Starting bot polling...
+2025-10-24 13:35:25 | INFO     | bot.services.scheduler_service:_kick_all:55 - Kick-all: running notification + hourly reminders + admin daily report
+2025-10-24 13:35:27 | ERROR    | bot.services.scheduler_service:_send_daily_admin_report:231 - Ошибка в задаче ежедневного отчёта админу: type object 'DailyReportRepository' has no attribute 'get_reports_by_date_range'
+2025-10-24 13:35:52 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /start
+2025-10-24 13:35:52 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /start
+2025-10-24 13:35:53 | INFO     | bot.middlewares.middlewares:__call__:76 - [UserCheck] пользователь 436680563 не найден в БД
+2025-10-24 13:35:53 | INFO     | bot.handlers.start:cmd_start_not_registered:49 - /start -> registration tg_id=436680563
+2025-10-24 13:35:53 | INFO     | bot.middlewares.middlewares:__call__:76 - [UserCheck] пользователь 436680563 не найден в БД
+2025-10-24 13:35:54 | INFO     | bot.handlers.start:cmd_start_not_registered:49 - /start -> registration tg_id=436680563
+2025-10-24 13:35:55 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): lang_ru
+2025-10-24 13:35:56 | INFO     | bot.middlewares.middlewares:__call__:76 - [UserCheck] пользователь 436680563 не найден в БД
+2025-10-24 13:35:56 | INFO     | bot.handlers.start:select_language:64 - lang selected=ru tg=436680563
+2025-10-24 13:36:01 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): Орхан
+2025-10-24 13:36:01 | INFO     | bot.middlewares.middlewares:__call__:76 - [UserCheck] пользователь 436680563 не найден в БД
+2025-10-24 13:36:02 | INFO     | bot.handlers.start:enter_first_name:97 - first_name ok tg=436680563
+2025-10-24 13:36:05 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): Гусейнов
+2025-10-24 13:36:05 | INFO     | bot.middlewares.middlewares:__call__:76 - [UserCheck] пользователь 436680563 не найден в БД
+2025-10-24 13:36:05 | INFO     | bot.handlers.start:enter_last_name:115 - last_name ok tg=436680563
+2025-10-24 13:36:07 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): work_time_9-18
+2025-10-24 13:36:07 | INFO     | bot.middlewares.middlewares:__call__:76 - [UserCheck] пользователь 436680563 не найден в БД
+2025-10-24 13:36:07 | INFO     | bot.handlers.start:select_work_time:136 - work_time=9:00-18:00 tg=436680563
+2025-10-24 13:36:09 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): confirm_yes
+2025-10-24 13:36:09 | INFO     | bot.middlewares.middlewares:__call__:76 - [UserCheck] пользователь 436680563 не найден в БД
+2025-10-24 13:36:10 | INFO     | bot.database.repository:create:49 - Создан новый пользователь: 436680563
+2025-10-24 13:36:10 | INFO     | bot.handlers.start:confirm_registration:167 - registration done tg=436680563 is_admin_env=True
+2025-10-24 13:36:19 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /help
+2025-10-24 13:36:19 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Орхан)
+2025-10-24 13:36:20 | INFO     | bot.handlers.common:cmd_help:27 - Пользователь 436680563 запросил помощь
+2025-10-24 13:36:21 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): ⚙️ Админ-панель
+2025-10-24 13:36:22 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Орхан)
+2025-10-24 13:36:22 | WARNING  | bot.handlers.admin:cmd_admin_not_authorized:282 - Пользователь без прав администратора 436680563 попытался войти в админ-панель
+2025-10-24 13:37:19 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /start
+2025-10-24 13:37:19 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Орхан)
+2025-10-24 13:37:19 | INFO     | bot.handlers.start:cmd_start_not_registered:49 - /start -> registration tg_id=436680563
+2025-10-24 13:37:20 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): lang_az
+2025-10-24 13:37:20 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Орхан)
+2025-10-24 13:37:20 | INFO     | bot.handlers.start:select_language:64 - lang selected=az tg=436680563
