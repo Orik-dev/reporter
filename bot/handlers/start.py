@@ -29,14 +29,26 @@ async def cmd_start_registered(message: Message, user: User, state: FSMContext):
     """Зарегистрированным показываем меню, сбрасываем любые состояния"""
     try:
         await state.clear()
+        text = (
+            f"👋 Добро пожаловать, {user.first_name}!\n\n"
+            f"Вы уже зарегистрированы в системе.\n"
+            f"Используйте меню ниже для работы с ботом."
+        )
+        if user.language == "az":
+            text = (
+                f"👋 Xoş gəlmisiniz, {user.first_name}!\n\n"
+                f"Siz artıq sistemdə qeydiyyatdan keçmisiniz.\n"
+                f"Bot ilə işləmək üçün aşağıdakı menyudan istifadə edin."
+            )
+        
         await message.answer(
-            get_text("help_text", user.language),
+            text,
             reply_markup=get_main_menu_keyboard(user.language, user.is_admin),
         )
         logger.info(f"/start (registered) tg_id={user.telegram_id}")
     except Exception as e:
         logger.error(f"start registered error: {e}")
-        await message.answer(get_text("error", user.language))
+        await message.answer(get_text("error", user.language if user else "ru"))
 
 
 @router.message(CommandStart(), IsNotRegisteredFilter())
@@ -116,6 +128,21 @@ async def enter_last_name(message: Message, state: FSMContext):
     except Exception as e:
         logger.error(f"enter_last_name error: {e}")
         await message.answer(get_text("error", "ru"))
+
+
+@router.callback_query(F.data == "back_to_last_name", RegistrationStates.work_time)
+async def back_to_last_name(callback: CallbackQuery, state: FSMContext):
+    """Кнопка Назад: вернуться к вводу фамилии"""
+    try:
+        data = await state.get_data()
+        lang = data.get("language", "ru")
+        await callback.message.edit_text(get_text("enter_last_name", lang))
+        await state.set_state(RegistrationStates.last_name)
+        await callback.answer()
+        logger.info(f"back to last_name tg={callback.from_user.id}")
+    except Exception as e:
+        logger.error(f"back_to_last_name error: {e}")
+        await callback.answer(get_text("error", "ru"), show_alert=True)
 
 
 @router.callback_query(F.data.startswith("work_time_"), RegistrationStates.work_time)

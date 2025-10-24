@@ -1,3 +1,3 @@
-from .filters import IsRegisteredFilter, IsNotRegisteredFilter, IsAdminFilter
+from .filters import IsRegisteredFilter, IsNotRegisteredFilter, IsAdminFilter, IsNotAdminFilter
 
-__all__ = ['IsRegisteredFilter', 'IsNotRegisteredFilter', 'IsAdminFilter']
+__all__ = ['IsRegisteredFilter', 'IsNotRegisteredFilter', 'IsAdminFilter', 'IsNotAdminFilter']

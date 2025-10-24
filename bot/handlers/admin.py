@@ -11,15 +11,15 @@ from loguru import logger
 from bot.keyboards import get_admin_keyboard
 from bot.utils import get_text
 from bot.database import User, UserRepository, DailyReportRepository
-from bot.filters import IsAdminFilter, IsRegisteredFilter
+from bot.filters import IsAdminFilter, IsRegisteredFilter, IsNotAdminFilter
 from bot.services import deepseek_service, document_service
 from bot.services.scheduler_service import SchedulerService
 
 router = Router()
 
 
-@router.message(Command("admin"), IsAdminFilter())
-@router.message(F.text.in_(["⚙️ Админ-панель", "⚙️ Admin panel"]), IsAdminFilter())
+@router.message(Command("admin"), IsNotAdminFilter())
+@router.message(F.text.in_(["⚙️ Админ-панель", "⚙️ Admin panel"]), IsNotAdminFilter())
 async def cmd_admin(message: Message, user: User):
     """Обработать команду /admin"""
     try:
@@ -271,7 +271,7 @@ async def admin_weekly_report(callback: CallbackQuery, user: User, session: Asyn
         await callback.message.answer(get_text("error", user.language if user else "ru"))
 
 
-@router.message(Command("admin"), ~IsAdminFilter())
+@router.message(Command("admin"), IsNotAdminFilter())
 @router.message(F.text.in_(["⚙️ Админ-панель", "⚙️ Admin panel"]), ~IsAdminFilter())
 async def cmd_admin_not_authorized(message: Message, user: User):
     """Обработать команду /admin для пользователей без прав администратора"""

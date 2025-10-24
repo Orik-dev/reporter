@@ -74,10 +74,6 @@ async def on_shutdown(bot: Bot, scheduler: SchedulerService):
         scheduler.shutdown()
         logger.info("Scheduler stopped")
         
-        # Close database connection
-        await db_manager.close()
-        logger.info("Database connection closed")
-        
         # Notify admins
         for admin_id in settings.admin_ids_list:
             try:
@@ -110,26 +106,26 @@ async def main():
         # Initialize scheduler
         scheduler = SchedulerService(bot)
         
-        # Register middlewares
+        # КРИТИЧНО: middleware в правильном порядке на OUTER уровне
+        # Outer middleware выполняются ПЕРВЫМИ, до обработки роутеров
+        dp.message.outer_middleware(DatabaseMiddleware())
+        dp.message.outer_middleware(UserCheckMiddleware())
+        dp.message.outer_middleware(AdminCheckMiddleware())
+        
+        dp.callback_query.outer_middleware(DatabaseMiddleware())
+        dp.callback_query.outer_middleware(UserCheckMiddleware())
+        dp.callback_query.outer_middleware(AdminCheckMiddleware())
+        
+        # Logging middleware последним
         dp.message.middleware(LoggingMiddleware())
         dp.callback_query.middleware(LoggingMiddleware())
         
-        dp.message.middleware(DatabaseMiddleware())
-        dp.callback_query.middleware(DatabaseMiddleware())
-        
-        dp.message.middleware(UserCheckMiddleware())
-        dp.callback_query.middleware(UserCheckMiddleware())
-        
-        dp.message.middleware(AdminCheckMiddleware())
-        dp.callback_query.middleware(AdminCheckMiddleware())
-        
-        # Register routers
+        # Register routers (порядок важен!)
+        dp.include_router(start.router)
         dp.include_router(admin.router)
         dp.include_router(profile.router)
         dp.include_router(reports.router)
         dp.include_router(common.router)
-        dp.include_router(start.router)
-        
         
         # Startup actions
         await on_startup(bot, scheduler)

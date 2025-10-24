@@ -1,24 +1,25 @@
 """
-Кастомные фильтры для aiogram 3.22
+Кастомные фильтры для aiogram 3.22.0
 """
-from typing import Any
 from aiogram.filters import BaseFilter
-from aiogram.types import TelegramObject
 
 
 class IsRegisteredFilter(BaseFilter):
-    """Пользователь зарегистрирован"""
-    async def __call__(self, event: TelegramObject, **data: Any) -> bool:
-        return bool(data.get("is_registered", False))
+    async def __call__(self, event, is_registered=False, **kwargs):
+        return is_registered
 
 
 class IsNotRegisteredFilter(BaseFilter):
-    """Пользователь НЕ зарегистрирован"""
-    async def __call__(self, event: TelegramObject, **data: Any) -> bool:
-        return not bool(data.get("is_registered", False))
+    async def __call__(self, event, is_registered=False, **kwargs):
+        return not is_registered
 
 
 class IsAdminFilter(BaseFilter):
-    """Пользователь — админ"""
-    async def __call__(self, event: TelegramObject, **data: Any) -> bool:
-        return bool(data.get("is_admin", False))
+    async def __call__(self, event, is_admin=False, **kwargs):
+        return is_admin
+
+
+class IsNotAdminFilter(BaseFilter):
+    """Пользователь НЕ админ"""
+    async def __call__(self, event, is_admin=False, **kwargs):
+        return not is_admin

@@ -146,6 +146,26 @@ class DailyReportRepository:
             raise
 
     @staticmethod
+    async def get_reports_by_date_range(
+        session: AsyncSession,
+        start_date: datetime,
+        end_date: datetime
+    ) -> List[DailyReport]:
+        """Получить отчёты за указанный диапазон дат"""
+        try:
+            stmt = select(DailyReport).where(
+                and_(
+                    DailyReport.report_date >= start_date,
+                    DailyReport.report_date <= end_date,
+                )
+            ).order_by(DailyReport.report_date.asc())
+            result = await session.scalars(stmt)
+            return list(result)
+        except Exception as e:
+            logger.error(f"Ошибка получения отчётов за период {start_date} - {end_date}: {e}")
+            raise
+
+    @staticmethod
     async def increment_reminder_count(session: AsyncSession, telegram_id: int, report_date: date) -> None:
         """Увеличить счётчик напоминаний"""
         try:

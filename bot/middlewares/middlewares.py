@@ -71,7 +71,7 @@ class UserCheckMiddleware(BaseMiddleware):
             data["is_registered"] = user is not None
 
             if user:
-                logger.info(f"[UserCheck] найден user {user.telegram_id} ({user.first_name})")
+                logger.info(f"[UserCheck] найден user {user.telegram_id} ({user.first_name}), is_admin={user.is_admin}")
             else:
                 logger.info(f"[UserCheck] пользователь {tg_user.id} не найден в БД")
         except Exception as e:
@@ -107,8 +107,8 @@ class AdminCheckMiddleware(BaseMiddleware):
         is_admin = env_admin or db_admin
 
         data["is_admin"] = is_admin
-        logger.debug(
-            f"is_admin={is_admin} (env={env_admin}, db={db_admin}) "
+        logger.info(
+            f"[AdminCheck] is_admin={is_admin} (env={env_admin}, db={db_admin}) "
             f"for tg_id={tg_user.id}; ADMIN_IDS={admin_list}"
         )
 
