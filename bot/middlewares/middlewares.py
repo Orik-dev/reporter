@@ -1,5 +1,5 @@
 """
-Middleware для бота
+Middleware - ИСПРАВЛЕННАЯ ВЕРСИЯ
 """
 from typing import Callable, Dict, Any, Awaitable
 from aiogram import BaseMiddleware
@@ -11,7 +11,7 @@ from config.settings import settings as app_settings
 
 
 class LoggingMiddleware(BaseMiddleware):
-    """Логирует входящие сообщения и callback-и"""
+    """Логирование входящих сообщений"""
     async def __call__(
         self,
         handler: Callable[[TelegramObject, Dict[str, Any]], Awaitable[Any]],
@@ -26,26 +26,24 @@ class LoggingMiddleware(BaseMiddleware):
 
 
 class DatabaseMiddleware(BaseMiddleware):
-    """Создаёт и передаёт session в data для всех апдейтов"""
+    """Создание сессии БД для каждого update"""
     async def __call__(
         self,
         handler: Callable[[TelegramObject, Dict[str, Any]], Awaitable[Any]],
         event: TelegramObject,
         data: Dict[str, Any]
     ) -> Any:
-        # создаём отдельную сессию на каждый update
         async with db_manager.session() as session:
             data["session"] = session
             try:
                 return await handler(event, data)
             finally:
-                # если по какой-то причине транзакция не закрыта
                 if session.in_transaction():
                     await session.rollback()
 
 
 class UserCheckMiddleware(BaseMiddleware):
-    """Проверяет, зарегистрирован ли пользователь. Кладёт в data: user, is_registered"""
+    """Проверка регистрации пользователя"""
     async def __call__(
         self,
         handler: Callable[[TelegramObject, Dict[str, Any]], Awaitable[Any]],
@@ -71,9 +69,9 @@ class UserCheckMiddleware(BaseMiddleware):
             data["is_registered"] = user is not None
 
             if user:
-                logger.info(f"[UserCheck] найден user {user.telegram_id} ({user.first_name}), is_admin={user.is_admin}")
+                logger.debug(f"[UserCheck] найден user {user.telegram_id} ({user.first_name}), is_admin={user.is_admin}")
             else:
-                logger.info(f"[UserCheck] пользователь {tg_user.id} не найден в БД")
+                logger.debug(f"[UserCheck] пользователь {tg_user.id} не найден в БД")
         except Exception as e:
             logger.error(f"UserCheck error: {e}")
             data["user"] = None
@@ -83,7 +81,7 @@ class UserCheckMiddleware(BaseMiddleware):
 
 
 class AdminCheckMiddleware(BaseMiddleware):
-    """Кладёт в data: is_admin (по .env ИЛИ по флагу в БД)"""
+    """Проверка прав администратора"""
     async def __call__(
         self,
         handler: Callable[[TelegramObject, Dict[str, Any]], Awaitable[Any]],
@@ -96,10 +94,13 @@ class AdminCheckMiddleware(BaseMiddleware):
 
         user = data.get("user")
 
+        # ✅ ИСПРАВЛЕНО: Детальное логирование ADMIN_IDS
         try:
+            logger.debug(f"[AdminCheck] raw ADMIN_IDS from settings: '{app_settings.admin_ids}'")
             admin_list = app_settings.admin_ids_list or []
+            logger.debug(f"[AdminCheck] parsed admin_ids_list: {admin_list}")
         except Exception as e:
-            logger.error(f"AdminCheck: settings недоступны: {e}")
+            logger.error(f"[AdminCheck] ОШИБКА получения admin_ids: {e}")
             admin_list = []
 
         env_admin = tg_user.id in admin_list
@@ -107,9 +108,14 @@ class AdminCheckMiddleware(BaseMiddleware):
         is_admin = env_admin or db_admin
 
         data["is_admin"] = is_admin
+        
+        # ✅ ИСПРАВЛЕНО: Подробное логирование
         logger.info(
-            f"[AdminCheck] is_admin={is_admin} (env={env_admin}, db={db_admin}) "
-            f"for tg_id={tg_user.id}; ADMIN_IDS={admin_list}"
+            f"[AdminCheck] tg_id={tg_user.id} | "
+            f"is_admin={is_admin} | "
+            f"env_admin={env_admin} | "
+            f"db_admin={db_admin} | "
+            f"ADMIN_IDS={admin_list}"
         )
 
         return await handler(event, data)

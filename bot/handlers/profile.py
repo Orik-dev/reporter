@@ -1,3 +1,7 @@
+"""
+Профиль пользователя - ИСПРАВЛЕННАЯ ВЕРСИЯ
+"""
+import re
 from aiogram import Router, F
 from aiogram.filters import Command
 from aiogram.types import Message, CallbackQuery
@@ -10,7 +14,6 @@ from bot.keyboards import (
     get_edit_profile_keyboard,
     get_language_keyboard,
     get_work_time_keyboard,
-    get_cancel_keyboard
 )
 from bot.utils import get_text
 from bot.database import User, UserRepository
@@ -18,10 +21,42 @@ from bot.filters import IsRegisteredFilter
 
 router = Router()
 
+
+# ✅ ИСПРАВЛЕНО: Такая же валидация как в start.py
+def _bad_name(s: str) -> bool:
+    """Проверка имени/фамилии"""
+    if not s or not s.strip():
+        return True
+    
+    s = s.strip()
+    
+    if len(s) < 2 or len(s) > 50:
+        return True
+    
+    if s.startswith("/"):
+        return True
+    
+    banned = {
+        "👤 Мой профиль", "📊 Отправить отчет", "❓ Помощь", "⚙️ Админ-панель",
+        "👤 Mənim profilim", "📊 Hesabat göndər", "❓ Kömək", "⚙️ Admin panel",
+    }
+    if s in banned:
+        return True
+    
+    pattern = r"^[a-zA-ZА-Яа-яЁёƏəİıÖöÜüĞğŞşÇç\s'\-]+$"
+    if not re.match(pattern, s):
+        return True
+    
+    if not re.search(r"[a-zA-ZА-Яа-яЁёƏəİıÖöÜüĞğŞşÇç]", s):
+        return True
+    
+    return False
+
+
 @router.message(Command("profile"), IsRegisteredFilter())
 @router.message(F.text.in_(["👤 Мой профиль", "👤 Mənim profilim"]), IsRegisteredFilter())
 async def cmd_profile(message: Message, user: User, state: FSMContext):
-    """Показываем профиль независимо от текущего FSM-состояния"""
+    """Показать профиль"""
     try:
         await state.clear()
         text = get_text("profile_info", user.language,
@@ -32,20 +67,16 @@ async def cmd_profile(message: Message, user: User, state: FSMContext):
         logger.error(f"profile error: {e}")
         await message.answer(get_text("error", user.language))
 
+
 @router.callback_query(F.data == "edit_first_name")
 async def edit_first_name_start(callback: CallbackQuery, state: FSMContext, user: User):
     """Начать редактирование имени"""
     try:
         await callback.answer()
-        
         text = get_text("enter_first_name", user.language)
-        keyboard = get_cancel_keyboard(user.language)
-        
-        await callback.message.edit_text(text, reply_markup=keyboard)
+        await callback.message.edit_text(text)
         await state.set_state(EditProfileStates.edit_first_name)
-        
         logger.info(f"Пользователь {user.telegram_id} начал редактирование имени")
-    
     except Exception as e:
         logger.error(f"Ошибка начала редактирования имени: {e}")
         await callback.answer(get_text("error", user.language), show_alert=True)
@@ -62,12 +93,11 @@ async def edit_first_name_process(
     try:
         first_name = message.text.strip()
         
-        # Валидация имени
-        if len(first_name) < 2 or len(first_name) > 50:
-            await message.answer(get_text("invalid_input", user.language))
+        # ✅ ИСПРАВЛЕНО: Используем улучшенную валидацию
+        if _bad_name(first_name):
+            await message.answer(get_text("invalid_name", user.language))
             return
         
-        # Обновляем пользователя
         await UserRepository.update(
             session,
             user.telegram_id,
@@ -79,7 +109,6 @@ async def edit_first_name_process(
         text = get_text("profile_updated", user.language)
         await message.answer(text)
         
-        # Показываем обновленный профиль
         updated_user = await UserRepository.get_by_telegram_id(session, user.telegram_id)
         profile_text = get_text(
             "profile_info",
@@ -104,15 +133,10 @@ async def edit_last_name_start(callback: CallbackQuery, state: FSMContext, user:
     """Начать редактирование фамилии"""
     try:
         await callback.answer()
-        
         text = get_text("enter_last_name", user.language)
-        keyboard = get_cancel_keyboard(user.language)
-        
-        await callback.message.edit_text(text, reply_markup=keyboard)
+        await callback.message.edit_text(text)
         await state.set_state(EditProfileStates.edit_last_name)
-        
         logger.info(f"Пользователь {user.telegram_id} начал редактирование фамилии")
-    
     except Exception as e:
         logger.error(f"Ошибка начала редактирования фамилии: {e}")
         await callback.answer(get_text("error", user.language), show_alert=True)
@@ -129,12 +153,11 @@ async def edit_last_name_process(
     try:
         last_name = message.text.strip()
         
-        # Валидация фамилии
-        if len(last_name) < 2 or len(last_name) > 50:
-            await message.answer(get_text("invalid_input", user.language))
+        # ✅ ИСПРАВЛЕНО: Используем улучшенную валидацию
+        if _bad_name(last_name):
+            await message.answer(get_text("invalid_last_name", user.language))
             return
         
-        # Обновляем пользователя
         await UserRepository.update(
             session,
             user.telegram_id,
@@ -146,7 +169,6 @@ async def edit_last_name_process(
         text = get_text("profile_updated", user.language)
         await message.answer(text)
         
-        # Показываем обновленный профиль
         updated_user = await UserRepository.get_by_telegram_id(session, user.telegram_id)
         profile_text = get_text(
             "profile_info",
@@ -171,15 +193,11 @@ async def edit_work_time_start(callback: CallbackQuery, state: FSMContext, user:
     """Начать редактирование рабочего времени"""
     try:
         await callback.answer()
-        
         text = get_text("select_work_time", user.language)
         keyboard = get_work_time_keyboard(user.language)
-        
         await callback.message.edit_text(text, reply_markup=keyboard)
         await state.set_state(EditProfileStates.edit_work_time)
-        
         logger.info(f"Пользователь {user.telegram_id} начал редактирование рабочего времени")
-    
     except Exception as e:
         logger.error(f"Ошибка начала редактирования рабочего времени: {e}")
         await callback.answer(get_text("error", user.language), show_alert=True)
@@ -202,7 +220,6 @@ async def edit_work_time_process(
         }
         work_time = work_time_map.get(work_time_code, "9:00-18:00")
         
-        # Обновляем пользователя
         await UserRepository.update(
             session,
             user.telegram_id,
@@ -215,7 +232,6 @@ async def edit_work_time_process(
         text = get_text("profile_updated", user.language)
         await callback.message.edit_text(text)
         
-        # Показываем обновленный профиль
         updated_user = await UserRepository.get_by_telegram_id(session, user.telegram_id)
         profile_text = get_text(
             "profile_info",
@@ -240,15 +256,11 @@ async def edit_language_start(callback: CallbackQuery, state: FSMContext, user: 
     """Начать редактирование языка"""
     try:
         await callback.answer()
-        
         text = get_text("welcome", user.language)
         keyboard = get_language_keyboard()
-        
         await callback.message.edit_text(text, reply_markup=keyboard)
         await state.set_state(EditProfileStates.edit_language)
-        
         logger.info(f"Пользователь {user.telegram_id} начал редактирование языка")
-    
     except Exception as e:
         logger.error(f"Ошибка начала редактирования языка: {e}")
         await callback.answer(get_text("error", user.language), show_alert=True)
@@ -265,7 +277,6 @@ async def edit_language_process(
     try:
         language = callback.data.split("_")[1]
         
-        # Обновляем пользователя
         await UserRepository.update(
             session,
             user.telegram_id,
@@ -278,7 +289,6 @@ async def edit_language_process(
         text = get_text("profile_updated", language)
         await callback.message.edit_text(text)
         
-        # Показываем обновленный профиль
         updated_user = await UserRepository.get_by_telegram_id(session, user.telegram_id)
         profile_text = get_text(
             "profile_info",
@@ -300,18 +310,13 @@ async def edit_language_process(
 
 @router.callback_query(F.data == "back_to_menu")
 async def back_to_menu(callback: CallbackQuery, state: FSMContext, user: User):
-    """Обработать кнопку возврата в меню"""
+    """Вернуться в главное меню"""
     try:
         await state.clear()
         await callback.answer()
-        
         text = get_text("help_text", user.language)
         await callback.message.edit_text(text)
-        
         logger.info(f"Пользователь {user.telegram_id} вернулся в меню")
-    
     except Exception as e:
         logger.error(f"Ошибка возврата в меню: {e}")
-
         await callback.answer(get_text("error", user.language), show_alert=True)
-

@@ -1,8 +1,9 @@
 """
-/start и регистрация
+/start и регистрация - ИСПРАВЛЕННАЯ ВЕРСИЯ
 """
+import re
 from aiogram import Router, F
-from aiogram.filters import CommandStart, StateFilter
+from aiogram.filters import CommandStart
 from aiogram.types import Message, CallbackQuery
 from aiogram.fsm.context import FSMContext
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -22,11 +23,50 @@ from bot.filters import IsNotRegisteredFilter, IsRegisteredFilter
 
 router = Router()
 
-# -------- /start --------
+
+# ✅ ИСПРАВЛЕНО: Улучшенная валидация имени/фамилии
+def _bad_name(s: str) -> bool:
+    """
+    Проверка имени/фамилии
+    Допускаются: буквы (кириллица, латиница, азербайджанские), пробелы, дефисы, апострофы
+    """
+    if not s or not s.strip():
+        return True
+    
+    s = s.strip()
+    
+    # Проверка длины
+    if len(s) < 2 or len(s) > 50:
+        return True
+    
+    # Начинается с команды
+    if s.startswith("/"):
+        return True
+    
+    # Запрещенные строки (кнопки меню)
+    banned = {
+        "👤 Мой профиль", "📊 Отправить отчет", "❓ Помощь", "⚙️ Админ-панель",
+        "👤 Mənim profilim", "📊 Hesabat göndər", "❓ Kömək", "⚙️ Admin panel",
+    }
+    if s in banned:
+        return True
+    
+    # Только буквы, пробелы, дефисы, апострофы
+    # Поддержка кириллицы, латиницы, азербайджанских букв (Ə, İ, Ö, Ü, Ğ, Ş, Ç)
+    pattern = r"^[a-zA-ZА-Яа-яЁёƏəİıÖöÜüĞğŞşÇç\s'\-]+$"
+    if not re.match(pattern, s):
+        return True
+    
+    # Не должно быть только пробелов/дефисов/апострофов
+    if not re.search(r"[a-zA-ZА-Яа-яЁёƏəİıÖöÜüĞğŞşÇç]", s):
+        return True
+    
+    return False
+
 
 @router.message(CommandStart(), IsRegisteredFilter())
 async def cmd_start_registered(message: Message, user: User, state: FSMContext):
-    """Зарегистрированным показываем меню, сбрасываем любые состояния"""
+    """Зарегистрированным показываем меню"""
     try:
         await state.clear()
         text = (
@@ -53,7 +93,7 @@ async def cmd_start_registered(message: Message, user: User, state: FSMContext):
 
 @router.message(CommandStart(), IsNotRegisteredFilter())
 async def cmd_start_not_registered(message: Message, state: FSMContext):
-    """Незарегистрированным — выбор языка и запуск регистрации"""
+    """Незарегистрированным — выбор языка"""
     try:
         await state.clear()
         await message.answer(get_text("welcome", "ru"), reply_markup=get_language_keyboard())
@@ -63,10 +103,10 @@ async def cmd_start_not_registered(message: Message, state: FSMContext):
         logger.error(f"start not registered error: {e}")
         await message.answer(get_text("error", "ru"))
 
-# -------- Регистрация --------
 
 @router.callback_query(F.data.startswith("lang_"), RegistrationStates.language)
 async def select_language(callback: CallbackQuery, state: FSMContext):
+    """Выбор языка"""
     try:
         lang = callback.data.split("_", 1)[1]
         await state.update_data(language=lang)
@@ -79,30 +119,19 @@ async def select_language(callback: CallbackQuery, state: FSMContext):
         await callback.answer(get_text("error", "ru"), show_alert=True)
 
 
-def _bad_name(s: str) -> bool:
-    if not s:
-        return True
-    s = s.strip()
-    if len(s) < 2 or len(s) > 50:
-        return True
-    if s.startswith("/"):
-        return True
-    banned = {
-        "👤 Мой профиль", "📊 Отправить отчет", "❓ Помощь", "⚙️ Админ-панель",
-        "👤 Mənim profilim", "📊 Hesabat göndər", "❓ Kömək", "⚙️ Admin panel",
-    }
-    return s in banned
-
-
 @router.message(RegistrationStates.first_name, F.text)
 async def enter_first_name(message: Message, state: FSMContext):
+    """Ввод имени"""
     try:
         data = await state.get_data()
         lang = data.get("language", "ru")
         name = message.text.strip()
+        
+        # ✅ ИСПРАВЛЕНО: Используем улучшенную валидацию
         if _bad_name(name):
-            await message.answer(get_text("invalid_input", lang))
+            await message.answer(get_text("invalid_name", lang))
             return
+        
         await state.update_data(first_name=name)
         await message.answer(get_text("enter_last_name", lang))
         await state.set_state(RegistrationStates.last_name)
@@ -114,13 +143,17 @@ async def enter_first_name(message: Message, state: FSMContext):
 
 @router.message(RegistrationStates.last_name, F.text)
 async def enter_last_name(message: Message, state: FSMContext):
+    """Ввод фамилии"""
     try:
         data = await state.get_data()
         lang = data.get("language", "ru")
         last = message.text.strip()
+        
+        # ✅ ИСПРАВЛЕНО: Используем улучшенную валидацию
         if _bad_name(last):
-            await message.answer(get_text("invalid_input", lang))
+            await message.answer(get_text("invalid_last_name", lang))
             return
+        
         await state.update_data(last_name=last)
         await message.answer(get_text("select_work_time", lang), reply_markup=get_work_time_keyboard(lang))
         await state.set_state(RegistrationStates.work_time)
@@ -147,6 +180,7 @@ async def back_to_last_name(callback: CallbackQuery, state: FSMContext):
 
 @router.callback_query(F.data.startswith("work_time_"), RegistrationStates.work_time)
 async def select_work_time(callback: CallbackQuery, state: FSMContext):
+    """Выбор рабочего времени"""
     try:
         code = callback.data.split("_", 2)[2]
         work_time = {"9-18": "9:00-18:00", "10-19": "10:00-19:00"}.get(code, "9:00-18:00")
@@ -168,10 +202,10 @@ async def select_work_time(callback: CallbackQuery, state: FSMContext):
 
 @router.callback_query(F.data == "confirm_yes", RegistrationStates.confirmation)
 async def confirm_registration(callback: CallbackQuery, state: FSMContext, session: AsyncSession):
+    """Подтверждение регистрации"""
     try:
         data = await state.get_data()
         lang = data["language"]
-        # флаг админа из .env
         is_admin = callback.from_user.id in settings.admin_ids_list
 
         await UserRepository.create(
@@ -191,7 +225,7 @@ async def confirm_registration(callback: CallbackQuery, state: FSMContext, sessi
             reply_markup=get_main_menu_keyboard(lang, is_admin)
         )
         await callback.answer()
-        logger.info(f"registration done tg={callback.from_user.id} is_admin_env={is_admin}")
+        logger.info(f"registration done tg={callback.from_user.id} is_admin={is_admin}")
     except Exception as e:
         logger.error(f"confirm_registration error: {e}")
         await callback.answer(get_text("error", "ru"), show_alert=True)
@@ -199,7 +233,7 @@ async def confirm_registration(callback: CallbackQuery, state: FSMContext, sessi
 
 @router.callback_query(F.data == "confirm_edit", RegistrationStates.confirmation)
 async def confirm_edit(callback: CallbackQuery, state: FSMContext):
-    """Вернуться к имени (исправить данные)"""
+    """Вернуться к имени для исправления"""
     try:
         data = await state.get_data()
         lang = data.get("language", "ru")

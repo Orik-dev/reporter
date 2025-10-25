@@ -61,3 +61,531 @@
 2025-10-24 13:37:20 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): lang_az
 2025-10-24 13:37:20 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Орхан)
 2025-10-24 13:37:20 | INFO     | bot.handlers.start:select_language:64 - lang selected=az tg=436680563
+2025-10-24 15:14:38 | INFO     | bot.database.connection:create_tables:113 - Таблицы базы данных успешно созданы
+2025-10-24 15:14:38 | INFO     | __main__:on_startup:46 - Database initialized
+2025-10-24 15:14:38 | INFO     | bot.services.scheduler_service:start:37 - APSheduler starting, current Baku time: 2025-10-24 19:14:38 +04
+2025-10-24 15:14:38 | INFO     | bot.services.scheduler_service:_schedule_daily_notifications:83 - Ежедневные уведомления запланированы на 18:00 и 19:00 (Baku)
+2025-10-24 15:14:38 | INFO     | bot.services.scheduler_service:_schedule_hourly_reminders:92 - Ежечасные напоминания каждые 60 мин (только 18:00–23:59).
+2025-10-24 15:14:38 | INFO     | bot.services.scheduler_service:_schedule_daily_admin_report:101 - Ежедневный отчёт админу запланирован на 23:59 (Baku).
+2025-10-24 15:14:38 | INFO     | bot.services.scheduler_service:_schedule_weekly_report:111 - Недельный отчёт запланирован на день недели=4 00:00 (Baku).
+2025-10-24 15:14:38 | INFO     | bot.services.scheduler_service:start:48 - Kick-all scheduled at 19:14:48 (Baku)
+2025-10-24 15:14:38 | INFO     | bot.services.scheduler_service:start:51 - Планировщик успешно запущен
+2025-10-24 15:14:38 | INFO     | __main__:on_startup:50 - Scheduler started
+2025-10-24 15:14:38 | INFO     | __main__:on_startup:63 - Bot started successfully
+2025-10-24 15:14:38 | INFO     | __main__:main:135 - Starting bot polling...
+2025-10-24 15:14:42 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Расим), is_admin=True
+2025-10-24 15:14:42 | INFO     | bot.middlewares.middlewares:__call__:110 - [AdminCheck] is_admin=True (env=True, db=True) for tg_id=436680563; ADMIN_IDS=[436680563]
+2025-10-24 15:14:42 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /start
+2025-10-24 15:14:42 | INFO     | bot.handlers.start:cmd_start_registered:48 - /start (registered) tg_id=436680563
+2025-10-24 15:14:48 | INFO     | bot.services.scheduler_service:_kick_all:55 - Kick-all: running notification + hourly reminders + admin daily report
+2025-10-24 15:14:48 | INFO     | bot.services.scheduler_service:_send_daily_notifications:126 - [notify] 436680563 уже отправил отчёт сегодня — пропуск
+2025-10-24 15:14:50 | INFO     | bot.services.scheduler_service:_send_daily_admin_report:226 - [admin daily] отправлено админу 436680563
+2025-10-24 15:15:09 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Расим), is_admin=True
+2025-10-24 15:15:09 | INFO     | bot.middlewares.middlewares:__call__:110 - [AdminCheck] is_admin=True (env=True, db=True) for tg_id=436680563; ADMIN_IDS=[436680563]
+2025-10-24 15:15:09 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): 📊 Hesabat göndər
+2025-10-24 15:15:16 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Расим), is_admin=True
+2025-10-24 15:15:16 | INFO     | bot.middlewares.middlewares:__call__:110 - [AdminCheck] is_admin=True (env=True, db=True) for tg_id=436680563; ADMIN_IDS=[436680563]
+2025-10-24 15:15:16 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /report
+2025-10-24 15:17:58 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Расим), is_admin=True
+2025-10-24 15:17:58 | INFO     | bot.middlewares.middlewares:__call__:110 - [AdminCheck] is_admin=True (env=True, db=True) for tg_id=436680563; ADMIN_IDS=[436680563]
+2025-10-24 15:17:58 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /profile
+2025-10-24 15:17:58 | INFO     | bot.handlers.profile:cmd_profile:30 - profile shown tg=436680563
+2025-10-24 15:18:00 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Расим), is_admin=True
+2025-10-24 15:18:00 | INFO     | bot.middlewares.middlewares:__call__:110 - [AdminCheck] is_admin=True (env=True, db=True) for tg_id=436680563; ADMIN_IDS=[436680563]
+2025-10-24 15:18:00 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): edit_language
+2025-10-24 15:18:01 | INFO     | bot.handlers.profile:edit_language_start:250 - Пользователь 436680563 начал редактирование языка
+2025-10-24 15:18:02 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Расим), is_admin=True
+2025-10-24 15:18:02 | INFO     | bot.middlewares.middlewares:__call__:110 - [AdminCheck] is_admin=True (env=True, db=True) for tg_id=436680563; ADMIN_IDS=[436680563]
+2025-10-24 15:18:02 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): lang_ru
+2025-10-24 15:18:03 | INFO     | bot.database.repository:update:70 - Обновлен пользователь 436680563
+2025-10-24 15:18:03 | INFO     | bot.handlers.profile:edit_language_process:294 - Пользователь 436680563 обновил язык на ru
+2025-10-24 15:18:06 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Расим), is_admin=True
+2025-10-24 15:18:06 | INFO     | bot.middlewares.middlewares:__call__:110 - [AdminCheck] is_admin=True (env=True, db=True) for tg_id=436680563; ADMIN_IDS=[436680563]
+2025-10-24 15:18:06 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): back_to_menu
+2025-10-24 15:18:06 | INFO     | bot.handlers.profile:back_to_menu:311 - Пользователь 436680563 вернулся в меню
+2025-10-25 10:44:26 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Расим), is_admin=True
+2025-10-25 10:44:26 | INFO     | bot.middlewares.middlewares:__call__:110 - [AdminCheck] is_admin=True (env=True, db=True) for tg_id=436680563; ADMIN_IDS=[436680563]
+2025-10-25 10:44:26 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): 👤 Mənim profilim
+2025-10-25 10:44:26 | INFO     | bot.handlers.profile:cmd_profile:30 - profile shown tg=436680563
+2025-10-25 10:44:40 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Расим), is_admin=True
+2025-10-25 10:44:40 | INFO     | bot.middlewares.middlewares:__call__:110 - [AdminCheck] is_admin=True (env=True, db=True) for tg_id=436680563; ADMIN_IDS=[436680563]
+2025-10-25 10:44:40 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): back_to_menu
+2025-10-25 10:44:40 | INFO     | bot.handlers.profile:back_to_menu:311 - Пользователь 436680563 вернулся в меню
+2025-10-25 10:44:43 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Расим), is_admin=True
+2025-10-25 10:44:43 | INFO     | bot.middlewares.middlewares:__call__:110 - [AdminCheck] is_admin=True (env=True, db=True) for tg_id=436680563; ADMIN_IDS=[436680563]
+2025-10-25 10:44:43 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): 👤 Mənim profilim
+2025-10-25 10:44:43 | INFO     | bot.handlers.profile:cmd_profile:30 - profile shown tg=436680563
+2025-10-25 10:44:45 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Расим), is_admin=True
+2025-10-25 10:44:45 | INFO     | bot.middlewares.middlewares:__call__:110 - [AdminCheck] is_admin=True (env=True, db=True) for tg_id=436680563; ADMIN_IDS=[436680563]
+2025-10-25 10:44:45 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): edit_language
+2025-10-25 10:44:45 | INFO     | bot.handlers.profile:edit_language_start:250 - Пользователь 436680563 начал редактирование языка
+2025-10-25 10:44:47 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Расим), is_admin=True
+2025-10-25 10:44:47 | INFO     | bot.middlewares.middlewares:__call__:110 - [AdminCheck] is_admin=True (env=True, db=True) for tg_id=436680563; ADMIN_IDS=[436680563]
+2025-10-25 10:44:47 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): 👤 Mənim profilim
+2025-10-25 10:44:47 | INFO     | bot.handlers.profile:cmd_profile:30 - profile shown tg=436680563
+2025-10-25 10:44:51 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Расим), is_admin=True
+2025-10-25 10:44:51 | INFO     | bot.middlewares.middlewares:__call__:110 - [AdminCheck] is_admin=True (env=True, db=True) for tg_id=436680563; ADMIN_IDS=[436680563]
+2025-10-25 10:44:51 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): edit_work_time
+2025-10-25 10:44:51 | INFO     | bot.handlers.profile:edit_work_time_start:181 - Пользователь 436680563 начал редактирование рабочего времени
+2025-10-25 10:44:53 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Расим), is_admin=True
+2025-10-25 10:44:53 | INFO     | bot.middlewares.middlewares:__call__:110 - [AdminCheck] is_admin=True (env=True, db=True) for tg_id=436680563; ADMIN_IDS=[436680563]
+2025-10-25 10:44:57 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Расим), is_admin=True
+2025-10-25 10:44:57 | INFO     | bot.middlewares.middlewares:__call__:110 - [AdminCheck] is_admin=True (env=True, db=True) for tg_id=436680563; ADMIN_IDS=[436680563]
+2025-10-25 10:44:59 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Расим), is_admin=True
+2025-10-25 10:44:59 | INFO     | bot.middlewares.middlewares:__call__:110 - [AdminCheck] is_admin=True (env=True, db=True) for tg_id=436680563; ADMIN_IDS=[436680563]
+2025-10-25 10:44:59 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): 📊 Hesabat göndər
+2025-10-25 10:44:59 | INFO     | bot.handlers.reports:cmd_report:30 - report started tg=436680563
+2025-10-25 10:45:01 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Расим), is_admin=True
+2025-10-25 10:45:01 | INFO     | bot.middlewares.middlewares:__call__:110 - [AdminCheck] is_admin=True (env=True, db=True) for tg_id=436680563; ADMIN_IDS=[436680563]
+2025-10-25 10:45:01 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): report_has_tasks
+2025-10-25 10:45:01 | INFO     | bot.handlers.reports:report_has_tasks:48 - Пользователь 436680563 выбрал 'есть задачи'
+2025-10-25 10:45:04 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Расим), is_admin=True
+2025-10-25 10:45:04 | INFO     | bot.middlewares.middlewares:__call__:110 - [AdminCheck] is_admin=True (env=True, db=True) for tg_id=436680563; ADMIN_IDS=[436680563]
+2025-10-25 10:45:07 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Расим), is_admin=True
+2025-10-25 10:45:07 | INFO     | bot.middlewares.middlewares:__call__:110 - [AdminCheck] is_admin=True (env=True, db=True) for tg_id=436680563; ADMIN_IDS=[436680563]
+2025-10-25 10:45:18 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Расим), is_admin=True
+2025-10-25 10:45:18 | INFO     | bot.middlewares.middlewares:__call__:110 - [AdminCheck] is_admin=True (env=True, db=True) for tg_id=436680563; ADMIN_IDS=[436680563]
+2025-10-25 10:45:18 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Расим), is_admin=True
+2025-10-25 10:45:18 | INFO     | bot.middlewares.middlewares:__call__:110 - [AdminCheck] is_admin=True (env=True, db=True) for tg_id=436680563; ADMIN_IDS=[436680563]
+2025-10-25 10:45:19 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Расим), is_admin=True
+2025-10-25 10:45:19 | INFO     | bot.middlewares.middlewares:__call__:110 - [AdminCheck] is_admin=True (env=True, db=True) for tg_id=436680563; ADMIN_IDS=[436680563]
+2025-10-25 10:45:19 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): 📊 Hesabat göndər
+2025-10-25 10:45:19 | INFO     | bot.handlers.reports:cmd_report:30 - report started tg=436680563
+2025-10-25 10:45:20 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Расим), is_admin=True
+2025-10-25 10:45:20 | INFO     | bot.middlewares.middlewares:__call__:110 - [AdminCheck] is_admin=True (env=True, db=True) for tg_id=436680563; ADMIN_IDS=[436680563]
+2025-10-25 10:45:20 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): ⚙️ Admin panel
+2025-10-25 10:45:21 | INFO     | bot.database.repository:create:123 - Создан ежедневный отчёт для пользователя 436680563
+2025-10-25 10:45:21 | INFO     | bot.handlers.reports:receive_report_text:129 - Пользователь 436680563 отправил ежедневный отчет
+2025-10-25 10:45:23 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Расим), is_admin=True
+2025-10-25 10:45:23 | INFO     | bot.middlewares.middlewares:__call__:110 - [AdminCheck] is_admin=True (env=True, db=True) for tg_id=436680563; ADMIN_IDS=[436680563]
+2025-10-25 10:45:23 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): ⚙️ Admin panel
+2025-10-25 10:45:23 | INFO     | bot.handlers.common:handle_unknown_message:41 - Пользователь 436680563 отправил неизвестное сообщение
+2025-10-25 10:47:02 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Расим), is_admin=True
+2025-10-25 10:47:02 | INFO     | bot.middlewares.middlewares:__call__:110 - [AdminCheck] is_admin=True (env=True, db=True) for tg_id=436680563; ADMIN_IDS=[436680563]
+2025-10-25 10:47:02 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /report
+2025-10-25 10:47:09 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Расим), is_admin=True
+2025-10-25 10:47:09 | INFO     | bot.middlewares.middlewares:__call__:110 - [AdminCheck] is_admin=True (env=True, db=True) for tg_id=436680563; ADMIN_IDS=[436680563]
+2025-10-25 10:47:09 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /help
+2025-10-25 10:47:09 | INFO     | bot.handlers.common:cmd_help:27 - Пользователь 436680563 запросил помощь
+2025-10-25 10:47:11 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Расим), is_admin=True
+2025-10-25 10:47:11 | INFO     | bot.middlewares.middlewares:__call__:110 - [AdminCheck] is_admin=True (env=True, db=True) for tg_id=436680563; ADMIN_IDS=[436680563]
+2025-10-25 10:47:11 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /profile
+2025-10-25 10:47:11 | INFO     | bot.handlers.profile:cmd_profile:30 - profile shown tg=436680563
+2025-10-25 10:47:26 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Расим), is_admin=True
+2025-10-25 10:47:26 | INFO     | bot.middlewares.middlewares:__call__:110 - [AdminCheck] is_admin=True (env=True, db=True) for tg_id=436680563; ADMIN_IDS=[436680563]
+2025-10-25 10:47:26 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): 📊 Hesabat göndər
+2025-10-25 10:47:27 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Расим), is_admin=True
+2025-10-25 10:47:27 | INFO     | bot.middlewares.middlewares:__call__:110 - [AdminCheck] is_admin=True (env=True, db=True) for tg_id=436680563; ADMIN_IDS=[436680563]
+2025-10-25 10:47:27 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): 👤 Mənim profilim
+2025-10-25 10:47:27 | INFO     | bot.handlers.profile:cmd_profile:30 - profile shown tg=436680563
+2025-10-25 10:47:34 | INFO     | bot.middlewares.middlewares:__call__:74 - [UserCheck] найден user 436680563 (Расим), is_admin=True
+2025-10-25 10:47:34 | INFO     | bot.middlewares.middlewares:__call__:110 - [AdminCheck] is_admin=True (env=True, db=True) for tg_id=436680563; ADMIN_IDS=[436680563]
+2025-10-25 10:47:34 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): ⚙️ Admin panel
+2025-10-25 10:47:34 | INFO     | bot.handlers.common:handle_unknown_message:41 - Пользователь 436680563 отправил неизвестное сообщение
+2025-10-25 11:05:55 | INFO     | bot.services.scheduler_service:shutdown:63 - Планировщик остановлен
+2025-10-25 11:05:55 | INFO     | __main__:on_shutdown:75 - Scheduler stopped
+2025-10-25 11:05:55 | INFO     | __main__:on_shutdown:88 - Bot shut down successfully
+2025-10-25 11:07:16 | INFO     | bot.database.connection:create_tables:113 - Таблицы базы данных успешно созданы
+2025-10-25 11:07:16 | INFO     | __main__:on_startup:46 - Database initialized
+2025-10-25 11:07:16 | INFO     | bot.services.scheduler_service:start:37 - APSheduler starting, current Baku time: 2025-10-25 15:07:16 +04
+2025-10-25 11:07:16 | INFO     | bot.services.scheduler_service:_schedule_daily_notifications:83 - Ежедневные уведомления запланированы на 18:00 и 19:00 (Baku)
+2025-10-25 11:07:16 | INFO     | bot.services.scheduler_service:_schedule_hourly_reminders:92 - Ежечасные напоминания каждые 60 мин (только 18:00–23:59).
+2025-10-25 11:07:16 | INFO     | bot.services.scheduler_service:_schedule_daily_admin_report:101 - Ежедневный отчёт админу запланирован на 23:59 (Baku).
+2025-10-25 11:07:16 | INFO     | bot.services.scheduler_service:_schedule_weekly_report:111 - Недельный отчёт запланирован на день недели=4 00:00 (Baku).
+2025-10-25 11:07:16 | INFO     | bot.services.scheduler_service:start:48 - Kick-all scheduled at 15:07:26 (Baku)
+2025-10-25 11:07:16 | INFO     | bot.services.scheduler_service:start:51 - Планировщик успешно запущен
+2025-10-25 11:07:16 | INFO     | __main__:on_startup:50 - Scheduler started
+2025-10-25 11:07:16 | INFO     | __main__:on_startup:63 - Bot started successfully
+2025-10-25 11:07:16 | INFO     | __main__:main:135 - Starting bot polling...
+2025-10-25 11:07:25 | INFO     | bot.services.scheduler_service:shutdown:63 - Планировщик остановлен
+2025-10-25 11:07:25 | INFO     | __main__:on_shutdown:75 - Scheduler stopped
+2025-10-25 11:07:26 | INFO     | __main__:on_shutdown:88 - Bot shut down successfully
+2025-10-25 11:07:33 | INFO     | bot.database.connection:create_tables:113 - Таблицы базы данных успешно созданы
+2025-10-25 11:07:33 | INFO     | __main__:on_startup:46 - Database initialized
+2025-10-25 11:07:33 | INFO     | bot.services.scheduler_service:start:37 - APSheduler starting, current Baku time: 2025-10-25 15:07:33 +04
+2025-10-25 11:07:33 | INFO     | bot.services.scheduler_service:_schedule_daily_notifications:83 - Ежедневные уведомления запланированы на 18:00 и 19:00 (Baku)
+2025-10-25 11:07:33 | INFO     | bot.services.scheduler_service:_schedule_hourly_reminders:92 - Ежечасные напоминания каждые 60 мин (только 18:00–23:59).
+2025-10-25 11:07:33 | INFO     | bot.services.scheduler_service:_schedule_daily_admin_report:101 - Ежедневный отчёт админу запланирован на 23:59 (Baku).
+2025-10-25 11:07:33 | INFO     | bot.services.scheduler_service:_schedule_weekly_report:111 - Недельный отчёт запланирован на день недели=4 00:00 (Baku).
+2025-10-25 11:07:33 | INFO     | bot.services.scheduler_service:start:48 - Kick-all scheduled at 15:07:43 (Baku)
+2025-10-25 11:07:33 | INFO     | bot.services.scheduler_service:start:51 - Планировщик успешно запущен
+2025-10-25 11:07:33 | INFO     | __main__:on_startup:50 - Scheduler started
+2025-10-25 11:07:34 | INFO     | __main__:on_startup:63 - Bot started successfully
+2025-10-25 11:07:34 | INFO     | __main__:main:135 - Starting bot polling...
+2025-10-25 11:07:41 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:07:41 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /start
+2025-10-25 11:07:42 | INFO     | bot.handlers.start:cmd_start_registered:88 - /start (registered) tg_id=436680563
+2025-10-25 11:07:43 | INFO     | bot.services.scheduler_service:_kick_all:55 - Kick-all: running notification + hourly reminders + admin daily report
+2025-10-25 11:07:43 | INFO     | bot.services.scheduler_service:_send_daily_notifications:126 - [notify] 436680563 уже отправил отчёт сегодня — пропуск
+2025-10-25 11:07:44 | INFO     | bot.services.scheduler_service:_send_daily_admin_report:226 - [admin daily] отправлено админу 436680563
+2025-10-25 11:07:54 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:07:54 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): 👤 Мой профиль
+2025-10-25 11:07:54 | INFO     | bot.handlers.profile:cmd_profile:65 - profile shown tg=436680563
+2025-10-25 11:07:59 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:07:59 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): back_to_menu
+2025-10-25 11:07:59 | INFO     | bot.handlers.profile:back_to_menu:319 - Пользователь 436680563 вернулся в меню
+2025-10-25 11:08:02 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:08:02 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): ⚙️ Админ-панель
+2025-10-25 11:08:03 | INFO     | bot.handlers.admin:cmd_admin:32 - ✅ Администратор 436680563 открыл админ-панель
+2025-10-25 11:08:06 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:08:06 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): admin_stats
+2025-10-25 11:08:06 | INFO     | bot.handlers.admin:admin_stats:90 - Администратор 436680563 просмотрел статистику
+2025-10-25 11:08:12 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:08:12 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): ⚙️ Админ-панель
+2025-10-25 11:08:12 | INFO     | bot.handlers.admin:cmd_admin:32 - ✅ Администратор 436680563 открыл админ-панель
+2025-10-25 11:08:15 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:08:15 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): admin_daily_reports
+2025-10-25 11:08:16 | INFO     | bot.handlers.admin:admin_daily_reports:183 - Администратор 436680563 просмотрел ежедневные отчеты
+2025-10-25 11:08:18 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:08:18 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): ⚙️ Админ-панель
+2025-10-25 11:08:18 | INFO     | bot.handlers.admin:cmd_admin:32 - ✅ Администратор 436680563 открыл админ-панель
+2025-10-25 11:08:20 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:08:20 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): admin_weekly_report
+2025-10-25 11:08:23 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:08:23 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): admin_users
+2025-10-25 11:08:23 | INFO     | bot.handlers.admin:admin_users:118 - Администратор 436680563 просмотрел список пользователей
+2025-10-25 11:08:29 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:08:29 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): ⚙️ Админ-панель
+2025-10-25 11:08:29 | INFO     | bot.handlers.admin:cmd_admin:32 - ✅ Администратор 436680563 открыл админ-панель
+2025-10-25 11:08:35 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:08:35 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): admin_users
+2025-10-25 11:08:35 | INFO     | bot.handlers.admin:admin_users:118 - Администратор 436680563 просмотрел список пользователей
+2025-10-25 11:08:36 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:08:36 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): ⚙️ Админ-панель
+2025-10-25 11:08:36 | INFO     | bot.handlers.admin:cmd_admin:32 - ✅ Администратор 436680563 открыл админ-панель
+2025-10-25 11:08:38 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:08:38 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): admin_weekly_report
+2025-10-25 11:08:38 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:08:38 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): admin_weekly_report
+2025-10-25 11:08:39 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:08:39 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): admin_weekly_report
+2025-10-25 11:08:48 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:08:48 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /report
+2025-10-25 11:08:53 | INFO     | bot.services.document_service:generate_docx:72 - DOCX документ успешно сгенерирован
+2025-10-25 11:08:53 | INFO     | bot.services.document_service:generate_pdf:185 - PDF документ успешно сгенерирован
+2025-10-25 11:08:53 | INFO     | bot.handlers.admin:admin_weekly_report:267 - Администратор 436680563 сгенерировал недельный отчет
+2025-10-25 11:09:10 | INFO     | bot.services.document_service:generate_docx:72 - DOCX документ успешно сгенерирован
+2025-10-25 11:09:10 | INFO     | bot.services.document_service:generate_pdf:185 - PDF документ успешно сгенерирован
+2025-10-25 11:09:10 | INFO     | bot.services.document_service:generate_docx:72 - DOCX документ успешно сгенерирован
+2025-10-25 11:09:10 | INFO     | bot.services.document_service:generate_pdf:185 - PDF документ успешно сгенерирован
+2025-10-25 11:09:13 | INFO     | bot.handlers.admin:admin_weekly_report:267 - Администратор 436680563 сгенерировал недельный отчет
+2025-10-25 11:09:13 | INFO     | bot.handlers.admin:admin_weekly_report:267 - Администратор 436680563 сгенерировал недельный отчет
+2025-10-25 11:09:13 | INFO     | bot.services.document_service:generate_docx:72 - DOCX документ успешно сгенерирован
+2025-10-25 11:09:13 | INFO     | bot.services.document_service:generate_pdf:185 - PDF документ успешно сгенерирован
+2025-10-25 11:09:14 | INFO     | bot.handlers.admin:admin_weekly_report:267 - Администратор 436680563 сгенерировал недельный отчет
+2025-10-25 11:10:44 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:10:44 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): admin_weekly_report
+2025-10-25 11:11:17 | INFO     | bot.services.document_service:generate_docx:72 - DOCX документ успешно сгенерирован
+2025-10-25 11:11:17 | INFO     | bot.services.document_service:generate_pdf:185 - PDF документ успешно сгенерирован
+2025-10-25 11:11:18 | INFO     | bot.handlers.admin:admin_weekly_report:267 - Администратор 436680563 сгенерировал недельный отчет
+2025-10-25 11:34:29 | INFO     | bot.services.scheduler_service:shutdown:63 - Планировщик остановлен
+2025-10-25 11:34:29 | INFO     | __main__:on_shutdown:75 - Scheduler stopped
+2025-10-25 11:34:29 | INFO     | __main__:on_shutdown:88 - Bot shut down successfully
+2025-10-25 11:34:41 | INFO     | bot.database.connection:create_tables:113 - Таблицы базы данных успешно созданы
+2025-10-25 11:34:41 | INFO     | __main__:on_startup:46 - Database initialized
+2025-10-25 11:34:41 | INFO     | bot.services.scheduler_service:start:37 - APSheduler starting, current Baku time: 2025-10-25 15:34:41 +04
+2025-10-25 11:34:41 | INFO     | bot.services.scheduler_service:_schedule_daily_notifications:83 - Ежедневные уведомления запланированы на 18:00 и 19:00 (Baku)
+2025-10-25 11:34:41 | INFO     | bot.services.scheduler_service:_schedule_hourly_reminders:92 - Ежечасные напоминания каждые 60 мин (только 18:00–23:59).
+2025-10-25 11:34:41 | INFO     | bot.services.scheduler_service:_schedule_daily_admin_report:101 - Ежедневный отчёт админу запланирован на 23:59 (Baku).
+2025-10-25 11:34:41 | INFO     | bot.services.scheduler_service:_schedule_weekly_report:111 - Недельный отчёт запланирован на день недели=4 00:00 (Baku).
+2025-10-25 11:34:41 | INFO     | bot.services.scheduler_service:start:48 - Kick-all scheduled at 15:34:51 (Baku)
+2025-10-25 11:34:41 | INFO     | bot.services.scheduler_service:start:51 - Планировщик успешно запущен
+2025-10-25 11:34:41 | INFO     | __main__:on_startup:50 - Scheduler started
+2025-10-25 11:34:41 | INFO     | __main__:on_startup:63 - Bot started successfully
+2025-10-25 11:34:41 | INFO     | __main__:main:135 - Starting bot polling...
+2025-10-25 11:34:51 | INFO     | bot.services.scheduler_service:_kick_all:55 - Kick-all: running notification + hourly reminders + admin daily report
+2025-10-25 11:34:52 | INFO     | bot.services.scheduler_service:_send_daily_admin_report:226 - [admin daily] отправлено админу 436680563
+2025-10-25 11:34:57 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=False | ADMIN_IDS=[436680563]
+2025-10-25 11:34:57 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /start
+2025-10-25 11:34:57 | INFO     | bot.handlers.start:cmd_start_not_registered:101 - /start -> registration tg_id=436680563
+2025-10-25 11:34:58 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=False | ADMIN_IDS=[436680563]
+2025-10-25 11:34:58 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): lang_ru
+2025-10-25 11:34:59 | INFO     | bot.handlers.start:select_language:116 - lang selected=ru tg=436680563
+2025-10-25 11:35:01 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=False | ADMIN_IDS=[436680563]
+2025-10-25 11:35:01 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): ds
+2025-10-25 11:35:01 | INFO     | bot.handlers.start:enter_first_name:138 - first_name ok tg=436680563
+2025-10-25 11:35:07 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=False | ADMIN_IDS=[436680563]
+2025-10-25 11:35:07 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): Гусейнов
+2025-10-25 11:35:07 | INFO     | bot.handlers.start:enter_last_name:160 - last_name ok tg=436680563
+2025-10-25 11:35:09 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=False | ADMIN_IDS=[436680563]
+2025-10-25 11:35:09 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): work_time_9-18
+2025-10-25 11:35:09 | INFO     | bot.handlers.start:select_work_time:197 - work_time=9:00-18:00 tg=436680563
+2025-10-25 11:35:21 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=False | ADMIN_IDS=[436680563]
+2025-10-25 11:35:22 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): confirm_edit
+2025-10-25 11:35:23 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=False | ADMIN_IDS=[436680563]
+2025-10-25 11:35:23 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): 1221
+2025-10-25 11:35:40 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=False | ADMIN_IDS=[436680563]
+2025-10-25 11:35:40 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): Орхан
+2025-10-25 11:35:40 | INFO     | bot.handlers.start:enter_first_name:138 - first_name ok tg=436680563
+2025-10-25 11:35:43 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=False | ADMIN_IDS=[436680563]
+2025-10-25 11:35:43 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): Гусейнов
+2025-10-25 11:35:43 | INFO     | bot.handlers.start:enter_last_name:160 - last_name ok tg=436680563
+2025-10-25 11:35:45 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=False | ADMIN_IDS=[436680563]
+2025-10-25 11:35:45 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): work_time_9-18
+2025-10-25 11:35:45 | INFO     | bot.handlers.start:select_work_time:197 - work_time=9:00-18:00 tg=436680563
+2025-10-25 11:35:47 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=False | ADMIN_IDS=[436680563]
+2025-10-25 11:35:47 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): confirm_yes
+2025-10-25 11:35:48 | INFO     | bot.database.repository:create:49 - Создан новый пользователь: 436680563
+2025-10-25 11:35:48 | INFO     | bot.handlers.start:confirm_registration:228 - registration done tg=436680563 is_admin=True
+2025-10-25 11:35:52 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:35:52 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /profile
+2025-10-25 11:35:52 | INFO     | bot.handlers.profile:cmd_profile:65 - profile shown tg=436680563
+2025-10-25 11:35:54 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:35:54 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): edit_first_name
+2025-10-25 11:35:54 | INFO     | bot.handlers.profile:edit_first_name_start:79 - Пользователь 436680563 начал редактирование имени
+2025-10-25 11:35:56 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:35:56 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): Вадим
+2025-10-25 11:35:57 | INFO     | bot.database.repository:update:70 - Обновлен пользователь 436680563
+2025-10-25 11:35:57 | INFO     | bot.handlers.profile:edit_first_name_process:124 - Пользователь 436680563 обновил имя
+2025-10-25 11:36:00 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:36:00 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): edit_last_name
+2025-10-25 11:36:01 | INFO     | bot.handlers.profile:edit_last_name_start:139 - Пользователь 436680563 начал редактирование фамилии
+2025-10-25 11:36:04 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:36:04 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): Вадимович
+2025-10-25 11:36:05 | INFO     | bot.database.repository:update:70 - Обновлен пользователь 436680563
+2025-10-25 11:36:05 | INFO     | bot.handlers.profile:edit_last_name_process:184 - Пользователь 436680563 обновил фамилию
+2025-10-25 11:36:07 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:36:07 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): edit_work_time
+2025-10-25 11:36:08 | INFO     | bot.handlers.profile:edit_work_time_start:200 - Пользователь 436680563 начал редактирование рабочего времени
+2025-10-25 11:36:09 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:36:09 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): work_time_10-19
+2025-10-25 11:36:10 | INFO     | bot.database.repository:update:70 - Обновлен пользователь 436680563
+2025-10-25 11:36:10 | INFO     | bot.handlers.profile:edit_work_time_process:247 - Пользователь 436680563 обновил рабочее время на 10:00-19:00
+2025-10-25 11:36:16 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:36:16 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): edit_work_time
+2025-10-25 11:36:17 | INFO     | bot.handlers.profile:edit_work_time_start:200 - Пользователь 436680563 начал редактирование рабочего времени
+2025-10-25 11:36:18 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:36:18 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): work_time_9-18
+2025-10-25 11:36:18 | INFO     | bot.database.repository:update:70 - Обновлен пользователь 436680563
+2025-10-25 11:36:19 | INFO     | bot.handlers.profile:edit_work_time_process:247 - Пользователь 436680563 обновил рабочее время на 9:00-18:00
+2025-10-25 11:36:33 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:36:33 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): edit_first_name
+2025-10-25 11:36:33 | INFO     | bot.handlers.profile:edit_first_name_start:79 - Пользователь 436680563 начал редактирование имени
+2025-10-25 11:36:37 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:36:37 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): Орхан
+2025-10-25 11:36:37 | INFO     | bot.database.repository:update:70 - Обновлен пользователь 436680563
+2025-10-25 11:36:38 | INFO     | bot.handlers.profile:edit_first_name_process:124 - Пользователь 436680563 обновил имя
+2025-10-25 11:36:39 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:36:39 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): edit_last_name
+2025-10-25 11:36:39 | INFO     | bot.handlers.profile:edit_last_name_start:139 - Пользователь 436680563 начал редактирование фамилии
+2025-10-25 11:36:42 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:36:42 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): Гусейнов
+2025-10-25 11:36:42 | INFO     | bot.database.repository:update:70 - Обновлен пользователь 436680563
+2025-10-25 11:36:43 | INFO     | bot.handlers.profile:edit_last_name_process:184 - Пользователь 436680563 обновил фамилию
+2025-10-25 11:37:14 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:37:14 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): 📊 Отправить отчет
+2025-10-25 11:37:14 | INFO     | bot.handlers.reports:cmd_report:35 - report started tg=436680563
+2025-10-25 11:37:17 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:37:17 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): report_no_tasks
+2025-10-25 11:37:17 | INFO     | bot.database.repository:create:123 - Создан ежедневный отчёт для пользователя 436680563
+2025-10-25 11:37:18 | INFO     | bot.handlers.reports:report_no_tasks:81 - Пользователь 436680563 сообщил об отсутствии задач
+2025-10-25 11:37:21 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:37:21 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): 📊 Отправить отчет
+2025-10-25 11:37:40 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:37:40 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): ⚙️ Админ-панель
+2025-10-25 11:37:40 | INFO     | bot.handlers.admin:cmd_admin:32 - ✅ Администратор 436680563 открыл админ-панель
+2025-10-25 11:37:44 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:37:44 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): admin_daily_reports
+2025-10-25 11:37:45 | INFO     | bot.handlers.admin:admin_daily_reports:183 - Администратор 436680563 просмотрел ежедневные отчеты
+2025-10-25 11:38:27 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:38:27 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): ⚙️ Админ-панель
+2025-10-25 11:38:28 | INFO     | bot.handlers.admin:cmd_admin:32 - ✅ Администратор 436680563 открыл админ-панель
+2025-10-25 11:38:35 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:38:35 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): admin_stats
+2025-10-25 11:38:36 | INFO     | bot.handlers.admin:admin_stats:90 - Администратор 436680563 просмотрел статистику
+2025-10-25 11:49:03 | INFO     | bot.services.scheduler_service:shutdown:63 - Планировщик остановлен
+2025-10-25 11:49:03 | INFO     | __main__:on_shutdown:75 - Scheduler stopped
+2025-10-25 11:49:03 | INFO     | __main__:on_shutdown:88 - Bot shut down successfully
+2025-10-25 11:49:46 | INFO     | bot.database.connection:create_tables:113 - Таблицы базы данных успешно созданы
+2025-10-25 11:49:46 | INFO     | __main__:on_startup:46 - Database initialized
+2025-10-25 11:49:46 | INFO     | bot.services.scheduler_service:start:37 - APSheduler starting, current Baku time: 2025-10-25 15:49:46 +04
+2025-10-25 11:49:46 | INFO     | bot.services.scheduler_service:_schedule_daily_notifications:83 - Ежедневные уведомления запланированы на 18:00 и 19:00 (Baku)
+2025-10-25 11:49:46 | INFO     | bot.services.scheduler_service:_schedule_hourly_reminders:92 - Ежечасные напоминания каждые 60 мин (только 18:00–23:59).
+2025-10-25 11:49:46 | INFO     | bot.services.scheduler_service:_schedule_daily_admin_report:101 - Ежедневный отчёт админу запланирован на 23:59 (Baku).
+2025-10-25 11:49:46 | INFO     | bot.services.scheduler_service:_schedule_weekly_report:111 - Недельный отчёт запланирован на день недели=4 00:00 (Baku).
+2025-10-25 11:49:46 | INFO     | bot.services.scheduler_service:start:48 - Kick-all scheduled at 15:49:56 (Baku)
+2025-10-25 11:49:46 | INFO     | bot.services.scheduler_service:start:51 - Планировщик успешно запущен
+2025-10-25 11:49:46 | INFO     | __main__:on_startup:50 - Scheduler started
+2025-10-25 11:49:46 | INFO     | __main__:on_startup:63 - Bot started successfully
+2025-10-25 11:49:46 | INFO     | __main__:main:135 - Starting bot polling...
+2025-10-25 11:49:56 | INFO     | bot.services.scheduler_service:_kick_all:55 - Kick-all: running notification + hourly reminders + admin daily report
+2025-10-25 11:49:56 | INFO     | bot.services.scheduler_service:_send_daily_notifications:126 - [notify] 436680563 уже отправил отчёт сегодня — пропуск
+2025-10-25 11:49:57 | INFO     | bot.services.scheduler_service:_send_daily_admin_report:226 - [admin daily] отправлено админу 436680563
+2025-10-25 11:53:03 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:53:03 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /start
+2025-10-25 11:53:03 | INFO     | bot.handlers.start:cmd_start_registered:88 - /start (registered) tg_id=436680563
+2025-10-25 11:53:21 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:53:21 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /profile
+2025-10-25 11:53:22 | INFO     | bot.handlers.profile:cmd_profile:65 - profile shown tg=436680563
+2025-10-25 11:53:24 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:53:24 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): back_to_menu
+2025-10-25 11:53:24 | INFO     | bot.handlers.profile:back_to_menu:319 - Пользователь 436680563 вернулся в меню
+2025-10-25 11:53:27 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:53:27 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /report
+2025-10-25 11:53:30 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:53:30 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /help
+2025-10-25 11:53:30 | INFO     | bot.handlers.common:cmd_help:27 - Пользователь 436680563 запросил помощь
+2025-10-25 11:53:37 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:53:37 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): ⚙️ Админ-панель
+2025-10-25 11:53:37 | INFO     | bot.handlers.common:handle_unknown_message:41 - Пользователь 436680563 отправил неизвестное сообщение
+2025-10-25 11:53:40 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:53:40 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): ⚙️ Админ-панель
+2025-10-25 11:53:40 | INFO     | bot.handlers.common:handle_unknown_message:41 - Пользователь 436680563 отправил неизвестное сообщение
+2025-10-25 11:54:01 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:54:01 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): ⚙️ Админ-панель
+2025-10-25 11:54:01 | INFO     | bot.handlers.common:handle_unknown_message:41 - Пользователь 436680563 отправил неизвестное сообщение
+2025-10-25 11:54:04 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:54:04 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /admib
+2025-10-25 11:54:04 | INFO     | bot.handlers.common:handle_unknown_message:41 - Пользователь 436680563 отправил неизвестное сообщение
+2025-10-25 11:54:08 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:54:08 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /admin
+2025-10-25 11:54:09 | INFO     | bot.handlers.common:handle_unknown_message:41 - Пользователь 436680563 отправил неизвестное сообщение
+2025-10-25 11:54:40 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:54:40 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /report
+2025-10-25 11:54:40 | INFO     | bot.handlers.admin:cmd_report:349 - report started tg=436680563
+2025-10-25 11:54:46 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:54:46 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): report_has_tasks
+2025-10-25 11:54:46 | INFO     | bot.handlers.admin:report_has_tasks:365 - Пользователь 436680563 выбрал 'есть задачи'
+2025-10-25 11:54:56 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:54:56 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): Ehdhdhdh
+2025-10-25 11:55:02 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:55:02 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): Eh
+2025-10-25 11:55:06 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:55:06 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): cancel_report
+2025-10-25 11:55:06 | INFO     | bot.handlers.admin:cancel_report:415 - Пользователь 436680563 отменил отправку отчета
+2025-10-25 11:55:10 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:55:10 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /report
+2025-10-25 11:55:10 | INFO     | bot.handlers.admin:cmd_report:349 - report started tg=436680563
+2025-10-25 11:55:12 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:55:12 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): report_no_tasks
+2025-10-25 11:55:12 | INFO     | bot.database.repository:create:123 - Создан ежедневный отчёт для пользователя 436680563
+2025-10-25 11:55:13 | INFO     | bot.handlers.admin:report_no_tasks:397 - Пользователь 436680563 сообщил об отсутствии задач
+2025-10-25 11:55:17 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:55:17 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /report
+2025-10-25 11:55:50 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:55:50 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /report
+2025-10-25 11:56:04 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:56:04 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /help
+2025-10-25 11:56:04 | INFO     | bot.handlers.common:cmd_help:27 - Пользователь 436680563 запросил помощь
+2025-10-25 11:56:06 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:56:06 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /profile
+2025-10-25 11:56:06 | INFO     | bot.handlers.profile:cmd_profile:65 - profile shown tg=436680563
+2025-10-25 11:56:11 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:56:11 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /start
+2025-10-25 11:56:11 | INFO     | bot.handlers.start:cmd_start_registered:88 - /start (registered) tg_id=436680563
+2025-10-25 11:56:45 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:56:45 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): ⚙️ Админ-панель
+2025-10-25 11:56:46 | INFO     | bot.handlers.common:handle_unknown_message:41 - Пользователь 436680563 отправил неизвестное сообщение
+2025-10-25 11:58:00 | INFO     | bot.services.scheduler_service:shutdown:63 - Планировщик остановлен
+2025-10-25 11:58:00 | INFO     | __main__:on_shutdown:75 - Scheduler stopped
+2025-10-25 11:58:00 | INFO     | __main__:on_shutdown:88 - Bot shut down successfully
+2025-10-25 11:58:08 | INFO     | bot.database.connection:create_tables:113 - Таблицы базы данных успешно созданы
+2025-10-25 11:58:08 | INFO     | __main__:on_startup:46 - Database initialized
+2025-10-25 11:58:08 | INFO     | bot.services.scheduler_service:start:37 - APSheduler starting, current Baku time: 2025-10-25 15:58:08 +04
+2025-10-25 11:58:08 | INFO     | bot.services.scheduler_service:_schedule_daily_notifications:83 - Ежедневные уведомления запланированы на 18:00 и 19:00 (Baku)
+2025-10-25 11:58:08 | INFO     | bot.services.scheduler_service:_schedule_hourly_reminders:92 - Ежечасные напоминания каждые 60 мин (только 18:00–23:59).
+2025-10-25 11:58:08 | INFO     | bot.services.scheduler_service:_schedule_daily_admin_report:101 - Ежедневный отчёт админу запланирован на 23:59 (Baku).
+2025-10-25 11:58:08 | INFO     | bot.services.scheduler_service:_schedule_weekly_report:111 - Недельный отчёт запланирован на день недели=4 00:00 (Baku).
+2025-10-25 11:58:08 | INFO     | bot.services.scheduler_service:start:48 - Kick-all scheduled at 15:58:18 (Baku)
+2025-10-25 11:58:08 | INFO     | bot.services.scheduler_service:start:51 - Планировщик успешно запущен
+2025-10-25 11:58:08 | INFO     | __main__:on_startup:50 - Scheduler started
+2025-10-25 11:58:08 | INFO     | __main__:on_startup:63 - Bot started successfully
+2025-10-25 11:58:08 | INFO     | __main__:main:135 - Starting bot polling...
+2025-10-25 11:58:09 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:58:09 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): ⚙️ Админ-панель
+2025-10-25 11:58:09 | INFO     | bot.handlers.common:handle_unknown_message:41 - Пользователь 436680563 отправил неизвестное сообщение
+2025-10-25 11:58:11 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 11:58:11 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): ⚙️ Админ-панель
+2025-10-25 11:58:11 | INFO     | bot.handlers.common:handle_unknown_message:41 - Пользователь 436680563 отправил неизвестное сообщение
+2025-10-25 11:58:18 | INFO     | bot.services.scheduler_service:_kick_all:55 - Kick-all: running notification + hourly reminders + admin daily report
+2025-10-25 11:58:18 | INFO     | bot.services.scheduler_service:_send_daily_notifications:126 - [notify] 436680563 уже отправил отчёт сегодня — пропуск
+2025-10-25 11:58:19 | INFO     | bot.services.scheduler_service:_send_daily_admin_report:226 - [admin daily] отправлено админу 436680563
+2025-10-25 12:02:43 | INFO     | bot.services.scheduler_service:shutdown:63 - Планировщик остановлен
+2025-10-25 12:02:43 | INFO     | __main__:on_shutdown:75 - Scheduler stopped
+2025-10-25 12:02:43 | INFO     | __main__:on_shutdown:88 - Bot shut down successfully
+2025-10-25 12:03:02 | INFO     | bot.database.connection:create_tables:113 - Таблицы базы данных успешно созданы
+2025-10-25 12:03:02 | INFO     | __main__:on_startup:46 - Database initialized
+2025-10-25 12:03:02 | INFO     | bot.services.scheduler_service:start:37 - APSheduler starting, current Baku time: 2025-10-25 16:03:02 +04
+2025-10-25 12:03:02 | INFO     | bot.services.scheduler_service:_schedule_daily_notifications:83 - Ежедневные уведомления запланированы на 18:00 и 19:00 (Baku)
+2025-10-25 12:03:02 | INFO     | bot.services.scheduler_service:_schedule_hourly_reminders:92 - Ежечасные напоминания каждые 60 мин (только 18:00–23:59).
+2025-10-25 12:03:02 | INFO     | bot.services.scheduler_service:_schedule_daily_admin_report:101 - Ежедневный отчёт админу запланирован на 23:59 (Baku).
+2025-10-25 12:03:02 | INFO     | bot.services.scheduler_service:_schedule_weekly_report:111 - Недельный отчёт запланирован на день недели=4 00:00 (Baku).
+2025-10-25 12:03:02 | INFO     | bot.services.scheduler_service:start:48 - Kick-all scheduled at 16:03:12 (Baku)
+2025-10-25 12:03:02 | INFO     | bot.services.scheduler_service:start:51 - Планировщик успешно запущен
+2025-10-25 12:03:02 | INFO     | __main__:on_startup:50 - Scheduler started
+2025-10-25 12:03:03 | INFO     | __main__:on_startup:63 - Bot started successfully
+2025-10-25 12:03:03 | INFO     | __main__:main:135 - Starting bot polling...
+2025-10-25 12:03:12 | INFO     | bot.services.scheduler_service:_kick_all:55 - Kick-all: running notification + hourly reminders + admin daily report
+2025-10-25 12:03:13 | INFO     | bot.services.scheduler_service:_send_daily_notifications:126 - [notify] 436680563 уже отправил отчёт сегодня — пропуск
+2025-10-25 12:03:14 | INFO     | bot.services.scheduler_service:_send_daily_admin_report:226 - [admin daily] отправлено админу 436680563
+2025-10-25 12:03:17 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 12:03:17 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /profile
+2025-10-25 12:03:17 | INFO     | bot.handlers.profile:cmd_profile:65 - profile shown tg=436680563
+2025-10-25 12:03:21 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 12:03:21 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /report
+2025-10-25 12:03:36 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 12:03:36 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /report
+2025-10-25 12:03:36 | INFO     | bot.handlers.reports:cmd_report:180 - report started tg=436680563
+2025-10-25 12:03:42 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 12:03:42 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): report_has_tasks
+2025-10-25 12:03:43 | INFO     | bot.handlers.reports:report_has_tasks:196 - Пользователь 436680563 выбрал 'есть задачи'
+2025-10-25 12:04:16 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 12:04:16 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): 1.fix bug oxu.az
+2025-10-25 12:04:16 | INFO     | bot.database.repository:create:123 - Создан ежедневный отчёт для пользователя 436680563
+2025-10-25 12:04:16 | INFO     | bot.handlers.reports:receive_report_text:300 - Пользователь 436680563 отправил ежедневный отчет
+2025-10-25 12:04:19 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 12:04:19 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /report
+2025-10-25 12:04:22 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 12:04:34 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 12:04:39 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 12:04:39 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /help
+2025-10-25 12:04:40 | INFO     | bot.handlers.common:cmd_help:27 - Пользователь 436680563 запросил помощь
+2025-10-25 12:04:42 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 12:04:42 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /profile
+2025-10-25 12:04:42 | INFO     | bot.handlers.profile:cmd_profile:65 - profile shown tg=436680563
+2025-10-25 12:04:52 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 12:04:52 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /admin
+2025-10-25 12:04:52 | INFO     | bot.handlers.admin:cmd_admin:348 - ✅ Администратор 436680563 открыл админ-панель
+2025-10-25 12:04:57 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 12:04:57 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): admin_stats
+2025-10-25 12:04:58 | INFO     | bot.handlers.admin:admin_stats:405 - Администратор 436680563 просмотрел статистику
+2025-10-25 12:05:01 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 12:05:01 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /admin
+2025-10-25 12:05:01 | INFO     | bot.handlers.admin:cmd_admin:348 - ✅ Администратор 436680563 открыл админ-панель
+2025-10-25 12:05:03 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 12:05:03 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): admin_users
+2025-10-25 12:05:03 | INFO     | bot.handlers.admin:admin_users:433 - Администратор 436680563 просмотрел список пользователей
+2025-10-25 12:05:07 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 12:05:07 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /admin
+2025-10-25 12:05:07 | INFO     | bot.handlers.admin:cmd_admin:348 - ✅ Администратор 436680563 открыл админ-панель
+2025-10-25 12:05:09 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 12:05:09 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): admin_daily_reports
+2025-10-25 12:05:09 | INFO     | bot.handlers.admin:admin_daily_reports:498 - Администратор 436680563 просмотрел ежедневные отчеты
+2025-10-25 12:05:11 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 12:05:11 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /admin
+2025-10-25 12:05:11 | INFO     | bot.handlers.admin:cmd_admin:348 - ✅ Администратор 436680563 открыл админ-панель
+2025-10-25 12:05:12 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 12:05:12 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): admin_weekly_report
+2025-10-25 12:05:19 | INFO     | bot.services.document_service:generate_docx:72 - DOCX документ успешно сгенерирован
+2025-10-25 12:05:19 | INFO     | bot.services.document_service:generate_pdf:185 - PDF документ успешно сгенерирован
+2025-10-25 12:05:20 | INFO     | bot.handlers.admin:admin_weekly_report:632 - Администратор 436680563 сгенерировал недельный отчет
+2025-10-25 12:06:29 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 12:06:29 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): admin_weekly_report
+2025-10-25 12:06:32 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 12:06:32 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): admin_weekly_report
+2025-10-25 12:06:37 | INFO     | bot.services.document_service:generate_docx:72 - DOCX документ успешно сгенерирован
+2025-10-25 12:06:37 | INFO     | bot.services.document_service:generate_pdf:185 - PDF документ успешно сгенерирован
+2025-10-25 12:06:38 | INFO     | bot.handlers.admin:admin_weekly_report:632 - Администратор 436680563 сгенерировал недельный отчет
+2025-10-25 12:07:17 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 12:07:17 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /help
+2025-10-25 12:07:17 | INFO     | bot.handlers.common:cmd_help:27 - Пользователь 436680563 запросил помощь
+2025-10-25 12:07:20 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 12:07:20 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /report
+2025-10-25 12:09:23 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 12:09:23 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /help
+2025-10-25 12:09:23 | INFO     | bot.handlers.common:cmd_help:27 - Пользователь 436680563 запросил помощь
+2025-10-25 12:09:24 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 12:09:24 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /report
+2025-10-25 12:09:27 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-25 12:09:27 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /profile
+2025-10-25 12:09:27 | INFO     | bot.handlers.profile:cmd_profile:65 - profile shown tg=436680563

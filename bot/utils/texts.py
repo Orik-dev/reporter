@@ -1,3 +1,6 @@
+"""
+Тексты сообщений - ИСПРАВЛЕННАЯ ВЕРСИЯ
+"""
 from typing import Dict
 
 TEXTS: Dict[str, Dict[str, str]] = {
@@ -64,12 +67,24 @@ TEXTS: Dict[str, Dict[str, str]] = {
             "Отчетов за неделю: {week_reports}"
         ),
 
-        # Ошибки и общее
+        # ✅ ИСПРАВЛЕНО: Добавлены новые сообщения об ошибках
         "error": "❌ Произошла ошибка. Попробуйте еще раз.",
         "invalid_input": "❌ Некорректный ввод. Попробуйте еще раз.",
-        "invalid_name": "❌ Некорректное имя. Допускаются только буквы, пробел, дефис, апостроф (2–50 символов).",
-        "invalid_last_name": "❌ Некорректная фамилия. Допускаются только буквы, пробел, дефис, апостроф (2–50 символов).",
+        "invalid_name": (
+            "❌ Некорректное имя.\n\n"
+            "Допускаются только буквы, пробелы, дефисы, апострофы (2-50 символов).\n"
+            "Пример: Иван, Мария-Анна, O'Connor"
+        ),
+        "invalid_last_name": (
+            "❌ Некорректная фамилия.\n\n"
+            "Допускаются только буквы, пробелы, дефисы, апострофы (2-50 символов).\n"
+            "Пример: Иванов, Салтыков-Щедрин, O'Brien"
+        ),
+        "report_cancelled": "❌ Отправка отчета отменена",  # для ru
+        "report_too_short": "❌ Отчет слишком короткий. Минимум 10 символов.",
+        "report_empty": "❌ Отчет не может быть пустым или состоять только из пробелов.",
         "not_authorized": "❌ У вас нет доступа к этой функции",
+        
         "help_text": (
             "❓ Помощь\n\n"
             "Этот бот помогает отслеживать ежедневные задачи сотрудников.\n\n"
@@ -141,9 +156,21 @@ TEXTS: Dict[str, Dict[str, str]] = {
 
         "error": "❌ Xəta baş verdi. Yenidən cəhd edin.",
         "invalid_input": "❌ Yanlış məlumat. Yenidən cəhd edin.",
-        "invalid_name": "❌ Yanlış ad. Yalnız hərflər, boşluq, tire, apostrof (2–50 simvol).",
-        "invalid_last_name": "❌ Yanlış soyad. Yalnız hərflər, boşluq, tire, apostrof (2–50 simvol).",
+        "invalid_name": (
+            "❌ Yanlış ad.\n\n"
+            "Yalnız hərflər, boşluq, tire, apostrof (2-50 simvol).\n"
+            "Nümunə: Orxan, Məryəm-Anna"
+        ),
+        "invalid_last_name": (
+            "❌ Yanlış soyad.\n\n"
+            "Yalnız hərflər, boşluq, tire, apostrof (2-50 simvol).\n"
+            "Nümunə: Əliyev, Hacı-Məmmədov"
+        ),
+        "report_cancelled": "❌ Hesabat göndərilməsi ləğv edildi",  # для az
+        "report_too_short": "❌ Hesabat çox qısadır. Minimum 10 simvol.",
+        "report_empty": "❌ Hesabat boş ola bilməz və ya yalnız boşluqlardan ibarət ola bilməz.",
         "not_authorized": "❌ Bu funksiyaya girişiniz yoxdur",
+        
         "help_text": (
             "❓ Kömək\n\n"
             "Bu bot işçilərin gündəlik tapşırıqlarını izləməyə kömək edir.\n\n"
@@ -157,7 +184,9 @@ TEXTS: Dict[str, Dict[str, str]] = {
     }
 }
 
+
 def get_text(key: str, language: str = "ru", **kwargs) -> str:
+    """Получить текст сообщения"""
     try:
         text = TEXTS[language][key]
         return text.format(**kwargs) if kwargs else text

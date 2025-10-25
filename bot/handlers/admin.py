@@ -1,5 +1,5 @@
 """
-Обработчики для админ-панели
+Обработчики для админ-панели - ФИНАЛЬНАЯ ВЕРСИЯ
 """
 from datetime import date, datetime, timedelta
 from aiogram import Router, F
@@ -9,41 +9,56 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from loguru import logger
 
 from bot.keyboards import get_admin_keyboard
-from bot.utils import get_text
+from bot.utils import get_text, format_answer
 from bot.database import User, UserRepository, DailyReportRepository
-from bot.filters import IsAdminFilter, IsRegisteredFilter, IsNotAdminFilter
+from bot.filters import IsAdminFilter, IsNotAdminFilter
 from bot.services import deepseek_service, document_service
 from bot.services.scheduler_service import SchedulerService
 
 router = Router()
 
+# ✅ НОВОЕ: Хранилище для отслеживания генерации отчетов
+generating_reports = {}  # {admin_id: datetime}
 
-@router.message(Command("admin"), IsNotAdminFilter())
-@router.message(F.text.in_(["⚙️ Админ-панель", "⚙️ Admin panel"]), IsNotAdminFilter())
+
+@router.message(Command("admin"), IsAdminFilter())
+@router.message(F.text.in_(["⚙️ Админ-панель", "⚙️ Admin panel"]), IsAdminFilter())
 async def cmd_admin(message: Message, user: User):
-    """Обработать команду /admin"""
+    """Админ-панель"""
     try:
         text = get_text("admin_panel", user.language if user else "ru")
         keyboard = get_admin_keyboard(user.language if user else "ru")
         
         await message.answer(text, reply_markup=keyboard)
         
-        logger.info(f"Администратор {message.from_user.id} открыл админ-панель")
+        logger.info(f"✅ Администратор {message.from_user.id} открыл админ-панель")
     
     except Exception as e:
         logger.error(f"Ошибка в команде admin: {e}")
         await message.answer(get_text("error", user.language if user else "ru"))
 
 
+@router.message(Command("admin"), IsNotAdminFilter())
+@router.message(F.text.in_(["⚙️ Админ-панель", "⚙️ Admin panel"]), IsNotAdminFilter())
+async def cmd_admin_not_authorized(message: Message, user: User):
+    """Попытка доступа без прав"""
+    try:
+        text = get_text("not_authorized", user.language if user else "ru")
+        await message.answer(text)
+        
+        logger.warning(f"⚠️ Пользователь {message.from_user.id} попытался войти в админ-панель без прав")
+    
+    except Exception as e:
+        logger.error(f"Ошибка в admin not authorized: {e}")
+
+
 @router.callback_query(F.data == "admin_stats", IsAdminFilter())
 async def admin_stats(callback: CallbackQuery, user: User, session: AsyncSession):
     """Показать статистику"""
     try:
-        # Получаем статистику
         all_users = await UserRepository.get_all_active(session)
         total_users = len(all_users)
         
-        # Отчеты за сегодня
         today = date.today()
         start_date = datetime.combine(today, datetime.min.time())
         end_date = datetime.combine(today, datetime.max.time())
@@ -53,7 +68,6 @@ async def admin_stats(callback: CallbackQuery, user: User, session: AsyncSession
             end_date
         )
         
-        # Отчеты за неделю
         week_start = today - timedelta(days=today.weekday())
         week_start_date = datetime.combine(week_start, datetime.min.time())
         week_reports = await DailyReportRepository.get_reports_by_date_range(
@@ -129,10 +143,8 @@ async def admin_daily_reports(callback: CallbackQuery, user: User, session: Asyn
         no_tasks_count = sum(1 for r in reports if not r.has_tasks)
         not_submitted = total_users - submitted_reports
         
-        # Детали
         details = "👥 Подробности / Təfərrüatlar:\n\n"
         
-        # Пользователи, которые отправили отчет с задачами
         details += "✅ С задачами / Tapşırıqlarla:\n"
         for report in reports:
             if report.has_tasks:
@@ -140,7 +152,6 @@ async def admin_daily_reports(callback: CallbackQuery, user: User, session: Asyn
                 if u:
                     details += f"  • {u.first_name} {u.last_name}\n"
         
-        # Пользователи, которые отправили отчет без задач
         if no_tasks_count > 0:
             details += "\n🚫 Без задач / Tapşırıqsız:\n"
             for report in reports:
@@ -149,7 +160,6 @@ async def admin_daily_reports(callback: CallbackQuery, user: User, session: Asyn
                     if u:
                         details += f"  • {u.first_name} {u.last_name}\n"
         
-        # Пользователи, которые не отправили отчет
         if not_submitted > 0:
             details += "\n❌ Не отправили / Göndərmədi:\n"
             submitted_ids = {r.telegram_id for r in reports}
@@ -180,11 +190,38 @@ async def admin_daily_reports(callback: CallbackQuery, user: User, session: Asyn
 
 @router.callback_query(F.data == "admin_weekly_report", IsAdminFilter())
 async def admin_weekly_report(callback: CallbackQuery, user: User, session: AsyncSession):
-    """Сгенерировать и отправить недельный отчет по требованию"""
+    """
+    ✅ ОБНОВЛЕНО: Генерация недельного отчета с индикатором загрузки
+    """
     try:
-        await callback.answer("Генерирую отчет... / Hesabat hazırlanır...")
+        admin_id = callback.from_user.id
         
-        # Вычисляем диапазон недели
+        # ✅ НОВОЕ: Проверяем, не формируется ли уже отчет
+        if admin_id in generating_reports:
+            time_diff = (datetime.now() - generating_reports[admin_id]).total_seconds()
+            if time_diff < 120:  # Меньше 2 минут
+                await callback.answer(
+                    "⏳ Отчет уже формируется, подождите...\n"
+                    "Tarixçə artıq hazırlanır, gözləyin...",
+                    show_alert=True
+                )
+                return
+            else:
+                # Прошло больше 2 минут - разрешаем новую попытку
+                del generating_reports[admin_id]
+        
+        # ✅ НОВОЕ: Отмечаем начало генерации
+        generating_reports[admin_id] = datetime.now()
+        
+        # ✅ НОВОЕ: Показываем индикатор загрузки
+        loading_msg = await callback.message.answer(
+            "⏳ Формирую недельный отчет...\n"
+            "Это может занять до 1 минуты.\n\n"
+            "⏳ Həftəlik hesabat hazırlanır...\n"
+            "Bu 1 dəqiqəyə qədər çəkə bilər."
+        )
+        await callback.answer()
+        
         today = date.today()
         week_start = today - timedelta(days=today.weekday())
         week_end = today
@@ -192,7 +229,6 @@ async def admin_weekly_report(callback: CallbackQuery, user: User, session: Asyn
         start_datetime = datetime.combine(week_start, datetime.min.time())
         end_datetime = datetime.combine(week_end, datetime.max.time())
         
-        # Получаем отчеты
         reports = await DailyReportRepository.get_reports_by_date_range(
             session,
             start_datetime,
@@ -200,14 +236,15 @@ async def admin_weekly_report(callback: CallbackQuery, user: User, session: Asyn
         )
         
         if not reports:
-            await callback.message.answer("Нет отчетов за эту неделю / Bu həftə hesabat yoxdur")
+            # ✅ Удаляем из generating_reports
+            del generating_reports[admin_id]
+            await loading_msg.delete()
+            await callback.message.answer("📭 Нет отчетов за эту неделю / Bu həftə hesabat yoxdur")
             return
         
-        # Получаем информацию о пользователях
         users = await UserRepository.get_all_active(session)
         user_dict = {u.telegram_id: u for u in users}
         
-        # Подготавливаем данные
         reports_data = []
         for report in reports:
             u = user_dict.get(report.telegram_id)
@@ -220,16 +257,19 @@ async def admin_weekly_report(callback: CallbackQuery, user: User, session: Asyn
                     'has_tasks': report.has_tasks
                 })
         
-        # Генерируем отчет с помощью AI
+        # Генерируем отчет с AI
         report_text = await deepseek_service.generate_weekly_report(
             reports_data,
             language=user.language if user else "ru"
         )
         
-        # Генерируем документы
+        # ✅ НОВОЕ: Форматируем текст для Telegram
+        formatted_text = format_answer(report_text)
+        
         week_start_str = week_start.strftime("%d.%m.%Y")
         week_end_str = week_end.strftime("%d.%m.%Y")
         
+        # Генерируем документы
         docx_file = document_service.generate_docx(
             report_text,
             week_start_str,
@@ -242,9 +282,15 @@ async def admin_weekly_report(callback: CallbackQuery, user: User, session: Asyn
             week_end_str
         )
         
-        # Отправляем документы
+        # ✅ Удаляем сообщение о загрузке
+        await loading_msg.delete()
+        
+        # ✅ Отправляем отформатированный текст
         await callback.message.answer(
-            f"📊 Еженедельный отчет / Həftəlik Hesabat\n{week_start_str} - {week_end_str}"
+            f"📊 <b>Еженедельный отчет / Həftəlik Hesabat</b>\n"
+            f"📅 {week_start_str} - {week_end_str}\n\n"
+            f"{formatted_text}",
+            parse_mode="HTML"
         )
         
         # Отправляем DOCX
@@ -252,7 +298,8 @@ async def admin_weekly_report(callback: CallbackQuery, user: User, session: Asyn
             document=BufferedInputFile(
                 docx_file.read(),
                 filename=f"weekly_report_{week_start_str}_{week_end_str}.docx"
-            )
+            ),
+            caption="📄 DOCX версия отчета"
         )
         
         # Отправляем PDF
@@ -261,32 +308,28 @@ async def admin_weekly_report(callback: CallbackQuery, user: User, session: Asyn
             document=BufferedInputFile(
                 pdf_file.read(),
                 filename=f"weekly_report_{week_start_str}_{week_end_str}.pdf"
-            )
+            ),
+            caption="📄 PDF версия отчета"
         )
+        
+        # ✅ НОВОЕ: Удаляем из generating_reports
+        del generating_reports[admin_id]
         
         logger.info(f"Администратор {callback.from_user.id} сгенерировал недельный отчет")
     
     except Exception as e:
         logger.error(f"Ошибка генерации недельного отчета: {e}")
+        
+        # ✅ Удаляем из generating_reports при ошибке
+        if callback.from_user.id in generating_reports:
+            del generating_reports[callback.from_user.id]
+        
         await callback.message.answer(get_text("error", user.language if user else "ru"))
 
 
-@router.message(Command("admin"), IsNotAdminFilter())
-@router.message(F.text.in_(["⚙️ Админ-панель", "⚙️ Admin panel"]), ~IsAdminFilter())
-async def cmd_admin_not_authorized(message: Message, user: User):
-    """Обработать команду /admin для пользователей без прав администратора"""
-    try:
-        text = get_text("not_authorized", user.language if user else "ru")
-        await message.answer(text)
-        
-        logger.warning(f"Пользователь без прав администратора {message.from_user.id} попытался войти в админ-панель")
-    
-    except Exception as e:
-        logger.error(f"Ошибка в admin not authorized: {e}")
-        
 @router.message(Command("debug_notify"), IsAdminFilter())
 async def debug_notify(message: Message, user: User):
-    """Принудительно разослать уведомления и hourly-reminder прямо сейчас"""
+    """DEBUG: Принудительно разослать уведомления"""
     try:
         from aiogram import Bot
         bot: Bot = message.bot
@@ -298,8 +341,10 @@ async def debug_notify(message: Message, user: User):
     except Exception as e:
         await message.answer(f"❌ debug_notify ошибка: {e}")
 
+
 @router.message(Command("debug_admin_daily"), IsAdminFilter())
 async def debug_admin_daily(message: Message, user: User):
+    """DEBUG: Ежедневный отчет админу"""
     try:
         from aiogram import Bot
         bot: Bot = message.bot
@@ -309,8 +354,10 @@ async def debug_admin_daily(message: Message, user: User):
     except Exception as e:
         await message.answer(f"❌ admin daily error: {e}")
 
+
 @router.message(Command("debug_weekly"), IsAdminFilter())
 async def debug_weekly(message: Message, user: User):
+    """DEBUG: Недельный отчет"""
     try:
         from aiogram import Bot
         bot: Bot = message.bot
