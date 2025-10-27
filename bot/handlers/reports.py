@@ -31,7 +31,7 @@ async def cmd_report(message: Message, user: User, session: AsyncSession, state:
     try:
         await state.clear()
         
-        # ✅ НОВОЕ: Проверка времени
+        # Проверка времени
         baku_tz = pytz.timezone(settings.timezone)
         now_baku = datetime.now(baku_tz)
         current_hour = now_baku.hour
@@ -66,15 +66,23 @@ async def cmd_report(message: Message, user: User, session: AsyncSession, state:
         await message.answer(get_text("error", user.language))
 
 
-@router.callback_query(F.data == "report_has_tasks", ReportStates.waiting_for_report)
-async def report_has_tasks(callback: CallbackQuery, state: FSMContext, user: User):
+# ✅ ИСПРАВЛЕНО: Убрано требование state
+@router.callback_query(F.data == "report_has_tasks")
+async def report_has_tasks(callback: CallbackQuery, state: FSMContext, user: User, session: AsyncSession):
     """Пользователь выбрал что есть задачи"""
     try:
+        # Проверяем, не отправлен ли уже отчет
+        today = date.today()
+        existing = await DailyReportRepository.get_by_date(session, user.telegram_id, today)
+        if existing:
+            await callback.answer(get_text("report_already_submitted", user.language), show_alert=True)
+            return
+        
         await callback.answer()
         text = get_text("enter_report_text", user.language)
-        # ✅ ОБНОВЛЕНО: Кнопки отмены и примеров
         keyboard = get_cancel_and_examples_keyboard(user.language)
         await callback.message.edit_text(text, reply_markup=keyboard)
+        await state.set_state(ReportStates.waiting_for_report)
         await state.update_data(has_tasks=True)
         logger.info(f"Пользователь {user.telegram_id} выбрал 'есть задачи'")
     except Exception as e:
@@ -125,7 +133,8 @@ async def back_to_report(callback: CallbackQuery, state: FSMContext, user: User)
         await callback.answer(get_text("error", user.language), show_alert=True)
 
 
-@router.callback_query(F.data == "report_no_tasks", ReportStates.waiting_for_report)
+# ✅ ИСПРАВЛЕНО: Убрано требование state
+@router.callback_query(F.data == "report_no_tasks")
 async def report_no_tasks(
     callback: CallbackQuery,
     state: FSMContext,
@@ -134,6 +143,13 @@ async def report_no_tasks(
 ):
     """Пользователь выбрал что нет задач"""
     try:
+        # Проверяем, не отправлен ли уже отчет
+        today_date = date.today()
+        existing = await DailyReportRepository.get_by_date(session, user.telegram_id, today_date)
+        if existing:
+            await callback.answer(get_text("report_already_submitted", user.language), show_alert=True)
+            return
+        
         today = datetime.now()
         
         await DailyReportRepository.create(
