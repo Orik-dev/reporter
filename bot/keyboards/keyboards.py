@@ -1,7 +1,7 @@
 # """
-# Клавиатуры - ИСПРАВЛЕННАЯ ВЕРСИЯ
+# Клавиатуры - ФИНАЛЬНАЯ ВЕРСИЯ с кнопкой "Примеры"
 # """
-# from aiogram.types import InlineKeyboardMarkup, ReplyKeyboardMarkup
+# from aiogram.types import InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove
 # from aiogram.utils.keyboard import InlineKeyboardBuilder, ReplyKeyboardBuilder
 
 
@@ -15,7 +15,7 @@
 
 
 # def get_work_time_keyboard(language: str = "ru") -> InlineKeyboardMarkup:
-#     """Выбор рабочего времени + кнопка Назад"""
+#     """Выбор рабочего времени ДЛЯ РЕГИСТРАЦИИ"""
 #     texts = {
 #         "ru": {"morning": "🌅 9:00 - 18:00", "afternoon": "🌆 10:00 - 19:00", "back": "◀️ Назад"},
 #         "az": {"morning": "🌅 9:00 - 18:00", "afternoon": "🌆 10:00 - 19:00", "back": "◀️ Geri"}
@@ -23,14 +23,27 @@
 #     builder = InlineKeyboardBuilder()
 #     builder.button(text=texts[language]["morning"], callback_data="work_time_9-18")
 #     builder.button(text=texts[language]["afternoon"], callback_data="work_time_10-19")
-#     # ✅ ИСПРАВЛЕНО: Добавлена кнопка "Назад" к фамилии
 #     builder.button(text=texts[language]["back"], callback_data="back_to_last_name")
 #     builder.adjust(1)
 #     return builder.as_markup()
 
 
+# def get_work_time_keyboard_for_profile(language: str = "ru") -> InlineKeyboardMarkup:
+#     """Выбор рабочего времени ДЛЯ ПРОФИЛЯ"""
+#     texts = {
+#         "ru": {"morning": "🌅 9:00 - 18:00", "afternoon": "🌆 10:00 - 19:00", "back": "◀️ Назад"},
+#         "az": {"morning": "🌅 9:00 - 18:00", "afternoon": "🌆 10:00 - 19:00", "back": "◀️ Geri"}
+#     }
+#     builder = InlineKeyboardBuilder()
+#     builder.button(text=texts[language]["morning"], callback_data="work_time_9-18")
+#     builder.button(text=texts[language]["afternoon"], callback_data="work_time_10-19")
+#     builder.button(text=texts[language]["back"], callback_data="back_to_profile")
+#     builder.adjust(1)
+#     return builder.as_markup()
+
+
 # def get_confirmation_keyboard(language: str = "ru") -> InlineKeyboardMarkup:
-#     """Подтверждение регистрации (без кнопки Отменить)"""
+#     """Подтверждение регистрации"""
 #     texts = {
 #         "ru": {"confirm": "✅ Подтвердить", "edit": "✏️ Изменить"},
 #         "az": {"confirm": "✅ Təsdiq et", "edit": "✏️ Dəyişdir"},
@@ -55,21 +68,48 @@
 #     return builder.as_markup()
 
 
-# def get_main_menu_keyboard(language: str = "ru", is_admin: bool = False) -> ReplyKeyboardMarkup:
-#     """Главное меню"""
+# def get_report_input_keyboard(language: str = "ru") -> InlineKeyboardMarkup:
+#     """✅ НОВОЕ: Клавиатура для ввода отчета с кнопками "Примеры" и "Отменить" """
 #     texts = {
-#         "ru": {"profile": "👤 Мой профиль", "report": "📊 Отправить отчет", 
-#                "help": "❓ Помощь", "admin": "⚙️ Админ-панель"},
-#         "az": {"profile": "👤 Mənim profilim", "report": "📊 Hesabat göndər", 
-#                "help": "❓ Kömək", "admin": "⚙️ Admin panel"},
+#         "ru": {"examples": "💡 Примеры отчетов", "cancel": "❌ Отменить"},
+#         "az": {"examples": "💡 Hesabat nümunələri", "cancel": "❌ Ləğv et"}
+#     }
+#     builder = InlineKeyboardBuilder()
+#     builder.button(text=texts[language]["examples"], callback_data="show_examples")
+#     builder.button(text=texts[language]["cancel"], callback_data="cancel_report")
+#     builder.adjust(1)
+#     return builder.as_markup()
+
+
+# def get_cancel_report_keyboard(language: str = "ru") -> InlineKeyboardMarkup:
+#     """Кнопка отмены отчета (старая версия, заменена на get_report_input_keyboard)"""
+#     texts = {
+#         "ru": "❌ Отменить",
+#         "az": "❌ Ləğv et"
+#     }
+#     builder = InlineKeyboardBuilder()
+#     builder.button(text=texts[language], callback_data="cancel_report")
+#     return builder.as_markup()
+
+
+# def get_main_menu_keyboard(language: str = "ru", is_admin: bool = False):
+#     """
+#     ✅ ИСПРАВЛЕНО: Главное меню
+#     - Для обычных пользователей: ReplyKeyboardRemove (убирает кнопки)
+#     - Для админов: только кнопка Админ-панель
+#     """
+#     if not is_admin:
+#         # ✅ ИСПРАВЛЕНО: Возвращаем ReplyKeyboardRemove вместо None
+#         return ReplyKeyboardRemove()
+    
+#     # Для админов - только кнопка админ-панели
+#     texts = {
+#         "ru": {"admin": "⚙️ Админ-панель"},
+#         "az": {"admin": "⚙️ Admin panel"},
 #     }
 #     builder = ReplyKeyboardBuilder()
-#     builder.button(text=texts[language]["profile"])
-#     builder.button(text=texts[language]["report"])
-#     builder.button(text=texts[language]["help"])
-#     if is_admin:
-#         builder.button(text=texts[language]["admin"])
-#     builder.adjust(2)
+#     builder.button(text=texts[language]["admin"])
+#     builder.adjust(1)
 #     return builder.as_markup(resize_keyboard=True)
 
 
@@ -111,7 +151,7 @@
 
 
 """
-Клавиатуры - ИСПРАВЛЕННАЯ ВЕРСИЯ
+Клавиатуры - ФИНАЛЬНАЯ ВЕРСИЯ
 """
 from aiogram.types import InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove
 from aiogram.utils.keyboard import InlineKeyboardBuilder, ReplyKeyboardBuilder
@@ -180,28 +220,55 @@ def get_report_type_keyboard(language: str = "ru") -> InlineKeyboardMarkup:
     return builder.as_markup()
 
 
-def get_cancel_report_keyboard(language: str = "ru") -> InlineKeyboardMarkup:
-    """Кнопка отмены отчета"""
+def get_cancel_and_examples_keyboard(language: str = "ru") -> InlineKeyboardMarkup:
+    """Кнопки отмены и примеров при отправке отчета"""
     texts = {
-        "ru": "❌ Отменить",
-        "az": "❌ Ləğv et"
+        "ru": {"cancel": "❌ Отменить", "examples": "📝 Примеры"},
+        "az": {"cancel": "❌ Ləğv et", "examples": "📝 Nümunələr"}
     }
     builder = InlineKeyboardBuilder()
-    builder.button(text=texts[language], callback_data="cancel_report")
+    builder.button(text=texts[language]["examples"], callback_data="show_examples")
+    builder.button(text=texts[language]["cancel"], callback_data="cancel_report")
+    builder.adjust(2)
+    return builder.as_markup()
+
+
+def get_examples_keyboard(language: str = "ru") -> InlineKeyboardMarkup:
+    """Клавиатура с примерами профессий"""
+    texts = {
+        "ru": {
+            "uiux": "🎨 UI/UX Дизайнер",
+            "graphic": "🖼 Графический дизайнер",
+            "backend": "⚙️ PHP Backend",
+            "flutter": "📱 Flutter Dev",
+            "seo": "🔍 SEO",
+            "back": "◀️ Назад"
+        },
+        "az": {
+            "uiux": "🎨 UI/UX Dizayner",
+            "graphic": "🖼 Qrafik dizayner",
+            "backend": "⚙️ PHP Backend",
+            "flutter": "📱 Flutter Dev",
+            "seo": "🔍 SEO",
+            "back": "◀️ Geri"
+        }
+    }
+    builder = InlineKeyboardBuilder()
+    builder.button(text=texts[language]["uiux"], callback_data="example_uiux")
+    builder.button(text=texts[language]["graphic"], callback_data="example_graphic")
+    builder.button(text=texts[language]["backend"], callback_data="example_backend")
+    builder.button(text=texts[language]["flutter"], callback_data="example_flutter")
+    builder.button(text=texts[language]["seo"], callback_data="example_seo")
+    builder.button(text=texts[language]["back"], callback_data="back_to_report")
+    builder.adjust(2, 2, 1, 1)
     return builder.as_markup()
 
 
 def get_main_menu_keyboard(language: str = "ru", is_admin: bool = False):
-    """
-    ✅ ИСПРАВЛЕНО: Главное меню
-    - Для обычных пользователей: ReplyKeyboardRemove (убирает кнопки)
-    - Для админов: только кнопка Админ-панель
-    """
+    """Главное меню"""
     if not is_admin:
-        # ✅ ИСПРАВЛЕНО: Возвращаем ReplyKeyboardRemove вместо None
         return ReplyKeyboardRemove()
     
-    # Для админов - только кнопка админ-панели
     texts = {
         "ru": {"admin": "⚙️ Админ-панель"},
         "az": {"admin": "⚙️ Admin panel"},

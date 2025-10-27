@@ -1,7 +1,8 @@
 """
-Сервис для генерации PDF и DOCX документов
+Сервис для генерации PDF и DOCX документов - ФИНАЛЬНАЯ ВЕРСИЯ
 """
 import io
+import re
 from datetime import datetime
 from typing import BinaryIO
 from docx import Document
@@ -17,6 +18,24 @@ from reportlab.lib.enums import TA_CENTER, TA_LEFT
 from loguru import logger
 
 
+def clean_markdown(text: str) -> str:
+    """
+    Очистить markdown от специальных символов для документов
+    """
+    # Убираем ** (жирный)
+    text = re.sub(r'\*\*(.+?)\*\*', r'\1', text)
+    # Убираем * (курсив)
+    text = re.sub(r'\*(.+?)\*', r'\1', text)
+    # Убираем ### (заголовки)
+    text = re.sub(r'^###\s+', '', text, flags=re.MULTILINE)
+    text = re.sub(r'^##\s+', '', text, flags=re.MULTILINE)
+    text = re.sub(r'^#\s+', '', text, flags=re.MULTILINE)
+    # Убираем - в начале строк (списки)
+    text = re.sub(r'^\s*-\s+', '• ', text, flags=re.MULTILINE)
+    
+    return text
+
+
 class DocumentService:
     """Сервис для генерации документов"""
     
@@ -24,16 +43,11 @@ class DocumentService:
     def generate_docx(report_text: str, week_start: str, week_end: str) -> BinaryIO:
         """
         Сгенерировать DOCX документ с недельным отчетом
-        
-        Args:
-            report_text: Содержимое отчета
-            week_start: Дата начала недели
-            week_end: Дата окончания недели
-        
-        Returns:
-            BytesIO объект с содержимым DOCX
         """
         try:
+            # ✅ Очищаем markdown
+            clean_text = clean_markdown(report_text)
+            
             doc = Document()
             
             # Добавляем заголовок
@@ -48,8 +62,7 @@ class DocumentService:
             doc.add_paragraph()  # Пустая строка
             
             # Добавляем содержимое отчета
-            # Разбиваем по строкам и добавляем как параграфы
-            for line in report_text.split('\n'):
+            for line in clean_text.split('\n'):
                 if line.strip():
                     para = doc.add_paragraph(line)
                     para.style.font.size = Pt(11)
@@ -80,16 +93,11 @@ class DocumentService:
     def generate_pdf(report_text: str, week_start: str, week_end: str) -> BinaryIO:
         """
         Сгенерировать PDF документ с недельным отчетом
-        
-        Args:
-            report_text: Содержимое отчета
-            week_start: Дата начала недели
-            week_end: Дата окончания недели
-        
-        Returns:
-            BytesIO объект с содержимым PDF
         """
         try:
+            # ✅ Очищаем markdown
+            clean_text = clean_markdown(report_text)
+            
             pdf_io = io.BytesIO()
             
             # Создаем PDF документ
@@ -153,7 +161,7 @@ class DocumentService:
             story.append(Spacer(1, 0.2 * inch))
             
             # Добавляем содержимое отчета
-            for line in report_text.split('\n'):
+            for line in clean_text.split('\n'):
                 if line.strip():
                     # Экранируем специальные символы для PDF
                     safe_line = line.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')

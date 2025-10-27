@@ -1,5 +1,5 @@
 """
-Обработчики для админ-панели - ФИНАЛЬНАЯ ВЕРСИЯ
+Обработчики для админ-панели - ФИНАЛЬНАЯ ВЕРСИЯ (исправлены двойные тексты)
 """
 from datetime import date, datetime, timedelta
 from aiogram import Router, F
@@ -191,35 +191,35 @@ async def admin_daily_reports(callback: CallbackQuery, user: User, session: Asyn
 @router.callback_query(F.data == "admin_weekly_report", IsAdminFilter())
 async def admin_weekly_report(callback: CallbackQuery, user: User, session: AsyncSession):
     """
-    ✅ ОБНОВЛЕНО: Генерация недельного отчета с индикатором загрузки
+    ✅ ФИНАЛЬНАЯ ВЕРСИЯ: Генерация недельного отчета
     """
     try:
         admin_id = callback.from_user.id
         
-        # ✅ НОВОЕ: Проверяем, не формируется ли уже отчет
+        # Проверяем, не формируется ли уже отчет
         if admin_id in generating_reports:
             time_diff = (datetime.now() - generating_reports[admin_id]).total_seconds()
-            if time_diff < 120:  # Меньше 2 минут
+            if time_diff < 120:
                 await callback.answer(
                     "⏳ Отчет уже формируется, подождите...\n"
-                    "Tarixçə artıq hazırlanır, gözləyin...",
+                    "Hesabat artıq hazırlanır, gözləyin..." if user.language == "az" else 
+                    "⏳ Отчет уже формируется, подождите...",
                     show_alert=True
                 )
                 return
             else:
-                # Прошло больше 2 минут - разрешаем новую попытку
                 del generating_reports[admin_id]
         
-        # ✅ НОВОЕ: Отмечаем начало генерации
+        # Отмечаем начало генерации
         generating_reports[admin_id] = datetime.now()
         
-        # ✅ НОВОЕ: Показываем индикатор загрузки
-        loading_msg = await callback.message.answer(
-            "⏳ Формирую недельный отчет...\n"
-            "Это может занять до 1 минуты.\n\n"
-            "⏳ Həftəlik hesabat hazırlanır...\n"
-            "Bu 1 dəqiqəyə qədər çəkə bilər."
+        # ✅ ИСПРАВЛЕНО: Показываем индикатор загрузки только на языке админа
+        loading_text = (
+            "⏳ Həftəlik hesabat hazırlanır...\nBu 1 dəqiqəyə qədər çəkə bilər."
+            if user.language == "az" else
+            "⏳ Формирую недельный отчет...\nЭто может занять до 1 минуты."
         )
+        loading_msg = await callback.message.answer(loading_text)
         await callback.answer()
         
         today = date.today()
@@ -236,10 +236,14 @@ async def admin_weekly_report(callback: CallbackQuery, user: User, session: Asyn
         )
         
         if not reports:
-            # ✅ Удаляем из generating_reports
             del generating_reports[admin_id]
             await loading_msg.delete()
-            await callback.message.answer("📭 Нет отчетов за эту неделю / Bu həftə hesabat yoxdur")
+            no_data_text = (
+                "📭 Bu həftə hesabat yoxdur"
+                if user.language == "az" else
+                "📭 Нет отчетов за эту неделю"
+            )
+            await callback.message.answer(no_data_text)
             return
         
         users = await UserRepository.get_all_active(session)
@@ -260,10 +264,10 @@ async def admin_weekly_report(callback: CallbackQuery, user: User, session: Asyn
         # Генерируем отчет с AI
         report_text = await deepseek_service.generate_weekly_report(
             reports_data,
-            language=user.language if user else "ru"
+            language=user.language
         )
         
-        # ✅ НОВОЕ: Форматируем текст для Telegram
+        # ✅ ИСПРАВЛЕНО: Форматируем текст для Telegram
         formatted_text = format_answer(report_text)
         
         week_start_str = week_start.strftime("%d.%m.%Y")
@@ -282,14 +286,15 @@ async def admin_weekly_report(callback: CallbackQuery, user: User, session: Asyn
             week_end_str
         )
         
-        # ✅ Удаляем сообщение о загрузке
+        # Удаляем сообщение о загрузке
         await loading_msg.delete()
         
-        # ✅ Отправляем отформатированный текст
+        # ✅ ИСПРАВЛЕНО: Отправляем заголовок и текст на языке админа
+        header = get_text("weekly_report_header", user.language, 
+                         week_start=week_start_str, week_end=week_end_str)
+        
         await callback.message.answer(
-            f"📊 <b>Еженедельный отчет / Həftəlik Hesabat</b>\n"
-            f"📅 {week_start_str} - {week_end_str}\n\n"
-            f"{formatted_text}",
+            f"{header}\n\n{formatted_text}",
             parse_mode="HTML"
         )
         
@@ -299,7 +304,7 @@ async def admin_weekly_report(callback: CallbackQuery, user: User, session: Asyn
                 docx_file.read(),
                 filename=f"weekly_report_{week_start_str}_{week_end_str}.docx"
             ),
-            caption="📄 DOCX версия отчета"
+            caption="📄 DOCX версия отчета" if user.language == "ru" else "📄 Hesabatın DOCX versiyası"
         )
         
         # Отправляем PDF
@@ -309,10 +314,10 @@ async def admin_weekly_report(callback: CallbackQuery, user: User, session: Asyn
                 pdf_file.read(),
                 filename=f"weekly_report_{week_start_str}_{week_end_str}.pdf"
             ),
-            caption="📄 PDF версия отчета"
+            caption="📄 PDF версия отчета" if user.language == "ru" else "📄 Hesabatın PDF versiyası"
         )
         
-        # ✅ НОВОЕ: Удаляем из generating_reports
+        # Удаляем из generating_reports
         del generating_reports[admin_id]
         
         logger.info(f"Администратор {callback.from_user.id} сгенерировал недельный отчет")
@@ -320,7 +325,6 @@ async def admin_weekly_report(callback: CallbackQuery, user: User, session: Asyn
     except Exception as e:
         logger.error(f"Ошибка генерации недельного отчета: {e}")
         
-        # ✅ Удаляем из generating_reports при ошибке
         if callback.from_user.id in generating_reports:
             del generating_reports[callback.from_user.id]
         
