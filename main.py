@@ -8,6 +8,8 @@ from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
+from aiogram.exceptions import TelegramBadRequest
+
 from config.settings import settings
 from bot.database import db_manager
 from bot.middlewares import (
@@ -15,7 +17,6 @@ from bot.middlewares import (
     DatabaseMiddleware,
     UserCheckMiddleware,
     AdminCheckMiddleware,
-    CallbackAgeMiddleware
 )
 from bot.handlers import start, reports, profile, admin, common
 from bot.services import SchedulerService
@@ -39,23 +40,29 @@ logger.add(
 
 
 class RetryMiddleware:
+    """
+    ✅ Middleware для автоматического повтора при временных ошибках Telegram
+    """
     async def __call__(self, handler, event, data):
         max_retries = 2
         for attempt in range(max_retries + 1):
             try:
                 return await handler(event, data)
             except TelegramBadRequest as e:
-                if "query is too old" in str(e) or "timeout expired" in str(e):
+                error_msg = str(e).lower()
+                # Проверяем, является ли ошибка временной
+                if "query is too old" in error_msg or "timeout expired" in error_msg:
                     if attempt == max_retries:
                         logger.error(f"Max retries reached for {event}: {e}")
-                        raise
+                        # Не пробрасываем ошибку дальше, просто логируем
+                        return None
                     logger.warning(f"Retry {attempt + 1}/{max_retries} for {event}: {e}")
-                    await asyncio.sleep(1)  # Задержка перед повторной попыткой
+                    await asyncio.sleep(1)
                 else:
+                    # Если ошибка не временная, пробрасываем её
                     raise
-        # Импорт внутри функции для избежания циклических зависимостей
-        from aiogram.exceptions import TelegramBadRequest
-        
+
+
 async def on_startup(bot: Bot, scheduler: SchedulerService):
     """Actions on bot startup"""
     try:
@@ -125,7 +132,7 @@ async def main():
         # Initialize scheduler
         scheduler = SchedulerService(bot)
         
-        # КРИТИЧНО: middleware в правильном порядке на OUTER уровне
+        # ✅ ИСПРАВЛЕНО: Убран CallbackAgeMiddleware
         # Outer middleware выполняются ПЕРВЫМИ, до обработки роутеров
         dp.message.outer_middleware(DatabaseMiddleware())
         dp.message.outer_middleware(UserCheckMiddleware())
@@ -134,10 +141,11 @@ async def main():
         dp.callback_query.outer_middleware(DatabaseMiddleware())
         dp.callback_query.outer_middleware(UserCheckMiddleware())
         dp.callback_query.outer_middleware(AdminCheckMiddleware())
-        dp.callback_query.outer_middleware(CallbackAgeMiddleware())
         
+        # Retry middleware для обработки временных ошибок
         dp.message.middleware(RetryMiddleware())
         dp.callback_query.middleware(RetryMiddleware())
+        
         # Logging middleware последним
         dp.message.middleware(LoggingMiddleware())
         dp.callback_query.middleware(LoggingMiddleware())

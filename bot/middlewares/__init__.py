@@ -3,7 +3,6 @@ from .middlewares import (
     DatabaseMiddleware,
     UserCheckMiddleware,
     AdminCheckMiddleware,
-    CallbackAgeMiddleware
 )
 
 __all__ = [
@@ -11,6 +10,4 @@ __all__ = [
     'DatabaseMiddleware',
     'UserCheckMiddleware',
     'AdminCheckMiddleware',
-    'CallbackAgeMiddleware',
-    
 ]

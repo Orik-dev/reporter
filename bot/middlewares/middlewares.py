@@ -5,8 +5,6 @@ from typing import Callable, Dict, Any, Awaitable
 from aiogram import BaseMiddleware
 from aiogram.types import TelegramObject, Message, CallbackQuery
 from loguru import logger
-from datetime import datetime
-import pytz
 
 from bot.database import db_manager, UserRepository
 from config.settings import settings as app_settings
@@ -118,42 +116,4 @@ class AdminCheckMiddleware(BaseMiddleware):
             f"ADMIN_IDS={admin_list}"
         )
 
-        return await handler(event, data)
-    
-    
-class CallbackAgeMiddleware(BaseMiddleware):
-    """
-    ✅ ИСПРАВЛЕНО: Проверка возраста callback запроса
-    Игнорирует устаревшие callback (старше 30 секунд)
-    """
-    async def __call__(self, handler, event, data):
-        if isinstance(event, CallbackQuery):
-            try:
-                # ✅ ИСПРАВЛЕНО: Преобразуем event.id в int перед делением
-                event_id = int(event.id) if isinstance(event.id, str) else event.id
-                request_time = datetime.fromtimestamp(
-                    event_id / 4294967296, 
-                    tz=pytz.timezone(app_settings.timezone)
-                )
-                
-                now = datetime.now(pytz.timezone(app_settings.timezone))
-                age_seconds = (now - request_time).total_seconds()
-                
-                if age_seconds > 30:
-                    logger.warning(
-                        f"Устаревший callback от {event.from_user.id}, "
-                        f"возраст: {age_seconds:.1f}s, игнорирую"
-                    )
-                    await event.answer(
-                        "⚠️ Это действие устарело. Пожалуйста, повторите команду.\n"
-                        "Bu əməliyyat köhnəlib. Zəhmət olmasa, əmri təkrarlayın.",
-                        show_alert=True
-                    )
-                    return None
-                    
-            except Exception as e:
-                logger.error(f"Ошибка в CallbackAgeMiddleware: {e}")
-                # Если ошибка в проверке возраста, пропускаем callback
-                pass
-                
         return await handler(event, data)
