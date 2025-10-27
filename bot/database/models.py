@@ -9,24 +9,20 @@ import enum
 
 
 class Base(DeclarativeBase):
-    """Базовый класс для всех моделей"""
     pass
 
 
 class LanguageEnum(enum.Enum):
-    """Поддерживаемые языки"""
     AZ = "az"
     RU = "ru"
 
 
 class WorkTimeEnum(enum.Enum):
-    """Варианты рабочего времени"""
     MORNING = "9:00-18:00"
     AFTERNOON = "10:00-19:00"
 
 
 class User(Base):
-    """Модель пользователя"""
     __tablename__ = 'users'
     
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
@@ -50,7 +46,6 @@ class User(Base):
 
 
 class DailyReport(Base):
-    """Модель ежедневного отчета"""
     __tablename__ = 'daily_reports'
     
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
@@ -67,7 +62,6 @@ class DailyReport(Base):
 
 
 class WeeklyReport(Base):
-    """Модель недельного отчета"""
     __tablename__ = 'weekly_reports'
     
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)

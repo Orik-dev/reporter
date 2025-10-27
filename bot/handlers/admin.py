@@ -191,7 +191,7 @@ async def admin_daily_reports(callback: CallbackQuery, user: User, session: Asyn
 @router.callback_query(F.data == "admin_weekly_report", IsAdminFilter())
 async def admin_weekly_report(callback: CallbackQuery, user: User, session: AsyncSession):
     """
-    ✅ ФИНАЛЬНАЯ ВЕРСИЯ: Генерация недельного отчета
+    ✅ ФИНАЛЬНАЯ ВЕРСИЯ: Генерация недельного отчета (БЕЗ PDF)
     """
     try:
         admin_id = callback.from_user.id
@@ -273,14 +273,8 @@ async def admin_weekly_report(callback: CallbackQuery, user: User, session: Asyn
         week_start_str = week_start.strftime("%d.%m.%Y")
         week_end_str = week_end.strftime("%d.%m.%Y")
         
-        # Генерируем документы
+        # Генерируем только DOCX документ
         docx_file = document_service.generate_docx(
-            report_text,
-            week_start_str,
-            week_end_str
-        )
-        
-        pdf_file = document_service.generate_pdf(
             report_text,
             week_start_str,
             week_end_str
@@ -298,23 +292,13 @@ async def admin_weekly_report(callback: CallbackQuery, user: User, session: Asyn
             parse_mode="HTML"
         )
         
-        # Отправляем DOCX
+        # ✅ ИСПРАВЛЕНО: Отправляем только DOCX
         await callback.message.answer_document(
             document=BufferedInputFile(
                 docx_file.read(),
                 filename=f"weekly_report_{week_start_str}_{week_end_str}.docx"
             ),
             caption="📄 DOCX версия отчета" if user.language == "ru" else "📄 Hesabatın DOCX versiyası"
-        )
-        
-        # Отправляем PDF
-        pdf_file.seek(0)
-        await callback.message.answer_document(
-            document=BufferedInputFile(
-                pdf_file.read(),
-                filename=f"weekly_report_{week_start_str}_{week_end_str}.pdf"
-            ),
-            caption="📄 PDF версия отчета" if user.language == "ru" else "📄 Hesabatın PDF versiyası"
         )
         
         # Удаляем из generating_reports
