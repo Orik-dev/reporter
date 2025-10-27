@@ -8,14 +8,14 @@ from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
-
 from config.settings import settings
 from bot.database import db_manager
 from bot.middlewares import (
     LoggingMiddleware,
     DatabaseMiddleware,
     UserCheckMiddleware,
-    AdminCheckMiddleware
+    AdminCheckMiddleware,
+    CallbackAgeMiddleware
 )
 from bot.handlers import start, reports, profile, admin, common
 from bot.services import SchedulerService
@@ -38,6 +38,24 @@ logger.add(
 )
 
 
+class RetryMiddleware:
+    async def __call__(self, handler, event, data):
+        max_retries = 2
+        for attempt in range(max_retries + 1):
+            try:
+                return await handler(event, data)
+            except TelegramBadRequest as e:
+                if "query is too old" in str(e) or "timeout expired" in str(e):
+                    if attempt == max_retries:
+                        logger.error(f"Max retries reached for {event}: {e}")
+                        raise
+                    logger.warning(f"Retry {attempt + 1}/{max_retries} for {event}: {e}")
+                    await asyncio.sleep(1)  # Задержка перед повторной попыткой
+                else:
+                    raise
+        # Импорт внутри функции для избежания циклических зависимостей
+        from aiogram.exceptions import TelegramBadRequest
+        
 async def on_startup(bot: Bot, scheduler: SchedulerService):
     """Actions on bot startup"""
     try:
@@ -97,6 +115,7 @@ async def main():
         # Initialize bot and dispatcher
         bot = Bot(
             token=settings.bot_token,
+            timeout=60,
             default=DefaultBotProperties(parse_mode=ParseMode.HTML)
         )
         
@@ -115,7 +134,10 @@ async def main():
         dp.callback_query.outer_middleware(DatabaseMiddleware())
         dp.callback_query.outer_middleware(UserCheckMiddleware())
         dp.callback_query.outer_middleware(AdminCheckMiddleware())
+        dp.callback_query.outer_middleware(CallbackAgeMiddleware())
         
+        dp.message.middleware(RetryMiddleware())
+        dp.callback_query.middleware(RetryMiddleware())
         # Logging middleware последним
         dp.message.middleware(LoggingMiddleware())
         dp.callback_query.middleware(LoggingMiddleware())

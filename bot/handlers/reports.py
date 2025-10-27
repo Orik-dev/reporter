@@ -30,7 +30,9 @@ async def cmd_report(message: Message, user: User, session: AsyncSession, state:
     """Начать отправку отчета"""
     try:
         await state.clear()
-        
+        if user.is_admin:
+            # await message.answer(get_text("admin_no_daily_report", user.language))
+            return
         # Проверка времени
         baku_tz = pytz.timezone(settings.timezone)
         now_baku = datetime.now(baku_tz)

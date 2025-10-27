@@ -41,11 +41,11 @@ class SchedulerService:
         self._schedule_daily_admin_report()
         self._schedule_weekly_report()
 
-        # ТЕСТ-ПИНОК: единоразово вызовем задачи через N секунд после старта
-        if settings.scheduler_start_kick_seconds > 0:
-            kick_time = datetime.now(self.timezone) + timedelta(seconds=settings.scheduler_start_kick_seconds)
-            self.scheduler.add_job(self._kick_all, DateTrigger(run_date=kick_time, timezone=self.timezone), id="kick_all_once")
-            logger.info(f"Kick-all scheduled at {kick_time.strftime('%H:%M:%S')} (Baku)")
+        # # ТЕСТ-ПИНОК: единоразово вызовем задачи через N секунд после старта
+        # if settings.scheduler_start_kick_seconds > 0:
+        #     kick_time = datetime.now(self.timezone) + timedelta(seconds=settings.scheduler_start_kick_seconds)
+        #     self.scheduler.add_job(self._kick_all, DateTrigger(run_date=kick_time, timezone=self.timezone), id="kick_all_once")
+        #     logger.info(f"Kick-all scheduled at {kick_time.strftime('%H:%M:%S')} (Baku)")
 
         self.scheduler.start()
         logger.info("Планировщик успешно запущен")
@@ -120,6 +120,8 @@ class SchedulerService:
                 today = date.today()
 
                 for user in users:
+                    if user.is_admin:
+                        continue
                     # уже есть отчёт за сегодня?
                     existing = await DailyReportRepository.get_by_date(session, user.telegram_id, today)
                     if existing:
@@ -139,22 +141,50 @@ class SchedulerService:
         except Exception as e:
             logger.error(f"Ошибка в задаче уведомлений: {e}")
 
+    # async def _send_hourly_reminders(self):
+    #     """Ежечасно — напоминания тем, кто не отправил отчёт (18:00–23:59)"""
+    #     try:
+    #         now_baku = datetime.now(self.timezone)
+    #         if not (18 <= now_baku.hour <= 23):
+    #             return
+
+    #         async for session in db_manager.get_session():
+    #             users = await UserRepository.get_all_active(session)
+    #             today = date.today()
+
+    #             for user in users:
+    #                 existing_report = await DailyReportRepository.get_by_date(session, user.telegram_id, today)
+    #                 if existing_report:
+    #                     continue
+
+    #                 try:
+    #                     await self.bot.send_message(
+    #                         chat_id=user.telegram_id,
+    #                         text=get_text("reminder", user.language),
+    #                         reply_markup=get_report_type_keyboard(user.language)
+    #                     )
+    #                     logger.info(f"[reminder] отправлено {user.telegram_id}")
+    #                 except Exception as tg_err:
+    #                     logger.error(f"[reminder] ошибка Telegram для {user.telegram_id}: {tg_err}")
+
+    #     except Exception as e:
+    #         logger.error(f"Ошибка в задаче ежечасных напоминаний: {e}")
+    
     async def _send_hourly_reminders(self):
-        """Ежечасно — напоминания тем, кто не отправил отчёт (18:00–23:59)"""
         try:
             now_baku = datetime.now(self.timezone)
-            if not (18 <= now_baku.hour <= 23):
-                return
-
             async for session in db_manager.get_session():
                 users = await UserRepository.get_all_active(session)
                 today = date.today()
-
                 for user in users:
+                    if user.is_admin:
+                        continue
                     existing_report = await DailyReportRepository.get_by_date(session, user.telegram_id, today)
                     if existing_report:
                         continue
-
+                    end_hour = 18 if user.work_time == "9:00-18:00" else 19
+                    if now_baku.hour < end_hour:
+                        continue
                     try:
                         await self.bot.send_message(
                             chat_id=user.telegram_id,
@@ -164,7 +194,6 @@ class SchedulerService:
                         logger.info(f"[reminder] отправлено {user.telegram_id}")
                     except Exception as tg_err:
                         logger.error(f"[reminder] ошибка Telegram для {user.telegram_id}: {tg_err}")
-
         except Exception as e:
             logger.error(f"Ошибка в задаче ежечасных напоминаний: {e}")
 

@@ -1,23 +1,17 @@
-2025-10-27 10:09:05 | INFO     | bot.services.scheduler_service:shutdown:63 - Планировщик остановлен
-2025-10-27 10:09:05 | INFO     | __main__:on_shutdown:75 - Scheduler stopped
-2025-10-27 10:09:05 | INFO     | __main__:on_shutdown:88 - Bot shut down successfully
-2025-10-27 10:16:49 | INFO     | bot.database.connection:create_tables:40 - Таблицы базы данных успешно созданы
-2025-10-27 10:16:49 | INFO     | __main__:on_startup:46 - Database initialized
-2025-10-27 10:16:49 | INFO     | bot.services.scheduler_service:start:37 - APSheduler starting, current Baku time: 2025-10-27 14:16:49 +04
-2025-10-27 10:16:49 | INFO     | bot.services.scheduler_service:_schedule_daily_notifications:83 - Ежедневные уведомления запланированы на 18:00 и 19:00 (Baku)
-2025-10-27 10:16:49 | INFO     | bot.services.scheduler_service:_schedule_hourly_reminders:92 - Ежечасные напоминания каждые 60 мин (только 18:00–23:59).
-2025-10-27 10:16:49 | INFO     | bot.services.scheduler_service:_schedule_daily_admin_report:101 - Ежедневный отчёт админу запланирован на 23:59 (Baku).
-2025-10-27 10:16:49 | INFO     | bot.services.scheduler_service:_schedule_weekly_report:111 - Недельный отчёт запланирован на день недели=4 00:00 (Baku).
-2025-10-27 10:16:49 | INFO     | bot.services.scheduler_service:start:48 - Kick-all scheduled at 14:16:59 (Baku)
-2025-10-27 10:16:49 | INFO     | bot.services.scheduler_service:start:51 - Планировщик успешно запущен
-2025-10-27 10:16:49 | INFO     | __main__:on_startup:50 - Scheduler started
-2025-10-27 10:16:49 | INFO     | __main__:on_startup:63 - Bot started successfully
-2025-10-27 10:16:49 | INFO     | __main__:main:135 - Starting bot polling...
-2025-10-27 10:16:59 | INFO     | bot.services.scheduler_service:_kick_all:55 - Kick-all: running notification + hourly reminders + admin daily report
-2025-10-27 10:17:00 | INFO     | bot.services.scheduler_service:_send_daily_notifications:135 - [notify] отправлено уведомление пользователю 436680563 (9:00-18:00)
-2025-10-27 10:17:00 | INFO     | bot.services.scheduler_service:_send_daily_notifications:126 - [notify] 5620228351 уже отправил отчёт сегодня — пропуск
-2025-10-27 10:17:00 | INFO     | bot.services.scheduler_service:_send_daily_admin_report:226 - [admin daily] отправлено админу 436680563
-2025-10-27 10:17:14 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
-2025-10-27 10:17:14 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): report_no_tasks
-2025-10-27 10:17:15 | INFO     | bot.database.repository:create:123 - Создан ежедневный отчёт для пользователя 436680563
-2025-10-27 10:17:16 | INFO     | bot.handlers.reports:report_no_tasks:170 - Пользователь 436680563 сообщил об отсутствии задач
+2025-10-27 12:01:51 | INFO     | bot.services.scheduler_service:_send_hourly_reminders:194 - [reminder] отправлено 5620228351
+2025-10-27 12:02:51 | INFO     | bot.services.scheduler_service:_send_hourly_reminders:194 - [reminder] отправлено 5620228351
+2025-10-27 12:02:55 | INFO     | bot.middlewares.middlewares:__call__:236 - [AdminCheck] tg_id=5620228351 | is_admin=False | env_admin=False | db_admin=False | ADMIN_IDS=[436680563]
+2025-10-27 12:02:55 | ERROR    | bot.database.connection:session:54 - Ошибка в сессии БД: unsupported operand type(s) for /: 'str' and 'int'
+2025-10-27 12:03:07 | INFO     | bot.middlewares.middlewares:__call__:236 - [AdminCheck] tg_id=5620228351 | is_admin=False | env_admin=False | db_admin=False | ADMIN_IDS=[436680563]
+2025-10-27 12:03:07 | ERROR    | bot.database.connection:session:54 - Ошибка в сессии БД: unsupported operand type(s) for /: 'str' and 'int'
+2025-10-27 12:03:32 | INFO     | bot.middlewares.middlewares:__call__:236 - [AdminCheck] tg_id=5620228351 | is_admin=False | env_admin=False | db_admin=False | ADMIN_IDS=[436680563]
+2025-10-27 12:03:32 | ERROR    | bot.database.connection:session:54 - Ошибка в сессии БД: unsupported operand type(s) for /: 'str' and 'int'
+2025-10-27 12:03:44 | INFO     | bot.middlewares.middlewares:__call__:236 - [AdminCheck] tg_id=5620228351 | is_admin=False | env_admin=False | db_admin=False | ADMIN_IDS=[436680563]
+2025-10-27 12:03:44 | ERROR    | bot.database.connection:session:54 - Ошибка в сессии БД: unsupported operand type(s) for /: 'str' and 'int'
+2025-10-27 12:03:51 | INFO     | bot.services.scheduler_service:_send_hourly_reminders:194 - [reminder] отправлено 5620228351
+2025-10-27 12:03:55 | INFO     | bot.middlewares.middlewares:__call__:236 - [AdminCheck] tg_id=5620228351 | is_admin=False | env_admin=False | db_admin=False | ADMIN_IDS=[436680563]
+2025-10-27 12:03:55 | ERROR    | bot.database.connection:session:54 - Ошибка в сессии БД: unsupported operand type(s) for /: 'str' and 'int'
+2025-10-27 12:03:57 | INFO     | bot.middlewares.middlewares:__call__:236 - [AdminCheck] tg_id=5620228351 | is_admin=False | env_admin=False | db_admin=False | ADMIN_IDS=[436680563]
+2025-10-27 12:03:57 | ERROR    | bot.database.connection:session:54 - Ошибка в сессии БД: unsupported operand type(s) for /: 'str' and 'int'
+2025-10-27 12:04:51 | INFO     | bot.services.scheduler_service:_send_hourly_reminders:194 - [reminder] отправлено 5620228351
+2025-10-27 12:05:51 | INFO     | bot.services.scheduler_service:_send_hourly_reminders:194 - [reminder] отправлено 5620228351
