@@ -1,5 +1,5 @@
 """
-Обработчики для админ-панели - ФИНАЛЬНАЯ ВЕРСИЯ (исправлены двойные тексты)
+Обработчики для админ-панели - С ФУНКЦИЕЙ УДАЛЕНИЯ ПОЛЬЗОВАТЕЛЕЙ
 """
 from datetime import date, datetime, timedelta
 from aiogram import Router, F
@@ -8,7 +8,7 @@ from aiogram.types import Message, CallbackQuery, BufferedInputFile
 from sqlalchemy.ext.asyncio import AsyncSession
 from loguru import logger
 
-from bot.keyboards import get_admin_keyboard
+from bot.keyboards import get_admin_keyboard, get_user_list_keyboard, get_delete_confirmation_keyboard
 from bot.utils import get_text, format_answer
 from bot.database import User, UserRepository, DailyReportRepository
 from bot.filters import IsAdminFilter, IsNotAdminFilter
@@ -17,8 +17,8 @@ from bot.services.scheduler_service import SchedulerService
 
 router = Router()
 
-# ✅ НОВОЕ: Хранилище для отслеживания генерации отчетов
-generating_reports = {}  # {admin_id: datetime}
+# Хранилище для отслеживания генерации отчетов
+generating_reports = {}
 
 
 @router.message(Command("admin"), IsAdminFilter())
@@ -26,8 +26,9 @@ generating_reports = {}  # {admin_id: datetime}
 async def cmd_admin(message: Message, user: User):
     """Админ-панель"""
     try:
-        text = get_text("admin_panel", user.language if user else "ru")
-        keyboard = get_admin_keyboard(user.language if user else "ru")
+        language = user.language if user else "ru"
+        text = get_text("admin_panel", language)
+        keyboard = get_admin_keyboard(language)
         
         await message.answer(text, reply_markup=keyboard)
         
@@ -35,7 +36,8 @@ async def cmd_admin(message: Message, user: User):
     
     except Exception as e:
         logger.error(f"Ошибка в команде admin: {e}")
-        await message.answer(get_text("error", user.language if user else "ru"))
+        language = user.language if user else "ru"
+        await message.answer(get_text("error", language))
 
 
 @router.message(Command("admin"), IsNotAdminFilter())
@@ -43,7 +45,8 @@ async def cmd_admin(message: Message, user: User):
 async def cmd_admin_not_authorized(message: Message, user: User):
     """Попытка доступа без прав"""
     try:
-        text = get_text("not_authorized", user.language if user else "ru")
+        language = user.language if user else "ru"
+        text = get_text("not_authorized", language)
         await message.answer(text)
         
         logger.warning(f"⚠️ Пользователь {message.from_user.id} попытался войти в админ-панель без прав")
@@ -56,6 +59,8 @@ async def cmd_admin_not_authorized(message: Message, user: User):
 async def admin_stats(callback: CallbackQuery, user: User, session: AsyncSession):
     """Показать статистику"""
     try:
+        language = user.language if user else "ru"
+        
         all_users = await UserRepository.get_all_active(session)
         total_users = len(all_users)
         
@@ -78,7 +83,7 @@ async def admin_stats(callback: CallbackQuery, user: User, session: AsyncSession
         
         text = get_text(
             "stats",
-            user.language if user else "ru",
+            language,
             total_users=total_users,
             active_users=total_users,
             today_reports=len(today_reports),
@@ -92,13 +97,16 @@ async def admin_stats(callback: CallbackQuery, user: User, session: AsyncSession
     
     except Exception as e:
         logger.error(f"Ошибка показа статистики: {e}")
-        await callback.answer(get_text("error", user.language if user else "ru"), show_alert=True)
+        language = user.language if user else "ru"
+        await callback.answer(get_text("error", language), show_alert=True)
 
 
 @router.callback_query(F.data == "admin_users", IsAdminFilter())
 async def admin_users(callback: CallbackQuery, user: User, session: AsyncSession):
-    """Показать список пользователей"""
+    """Показать список пользователей с кнопками удаления"""
     try:
+        language = user.language if user else "ru"
+        
         users = await UserRepository.get_all_active(session)
         
         users_text = ""
@@ -108,25 +116,192 @@ async def admin_users(callback: CallbackQuery, user: User, session: AsyncSession
         
         text = get_text(
             "user_list",
-            user.language if user else "ru",
+            language,
             count=len(users),
             users=users_text
         )
         
-        await callback.message.edit_text(text)
+        keyboard = get_user_list_keyboard(users, language, callback.from_user.id)
+        
+        await callback.message.edit_text(text, reply_markup=keyboard)
         await callback.answer()
         
         logger.info(f"Администратор {callback.from_user.id} просмотрел список пользователей")
     
     except Exception as e:
         logger.error(f"Ошибка показа пользователей: {e}")
-        await callback.answer(get_text("error", user.language if user else "ru"), show_alert=True)
+        language = user.language if user else "ru"
+        await callback.answer(get_text("error", language), show_alert=True)
+
+
+@router.callback_query(F.data.startswith("delete_user_"), IsAdminFilter())
+async def delete_user_confirm(callback: CallbackQuery, user: User, session: AsyncSession):
+    """
+    ✅ ИСПРАВЛЕНО: Подтверждение удаления пользователя
+    """
+    try:
+        # ✅ ИСПРАВЛЕНО: Определяем язык сразу
+        language = user.language if user else "ru"
+        
+        telegram_id = int(callback.data.split("_")[2])
+        
+        # Проверка: нельзя удалить самого себя
+        if telegram_id == callback.from_user.id:
+            await callback.answer(
+                get_text("cannot_delete_self", language),
+                show_alert=True
+            )
+            return
+        
+        # Получаем информацию о пользователе
+        target_user = await UserRepository.get_by_telegram_id(session, telegram_id)
+        if not target_user:
+            await callback.answer(
+                get_text("user_not_found", language),
+                show_alert=True
+            )
+            return
+        
+        # Проверка: нельзя удалить другого админа
+        if target_user.is_admin:
+            await callback.answer(
+                get_text("cannot_delete_admin", language),
+                show_alert=True
+            )
+            return
+        
+        # Показываем подтверждение
+        text = get_text(
+            "delete_user_confirm",
+            language,
+            first_name=target_user.first_name,
+            last_name=target_user.last_name
+        )
+        
+        keyboard = get_delete_confirmation_keyboard(telegram_id, language)
+        
+        await callback.message.edit_text(text, reply_markup=keyboard)
+        await callback.answer()
+        
+        logger.info(f"Админ {callback.from_user.id} запросил удаление пользователя {telegram_id}")
+    
+    except Exception as e:
+        logger.error(f"Ошибка при подтверждении удаления: {e}")
+        language = user.language if user else "ru"
+        await callback.answer(get_text("error", language), show_alert=True)
+
+
+@router.callback_query(F.data.startswith("confirm_delete_"), IsAdminFilter())
+async def delete_user_execute(callback: CallbackQuery, user: User, session: AsyncSession):
+    """
+    ✅ ИСПРАВЛЕНО: Выполнить удаление пользователя
+    """
+    try:
+        # ✅ ИСПРАВЛЕНО: Определяем язык сразу
+        language = user.language if user else "ru"
+        
+        telegram_id = int(callback.data.split("_")[2])
+        
+        # Получаем информацию о пользователе до удаления
+        target_user = await UserRepository.get_by_telegram_id(session, telegram_id)
+        if not target_user:
+            await callback.answer(
+                get_text("user_not_found", language),
+                show_alert=True
+            )
+            return
+        
+        user_name = f"{target_user.first_name} {target_user.last_name}"
+        
+        # Удаляем пользователя
+        success = await UserRepository.delete_user(session, telegram_id)
+        
+        if success:
+            text = get_text(
+                "user_deleted",
+                language,
+                first_name=target_user.first_name,
+                last_name=target_user.last_name
+            )
+            
+            await callback.message.edit_text(text)
+            await callback.answer("✅ Удалено" if language == "ru" else "✅ Silindi")
+            
+            logger.info(f"Админ {callback.from_user.id} удалил пользователя {telegram_id} ({user_name})")
+        else:
+            await callback.answer(
+                get_text("user_not_found", language),
+                show_alert=True
+            )
+    
+    except Exception as e:
+        logger.error(f"Ошибка при удалении пользователя: {e}")
+        language = user.language if user else "ru"
+        await callback.answer(get_text("error", language), show_alert=True)
+
+
+@router.callback_query(F.data.startswith("cancel_delete_"), IsAdminFilter())
+async def delete_user_cancel(callback: CallbackQuery, user: User, session: AsyncSession):
+    """
+    ✅ ИСПРАВЛЕНО: Отменить удаление пользователя
+    """
+    try:
+        # ✅ ИСПРАВЛЕНО: Определяем язык сразу
+        language = user.language if user else "ru"
+        
+        # Возвращаемся к списку пользователей
+        users = await UserRepository.get_all_active(session)
+        
+        users_text = ""
+        for u in users:
+            admin_badge = " 👑" if u.is_admin else ""
+            users_text += f"• {u.first_name} {u.last_name} ({u.work_time}){admin_badge}\n"
+        
+        text = get_text(
+            "user_list",
+            language,
+            count=len(users),
+            users=users_text
+        )
+        
+        keyboard = get_user_list_keyboard(users, language, callback.from_user.id)
+        
+        await callback.message.edit_text(text, reply_markup=keyboard)
+        await callback.answer("❌ Отменено" if language == "ru" else "❌ Ləğv edildi")
+        
+        logger.info(f"Админ {callback.from_user.id} отменил удаление пользователя")
+    
+    except Exception as e:
+        logger.error(f"Ошибка при отмене удаления: {e}")
+        language = user.language if user else "ru"
+        await callback.answer(get_text("error", language), show_alert=True)
+
+
+@router.callback_query(F.data == "admin_panel_back", IsAdminFilter())
+async def admin_panel_back(callback: CallbackQuery, user: User):
+    """Возврат в админ-панель"""
+    try:
+        language = user.language if user else "ru"
+        text = get_text("admin_panel", language)
+        keyboard = get_admin_keyboard(language)
+        
+        await callback.message.edit_text(text, reply_markup=keyboard)
+        await callback.answer()
+        
+        logger.info(f"Админ {callback.from_user.id} вернулся в главное меню админ-панели")
+        
+    except Exception as e:
+        logger.error(f"Ошибка возврата в админ-панель: {e}")
+        language = user.language if user else "ru"
+        await callback.answer(get_text("error", language), show_alert=True)
 
 
 @router.callback_query(F.data == "admin_daily_reports", IsAdminFilter())
 async def admin_daily_reports(callback: CallbackQuery, user: User, session: AsyncSession):
     """Показать отчеты за сегодня"""
     try:
+        language = user.language if user else "ru"
+        
         today = date.today()
         start_date = datetime.combine(today, datetime.min.time())
         end_date = datetime.combine(today, datetime.max.time())
@@ -169,7 +344,7 @@ async def admin_daily_reports(callback: CallbackQuery, user: User, session: Asyn
         
         text = get_text(
             "daily_report_summary",
-            user.language if user else "ru",
+            language,
             date=today.strftime("%d.%m.%Y"),
             total=total_users,
             submitted=submitted_reports,
@@ -185,24 +360,23 @@ async def admin_daily_reports(callback: CallbackQuery, user: User, session: Asyn
     
     except Exception as e:
         logger.error(f"Ошибка показа ежедневных отчетов: {e}")
-        await callback.answer(get_text("error", user.language if user else "ru"), show_alert=True)
+        language = user.language if user else "ru"
+        await callback.answer(get_text("error", language), show_alert=True)
 
 
 @router.callback_query(F.data == "admin_weekly_report", IsAdminFilter())
 async def admin_weekly_report(callback: CallbackQuery, user: User, session: AsyncSession):
-    """
-    ✅ ФИНАЛЬНАЯ ВЕРСИЯ: Генерация недельного отчета (БЕЗ PDF)
-    """
+    """Генерация недельного отчета"""
     try:
+        language = user.language if user else "ru"
         admin_id = callback.from_user.id
         
-        # Проверяем, не формируется ли уже отчет
         if admin_id in generating_reports:
             time_diff = (datetime.now() - generating_reports[admin_id]).total_seconds()
             if time_diff < 120:
                 await callback.answer(
                     "⏳ Отчет уже формируется, подождите...\n"
-                    "Hesabat artıq hazırlanır, gözləyin..." if user.language == "az" else 
+                    "Hesabat artıq hazırlanır, gözləyin..." if language == "az" else 
                     "⏳ Отчет уже формируется, подождите...",
                     show_alert=True
                 )
@@ -210,13 +384,11 @@ async def admin_weekly_report(callback: CallbackQuery, user: User, session: Asyn
             else:
                 del generating_reports[admin_id]
         
-        # Отмечаем начало генерации
         generating_reports[admin_id] = datetime.now()
         
-        # ✅ ИСПРАВЛЕНО: Показываем индикатор загрузки только на языке админа
         loading_text = (
             "⏳ Həftəlik hesabat hazırlanır...\nBu 1 dəqiqəyə qədər çəkə bilər."
-            if user.language == "az" else
+            if language == "az" else
             "⏳ Формирую недельный отчет...\nЭто может занять до 1 минуты."
         )
         loading_msg = await callback.message.answer(loading_text)
@@ -240,7 +412,7 @@ async def admin_weekly_report(callback: CallbackQuery, user: User, session: Asyn
             await loading_msg.delete()
             no_data_text = (
                 "📭 Bu həftə hesabat yoxdur"
-                if user.language == "az" else
+                if language == "az" else
                 "📭 Нет отчетов за эту неделю"
             )
             await callback.message.answer(no_data_text)
@@ -261,30 +433,25 @@ async def admin_weekly_report(callback: CallbackQuery, user: User, session: Asyn
                     'has_tasks': report.has_tasks
                 })
         
-        # Генерируем отчет с AI
         report_text = await deepseek_service.generate_weekly_report(
             reports_data,
-            language=user.language
+            language=language
         )
         
-        # ✅ ИСПРАВЛЕНО: Форматируем текст для Telegram
         formatted_text = format_answer(report_text)
         
         week_start_str = week_start.strftime("%d.%m.%Y")
         week_end_str = week_end.strftime("%d.%m.%Y")
         
-        # Генерируем только DOCX документ
         docx_file = document_service.generate_docx(
             report_text,
             week_start_str,
             week_end_str
         )
         
-        # Удаляем сообщение о загрузке
         await loading_msg.delete()
         
-        # ✅ ИСПРАВЛЕНО: Отправляем заголовок и текст на языке админа
-        header = get_text("weekly_report_header", user.language, 
+        header = get_text("weekly_report_header", language, 
                          week_start=week_start_str, week_end=week_end_str)
         
         await callback.message.answer(
@@ -292,16 +459,14 @@ async def admin_weekly_report(callback: CallbackQuery, user: User, session: Asyn
             parse_mode="HTML"
         )
         
-        # ✅ ИСПРАВЛЕНО: Отправляем только DOCX
         await callback.message.answer_document(
             document=BufferedInputFile(
                 docx_file.read(),
                 filename=f"weekly_report_{week_start_str}_{week_end_str}.docx"
             ),
-            caption="📄 DOCX версия отчета" if user.language == "ru" else "📄 Hesabatın DOCX versiyası"
+            caption="📄 DOCX версия отчета" if language == "ru" else "📄 Hesabatın DOCX versiyası"
         )
         
-        # Удаляем из generating_reports
         del generating_reports[admin_id]
         
         logger.info(f"Администратор {callback.from_user.id} сгенерировал недельный отчет")
@@ -312,7 +477,8 @@ async def admin_weekly_report(callback: CallbackQuery, user: User, session: Asyn
         if callback.from_user.id in generating_reports:
             del generating_reports[callback.from_user.id]
         
-        await callback.message.answer(get_text("error", user.language if user else "ru"))
+        language = user.language if user else "ru"
+        await callback.message.answer(get_text("error", language))
 
 
 @router.message(Command("debug_notify"), IsAdminFilter())

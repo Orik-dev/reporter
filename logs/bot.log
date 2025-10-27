@@ -54,3 +54,231 @@
 2025-10-27 12:19:05 | INFO     | bot.handlers.start:cmd_start_registered:88 - /start (registered) tg_id=436680563
 2025-10-27 12:19:10 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
 2025-10-27 12:19:10 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /report
+2025-10-27 12:20:48 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-27 12:20:48 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /start
+2025-10-27 12:20:48 | INFO     | bot.handlers.start:cmd_start_registered:88 - /start (registered) tg_id=436680563
+2025-10-27 12:20:51 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-27 12:20:51 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /report
+2025-10-27 12:21:29 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=5737051158 | is_admin=False | env_admin=False | db_admin=False | ADMIN_IDS=[436680563]
+2025-10-27 12:21:29 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 5737051158 (emingasim): /start
+2025-10-27 12:21:29 | INFO     | bot.handlers.start:cmd_start_not_registered:101 - /start -> registration tg_id=5737051158
+2025-10-27 12:21:34 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=5737051158 | is_admin=False | env_admin=False | db_admin=False | ADMIN_IDS=[436680563]
+2025-10-27 12:21:34 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 5737051158 (emingasim): lang_ru
+2025-10-27 12:21:34 | INFO     | bot.handlers.start:select_language:116 - lang selected=ru tg=5737051158
+2025-10-27 12:21:42 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=5737051158 | is_admin=False | env_admin=False | db_admin=False | ADMIN_IDS=[436680563]
+2025-10-27 12:21:42 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 5737051158 (emingasim): Emin Qasimov
+2025-10-27 12:21:42 | INFO     | bot.handlers.start:enter_first_name:138 - first_name ok tg=5737051158
+2025-10-27 12:21:52 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=5737051158 | is_admin=False | env_admin=False | db_admin=False | ADMIN_IDS=[436680563]
+2025-10-27 12:21:52 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 5737051158 (emingasim): Qasimov
+2025-10-27 12:21:52 | INFO     | bot.handlers.start:enter_last_name:160 - last_name ok tg=5737051158
+2025-10-27 12:22:16 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=5737051158 | is_admin=False | env_admin=False | db_admin=False | ADMIN_IDS=[436680563]
+2025-10-27 12:22:16 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 5737051158 (emingasim): work_time_9-18
+2025-10-27 12:22:16 | INFO     | bot.handlers.start:select_work_time:197 - work_time=9:00-18:00 tg=5737051158
+2025-10-27 12:22:21 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=5737051158 | is_admin=False | env_admin=False | db_admin=False | ADMIN_IDS=[436680563]
+2025-10-27 12:22:21 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 5737051158 (emingasim): confirm_edit
+2025-10-27 12:22:24 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=5737051158 | is_admin=False | env_admin=False | db_admin=False | ADMIN_IDS=[436680563]
+2025-10-27 12:22:24 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 5737051158 (emingasim): Emin
+2025-10-27 12:22:24 | INFO     | bot.handlers.start:enter_first_name:138 - first_name ok tg=5737051158
+2025-10-27 12:22:26 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=5737051158 | is_admin=False | env_admin=False | db_admin=False | ADMIN_IDS=[436680563]
+2025-10-27 12:22:26 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 5737051158 (emingasim): Qasimov
+2025-10-27 12:22:26 | INFO     | bot.handlers.start:enter_last_name:160 - last_name ok tg=5737051158
+2025-10-27 12:22:29 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=5737051158 | is_admin=False | env_admin=False | db_admin=False | ADMIN_IDS=[436680563]
+2025-10-27 12:22:29 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 5737051158 (emingasim): work_time_9-18
+2025-10-27 12:22:29 | INFO     | bot.handlers.start:select_work_time:197 - work_time=9:00-18:00 tg=5737051158
+2025-10-27 12:22:31 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=5737051158 | is_admin=False | env_admin=False | db_admin=False | ADMIN_IDS=[436680563]
+2025-10-27 12:22:31 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 5737051158 (emingasim): confirm_yes
+2025-10-27 12:22:31 | INFO     | bot.database.repository:create:49 - Создан новый пользователь: 5737051158
+2025-10-27 12:22:31 | INFO     | bot.handlers.start:confirm_registration:228 - registration done tg=5737051158 is_admin=False
+2025-10-27 12:22:37 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=5737051158 | is_admin=False | env_admin=False | db_admin=False | ADMIN_IDS=[436680563]
+2025-10-27 12:22:37 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 5737051158 (emingasim): /profile
+2025-10-27 12:22:37 | INFO     | bot.handlers.profile:cmd_profile:65 - profile shown tg=5737051158
+2025-10-27 12:22:41 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=5737051158 | is_admin=False | env_admin=False | db_admin=False | ADMIN_IDS=[436680563]
+2025-10-27 12:22:41 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 5737051158 (emingasim): /report
+2025-10-27 12:22:41 | INFO     | bot.handlers.reports:cmd_report:51 - report blocked (too early) tg=5737051158, hour=16, end=18
+2025-10-27 12:23:03 | INFO     | bot.services.scheduler_service:shutdown:54 - Планировщик остановлен
+2025-10-27 12:23:03 | INFO     | __main__:on_shutdown:100 - Scheduler stopped
+2025-10-27 12:23:04 | INFO     | __main__:on_shutdown:113 - Bot shut down successfully
+2025-10-27 12:23:12 | INFO     | bot.database.connection:create_tables:40 - Таблицы базы данных успешно созданы
+2025-10-27 12:23:12 | INFO     | __main__:on_startup:71 - Database initialized
+2025-10-27 12:23:12 | INFO     | bot.services.scheduler_service:start:42 - APScheduler starting, current Baku time: 2025-10-27 16:23:12 +04
+2025-10-27 12:23:12 | INFO     | bot.services.scheduler_service:_schedule_daily_notifications:74 - Ежедневные уведомления запланированы на 18:00 и 19:00 (Baku)
+2025-10-27 12:23:12 | INFO     | bot.services.scheduler_service:_schedule_hourly_reminders:83 - Ежечасные напоминания каждые 60 мин.
+2025-10-27 12:23:12 | INFO     | bot.services.scheduler_service:_schedule_daily_admin_report:92 - Ежедневный отчёт админу запланирован на 23:59 (Baku).
+2025-10-27 12:23:12 | INFO     | bot.services.scheduler_service:_schedule_weekly_report:102 - Недельный отчёт запланирован на день недели=4 00:00 (Baku).
+2025-10-27 12:23:12 | INFO     | bot.services.scheduler_service:start:50 - Планировщик успешно запущен
+2025-10-27 12:23:12 | INFO     | __main__:on_startup:75 - Scheduler started
+2025-10-27 12:23:12 | INFO     | __main__:on_startup:88 - Bot started successfully
+2025-10-27 12:23:12 | INFO     | __main__:main:165 - Starting bot polling...
+2025-10-27 12:23:13 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-27 12:23:13 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /admin
+2025-10-27 12:23:13 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-27 12:23:13 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /admin
+2025-10-27 12:23:13 | INFO     | bot.handlers.admin:cmd_admin:34 - ✅ Администратор 436680563 открыл админ-панель
+2025-10-27 12:23:13 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-27 12:23:13 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /start
+2025-10-27 12:23:13 | INFO     | bot.handlers.start:cmd_start_registered:88 - /start (registered) tg_id=436680563
+2025-10-27 12:23:13 | INFO     | bot.handlers.admin:cmd_admin:34 - ✅ Администратор 436680563 открыл админ-панель
+2025-10-27 12:26:44 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-27 12:26:44 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /report
+2025-10-27 12:26:44 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-27 12:26:44 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /start
+2025-10-27 12:26:44 | INFO     | bot.handlers.start:cmd_start_registered:88 - /start (registered) tg_id=436680563
+2025-10-27 12:26:48 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-27 12:26:48 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): ⚙️ Админ-панель
+2025-10-27 12:26:48 | INFO     | bot.handlers.admin:cmd_admin:34 - ✅ Администратор 436680563 открыл админ-панель
+2025-10-27 12:26:49 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-27 12:26:49 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): admin_stats
+2025-10-27 12:26:50 | INFO     | bot.handlers.admin:admin_stats:91 - Администратор 436680563 просмотрел статистику
+2025-10-27 12:28:02 | INFO     | bot.services.scheduler_service:shutdown:54 - Планировщик остановлен
+2025-10-27 12:28:02 | INFO     | __main__:on_shutdown:100 - Scheduler stopped
+2025-10-27 12:28:03 | INFO     | __main__:on_shutdown:113 - Bot shut down successfully
+2025-10-27 12:28:10 | INFO     | bot.database.connection:create_tables:40 - Таблицы базы данных успешно созданы
+2025-10-27 12:28:10 | INFO     | __main__:on_startup:71 - Database initialized
+2025-10-27 12:28:10 | INFO     | bot.services.scheduler_service:start:42 - APScheduler starting, current Baku time: 2025-10-27 16:28:10 +04
+2025-10-27 12:28:10 | INFO     | bot.services.scheduler_service:_schedule_daily_notifications:74 - Ежедневные уведомления запланированы на 18:00 и 19:00 (Baku)
+2025-10-27 12:28:10 | INFO     | bot.services.scheduler_service:_schedule_hourly_reminders:83 - Ежечасные напоминания каждые 60 мин.
+2025-10-27 12:28:10 | INFO     | bot.services.scheduler_service:_schedule_daily_admin_report:92 - Ежедневный отчёт админу запланирован на 23:59 (Baku).
+2025-10-27 12:28:10 | INFO     | bot.services.scheduler_service:_schedule_weekly_report:102 - Недельный отчёт запланирован на день недели=4 00:00 (Baku).
+2025-10-27 12:28:10 | INFO     | bot.services.scheduler_service:start:50 - Планировщик успешно запущен
+2025-10-27 12:28:10 | INFO     | __main__:on_startup:75 - Scheduler started
+2025-10-27 12:28:11 | INFO     | __main__:on_startup:88 - Bot started successfully
+2025-10-27 12:28:11 | INFO     | __main__:main:165 - Starting bot polling...
+2025-10-27 12:28:17 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 12:28:17 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): ⚙️ Админ-панель
+2025-10-27 12:28:17 | INFO     | bot.handlers.admin:cmd_admin:34 - ✅ Администратор 436680563 открыл админ-панель
+2025-10-27 12:28:19 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 12:28:19 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): admin_stats
+2025-10-27 12:28:20 | INFO     | bot.handlers.admin:admin_stats:91 - Администратор 436680563 просмотрел статистику
+2025-10-27 12:28:22 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 12:28:22 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): ⚙️ Админ-панель
+2025-10-27 12:28:23 | INFO     | bot.handlers.admin:cmd_admin:34 - ✅ Администратор 436680563 открыл админ-панель
+2025-10-27 12:28:24 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 12:28:24 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): admin_users
+2025-10-27 12:28:24 | INFO     | bot.handlers.admin:admin_users:119 - Администратор 436680563 просмотрел список пользователей
+2025-10-27 12:28:29 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 12:28:29 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): ⚙️ Админ-панель
+2025-10-27 12:28:29 | INFO     | bot.handlers.admin:cmd_admin:34 - ✅ Администратор 436680563 открыл админ-панель
+2025-10-27 12:28:30 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 12:28:30 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): admin_weekly_report
+2025-10-27 12:30:09 | INFO     | bot.services.scheduler_service:shutdown:54 - Планировщик остановлен
+2025-10-27 12:30:09 | INFO     | __main__:on_shutdown:100 - Scheduler stopped
+2025-10-27 12:30:10 | INFO     | __main__:on_shutdown:113 - Bot shut down successfully
+2025-10-27 13:09:50 | INFO     | bot.database.connection:create_tables:40 - Таблицы базы данных успешно созданы
+2025-10-27 13:09:50 | INFO     | __main__:on_startup:71 - Database initialized
+2025-10-27 13:09:50 | INFO     | bot.services.scheduler_service:start:42 - APScheduler starting, current Baku time: 2025-10-27 17:09:50 +04
+2025-10-27 13:09:50 | INFO     | bot.services.scheduler_service:_schedule_daily_notifications:74 - Ежедневные уведомления запланированы на 18:00 и 19:00 (Baku)
+2025-10-27 13:09:50 | INFO     | bot.services.scheduler_service:_schedule_hourly_reminders:83 - Ежечасные напоминания каждые 60 мин.
+2025-10-27 13:09:50 | INFO     | bot.services.scheduler_service:_schedule_daily_admin_report:92 - Ежедневный отчёт админу запланирован на 23:59 (Baku).
+2025-10-27 13:09:50 | INFO     | bot.services.scheduler_service:_schedule_weekly_report:102 - Недельный отчёт запланирован на день недели=4 00:00 (Baku).
+2025-10-27 13:09:50 | INFO     | bot.services.scheduler_service:start:50 - Планировщик успешно запущен
+2025-10-27 13:09:50 | INFO     | __main__:on_startup:75 - Scheduler started
+2025-10-27 13:09:51 | WARNING  | __main__:on_startup:86 - Could not notify admin 5737051158: Telegram server says - Bad Request: chat not found
+2025-10-27 13:09:51 | INFO     | __main__:on_startup:88 - Bot started successfully
+2025-10-27 13:09:51 | INFO     | __main__:main:165 - Starting bot polling...
+2025-10-27 13:10:03 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=False | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 13:10:03 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /admin
+2025-10-27 13:10:03 | INFO     | bot.handlers.admin:cmd_admin:34 - ✅ Администратор 436680563 открыл админ-панель
+2025-10-27 13:10:04 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=False | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 13:10:04 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): admin_users
+2025-10-27 13:10:05 | ERROR    | bot.handlers.admin:admin_users:127 - Ошибка показа пользователей: 'NoneType' object has no attribute 'language'
+2025-10-27 13:10:13 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=False | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 13:10:13 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): admin_stats
+2025-10-27 13:10:13 | INFO     | bot.handlers.admin:admin_stats:91 - Администратор 436680563 просмотрел статистику
+2025-10-27 13:10:16 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=False | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 13:10:16 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /admin
+2025-10-27 13:10:16 | INFO     | bot.handlers.admin:cmd_admin:34 - ✅ Администратор 436680563 открыл админ-панель
+2025-10-27 13:12:30 | INFO     | bot.services.scheduler_service:shutdown:54 - Планировщик остановлен
+2025-10-27 13:12:30 | INFO     | __main__:on_shutdown:100 - Scheduler stopped
+2025-10-27 13:12:31 | WARNING  | __main__:on_shutdown:111 - Could not notify admin 5737051158: Telegram server says - Bad Request: chat not found
+2025-10-27 13:12:31 | INFO     | __main__:on_shutdown:113 - Bot shut down successfully
+2025-10-27 13:12:45 | INFO     | bot.database.connection:create_tables:40 - Таблицы базы данных успешно созданы
+2025-10-27 13:12:45 | INFO     | __main__:on_startup:71 - Database initialized
+2025-10-27 13:12:45 | INFO     | bot.services.scheduler_service:start:42 - APScheduler starting, current Baku time: 2025-10-27 17:12:45 +04
+2025-10-27 13:12:45 | INFO     | bot.services.scheduler_service:_schedule_daily_notifications:74 - Ежедневные уведомления запланированы на 18:00 и 19:00 (Baku)
+2025-10-27 13:12:45 | INFO     | bot.services.scheduler_service:_schedule_hourly_reminders:83 - Ежечасные напоминания каждые 60 мин.
+2025-10-27 13:12:45 | INFO     | bot.services.scheduler_service:_schedule_daily_admin_report:92 - Ежедневный отчёт админу запланирован на 23:59 (Baku).
+2025-10-27 13:12:45 | INFO     | bot.services.scheduler_service:_schedule_weekly_report:102 - Недельный отчёт запланирован на день недели=4 00:00 (Baku).
+2025-10-27 13:12:45 | INFO     | bot.services.scheduler_service:start:50 - Планировщик успешно запущен
+2025-10-27 13:12:45 | INFO     | __main__:on_startup:75 - Scheduler started
+2025-10-27 13:12:45 | WARNING  | __main__:on_startup:86 - Could not notify admin 5737051158: Telegram server says - Bad Request: chat not found
+2025-10-27 13:12:45 | INFO     | __main__:on_startup:88 - Bot started successfully
+2025-10-27 13:12:45 | INFO     | __main__:main:165 - Starting bot polling...
+2025-10-27 13:12:50 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=False | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 13:12:50 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 436680563 (guseynov17): /admin
+2025-10-27 13:12:50 | INFO     | bot.handlers.admin:cmd_admin:34 - ✅ Администратор 436680563 открыл админ-панель
+2025-10-27 13:12:52 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=False | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 13:12:52 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): admin_users
+2025-10-27 13:12:52 | INFO     | bot.handlers.admin:admin_users:127 - Администратор 436680563 просмотрел список пользователей
+2025-10-27 13:12:59 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=False | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 13:12:59 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): admin_panel_back
+2025-10-27 13:12:59 | INFO     | bot.handlers.admin:admin_panel_back:498 - Админ 436680563 вернулся в главное меню админ-панели
+2025-10-27 13:13:27 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=5620228351 | is_admin=False | env_admin=False | db_admin=False | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 13:13:27 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 5620228351 (suppglate): /start
+2025-10-27 13:13:27 | INFO     | bot.handlers.start:cmd_start_not_registered:101 - /start -> registration tg_id=5620228351
+2025-10-27 13:13:29 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=5620228351 | is_admin=False | env_admin=False | db_admin=False | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 13:13:29 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 5620228351 (suppglate): lang_ru
+2025-10-27 13:13:29 | INFO     | bot.handlers.start:select_language:116 - lang selected=ru tg=5620228351
+2025-10-27 13:13:31 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=5620228351 | is_admin=False | env_admin=False | db_admin=False | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 13:13:31 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 5620228351 (suppglate): Орхан
+2025-10-27 13:13:31 | INFO     | bot.handlers.start:enter_first_name:138 - first_name ok tg=5620228351
+2025-10-27 13:13:33 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=5620228351 | is_admin=False | env_admin=False | db_admin=False | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 13:13:33 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 5620228351 (suppglate): Гусейнов
+2025-10-27 13:13:33 | INFO     | bot.handlers.start:enter_last_name:160 - last_name ok tg=5620228351
+2025-10-27 13:13:35 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=5620228351 | is_admin=False | env_admin=False | db_admin=False | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 13:13:35 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 5620228351 (suppglate): work_time_9-18
+2025-10-27 13:13:35 | INFO     | bot.handlers.start:select_work_time:197 - work_time=9:00-18:00 tg=5620228351
+2025-10-27 13:13:36 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=5620228351 | is_admin=False | env_admin=False | db_admin=False | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 13:13:36 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 5620228351 (suppglate): confirm_yes
+2025-10-27 13:13:36 | INFO     | bot.database.repository:create:49 - Создан новый пользователь: 5620228351
+2025-10-27 13:13:36 | INFO     | bot.handlers.start:confirm_registration:228 - registration done tg=5620228351 is_admin=False
+2025-10-27 13:13:51 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=False | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 13:13:51 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): admin_users
+2025-10-27 13:13:51 | INFO     | bot.handlers.admin:admin_users:127 - Администратор 436680563 просмотрел список пользователей
+2025-10-27 13:14:28 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=False | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 13:14:28 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): delete_user_5620228351
+2025-10-27 13:14:28 | ERROR    | bot.handlers.admin:delete_user_confirm:184 - Ошибка при подтверждении удаления: 'NoneType' object has no attribute 'language'
+2025-10-27 13:14:28 | ERROR    | bot.database.connection:session:54 - Ошибка в сессии БД: 'NoneType' object has no attribute 'language'
+2025-10-27 13:14:48 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=False | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 13:14:53 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=False | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 13:16:41 | INFO     | bot.services.scheduler_service:shutdown:54 - Планировщик остановлен
+2025-10-27 13:16:41 | INFO     | __main__:on_shutdown:100 - Scheduler stopped
+2025-10-27 13:16:42 | WARNING  | __main__:on_shutdown:111 - Could not notify admin 5737051158: Telegram server says - Bad Request: chat not found
+2025-10-27 13:16:42 | INFO     | __main__:on_shutdown:113 - Bot shut down successfully
+2025-10-27 13:16:58 | INFO     | bot.database.connection:create_tables:40 - Таблицы базы данных успешно созданы
+2025-10-27 13:16:58 | INFO     | __main__:on_startup:71 - Database initialized
+2025-10-27 13:16:58 | INFO     | bot.services.scheduler_service:start:42 - APScheduler starting, current Baku time: 2025-10-27 17:16:58 +04
+2025-10-27 13:16:58 | INFO     | bot.services.scheduler_service:_schedule_daily_notifications:74 - Ежедневные уведомления запланированы на 18:00 и 19:00 (Baku)
+2025-10-27 13:16:58 | INFO     | bot.services.scheduler_service:_schedule_hourly_reminders:83 - Ежечасные напоминания каждые 60 мин.
+2025-10-27 13:16:58 | INFO     | bot.services.scheduler_service:_schedule_daily_admin_report:92 - Ежедневный отчёт админу запланирован на 23:59 (Baku).
+2025-10-27 13:16:58 | INFO     | bot.services.scheduler_service:_schedule_weekly_report:102 - Недельный отчёт запланирован на день недели=4 00:00 (Baku).
+2025-10-27 13:16:58 | INFO     | bot.services.scheduler_service:start:50 - Планировщик успешно запущен
+2025-10-27 13:16:58 | INFO     | __main__:on_startup:75 - Scheduler started
+2025-10-27 13:16:58 | WARNING  | __main__:on_startup:86 - Could not notify admin 5737051158: Telegram server says - Bad Request: chat not found
+2025-10-27 13:16:58 | INFO     | __main__:on_startup:88 - Bot started successfully
+2025-10-27 13:16:58 | INFO     | __main__:main:165 - Starting bot polling...
+2025-10-27 13:17:04 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=False | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 13:17:04 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): admin_users
+2025-10-27 13:17:04 | INFO     | bot.handlers.admin:admin_users:129 - Администратор 436680563 просмотрел список пользователей
+2025-10-27 13:17:06 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=False | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 13:17:06 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): delete_user_5620228351
+2025-10-27 13:17:06 | INFO     | bot.handlers.admin:delete_user_confirm:186 - Админ 436680563 запросил удаление пользователя 5620228351
+2025-10-27 13:17:16 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=False | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 13:17:16 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 436680563 (guseynov17): cancel_delete_5620228351
+2025-10-27 13:17:16 | INFO     | bot.handlers.admin:delete_user_cancel:272 - Админ 436680563 отменил удаление пользователя
+2025-10-27 13:17:24 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=False | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 13:17:32 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=False | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 13:17:45 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=5620228351 | is_admin=False | env_admin=False | db_admin=False | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 13:17:45 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 5620228351 (suppglate): /profile
+2025-10-27 13:17:45 | INFO     | bot.handlers.profile:cmd_profile:65 - profile shown tg=5620228351
+2025-10-27 13:17:49 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=5620228351 | is_admin=False | env_admin=False | db_admin=False | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 13:17:49 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 5620228351 (suppglate): back_to_menu
+2025-10-27 13:17:50 | INFO     | bot.handlers.profile:back_to_menu:319 - Пользователь 5620228351 вернулся в меню
+2025-10-27 13:17:52 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=5620228351 | is_admin=False | env_admin=False | db_admin=False | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 13:17:52 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 5620228351 (suppglate): /profile
+2025-10-27 13:17:52 | INFO     | bot.handlers.profile:cmd_profile:65 - profile shown tg=5620228351
+2025-10-27 13:17:55 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=5620228351 | is_admin=False | env_admin=False | db_admin=False | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 13:17:55 | INFO     | bot.middlewares.middlewares:__call__:24 - Callback от 5620228351 (suppglate): back_to_menu
+2025-10-27 13:17:55 | INFO     | bot.handlers.profile:back_to_menu:319 - Пользователь 5620228351 вернулся в меню
+2025-10-27 13:17:57 | INFO     | bot.middlewares.middlewares:__call__:111 - [AdminCheck] tg_id=5620228351 | is_admin=False | env_admin=False | db_admin=False | ADMIN_IDS=[436680563, 5737051158]
+2025-10-27 13:17:57 | INFO     | bot.middlewares.middlewares:__call__:22 - Сообщение от 5620228351 (suppglate): /report
+2025-10-27 13:17:57 | INFO     | bot.handlers.reports:cmd_report:51 - report blocked (too early) tg=5620228351, hour=17, end=18

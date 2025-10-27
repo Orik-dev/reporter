@@ -1,5 +1,5 @@
 """
-Keyboards - ФИНАЛЬНАЯ ВЕРСИЯ
+Keyboards
 """
 from .keyboards import (
     get_language_keyboard,
@@ -11,7 +11,9 @@ from .keyboards import (
     get_examples_keyboard,
     get_main_menu_keyboard,
     get_edit_profile_keyboard,
-    get_admin_keyboard
+    get_admin_keyboard,
+    get_user_list_keyboard,
+    get_delete_confirmation_keyboard,
 )
 
 __all__ = [
@@ -24,5 +26,7 @@ __all__ = [
     'get_examples_keyboard',
     'get_main_menu_keyboard',
     'get_edit_profile_keyboard',
-    'get_admin_keyboard'
+    'get_admin_keyboard',
+    'get_user_list_keyboard',
+    'get_delete_confirmation_keyboard',
 ]

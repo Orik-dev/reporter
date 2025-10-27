@@ -3,7 +3,7 @@
 """
 from typing import Optional, List
 from datetime import datetime, date, timedelta
-from sqlalchemy import select, and_, update
+from sqlalchemy import select, and_, update, delete
 from sqlalchemy.ext.asyncio import AsyncSession
 from loguru import logger
 
@@ -94,6 +94,35 @@ class UserRepository:
             return list(result)
         except Exception as e:
             logger.error(f"Ошибка получения пользователей по рабочему времени {work_time}: {e}")
+            raise
+
+    @staticmethod
+    async def delete_user(session: AsyncSession, telegram_id: int) -> bool:
+        """
+        ✅ НОВОЕ: Удалить пользователя и все его отчеты
+        Возвращает True если удаление успешно, False если пользователь не найден
+        """
+        try:
+            user = await UserRepository.get_by_telegram_id(session, telegram_id)
+            if not user:
+                logger.warning(f"Попытка удалить несуществующего пользователя {telegram_id}")
+                return False
+
+            # Сначала удаляем все отчеты пользователя
+            await session.execute(
+                delete(DailyReport).where(DailyReport.telegram_id == telegram_id)
+            )
+            
+            # Затем удаляем самого пользователя
+            await session.delete(user)
+            await session.commit()
+            
+            logger.info(f"Удален пользователь {telegram_id} ({user.first_name} {user.last_name}) и все его отчеты")
+            return True
+            
+        except Exception as e:
+            await session.rollback()
+            logger.error(f"Ошибка удаления пользователя {telegram_id}: {e}")
             raise
 
 

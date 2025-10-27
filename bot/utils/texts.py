@@ -1,4 +1,3 @@
-
 """
 Тексты сообщений - ФИНАЛЬНАЯ ВЕРСИЯ
 """
@@ -74,6 +73,24 @@ TEXTS: Dict[str, Dict[str, str]] = {
             "Отчетов за неделю: {week_reports}"
         ),
 
+        # Удаление пользователей
+        "cannot_delete_self": "❌ Вы не можете удалить самого себя",
+        "cannot_delete_admin": "❌ Нельзя удалить администратора",
+        "user_not_found": "❌ Пользователь не найден",
+        "delete_user_confirm": (
+            "⚠️ Вы уверены, что хотите удалить пользователя?\n\n"
+            "👤 {first_name} {last_name}\n\n"
+            "❗️ Будут удалены:\n"
+            "• Профиль пользователя\n"
+            "• Все его отчеты\n\n"
+            "Это действие необратимо!"
+        ),
+        "user_deleted": (
+            "✅ Пользователь удален\n\n"
+            "👤 {first_name} {last_name}\n\n"
+            "Все данные пользователя удалены из системы."
+        ),
+
         # Примеры отчетов
         "examples_header": "📝 Примеры отчетов\n\nВыберите вашу специальность:",
         "example_uiux": (
@@ -129,17 +146,16 @@ TEXTS: Dict[str, Dict[str, str]] = {
         "report_too_short": "❌ Отчет слишком короткий. Минимум 10 символов.",
         "report_empty": "❌ Отчет не может быть пустым или состоять только из пробелов.",
         "not_authorized": "❌ У вас нет доступа к этой функции",
+        "finish_registration_first": "ℹ️ Сначала завершите регистрацию, пожалуйста.",
         
         "help_text": (
             "❓ Помощь\n\n"
             "Этот бот помогает отслеживать ежедневные задачи сотрудников.\n\n"
             "Основные команды:\n"
-            # "/start - Начать работу с ботом\n"
             "/profile - Просмотр профиля\n"
             "/report - Отправить отчет\n"
             "/help - Показать это сообщение"
         ),
-        "finish_registration_first": "ℹ️ Сначала завершите регистрацию, пожалуйста.",
     },
     "az": {
         "welcome": "👋 Xoş gəlmisiniz!\n\nDili seçin:",
@@ -205,6 +221,24 @@ TEXTS: Dict[str, Dict[str, str]] = {
             "Həftəlik hesabatlar: {week_reports}"
         ),
 
+        # Удаление пользователей
+        "cannot_delete_self": "❌ Siz özünüzü silə bilməzsiniz",
+        "cannot_delete_admin": "❌ Administratoru silmək olmaz",
+        "user_not_found": "❌ İstifadəçi tapılmadı",
+        "delete_user_confirm": (
+            "⚠️ İstifadəçini silmək istədiyinizə əminsiniz?\n\n"
+            "👤 {first_name} {last_name}\n\n"
+            "❗️ Silinəcək:\n"
+            "• İstifadəçi profili\n"
+            "• Bütün hesabatları\n\n"
+            "Bu əməliyyatı geri qaytarmaq mümkün deyil!"
+        ),
+        "user_deleted": (
+            "✅ İstifadəçi silindi\n\n"
+            "👤 {first_name} {last_name}\n\n"
+            "İstifadəçinin bütün məlumatları sistemdən silindi."
+        ),
+
         # Примеры отчетов
         "examples_header": "📝 Hesabat nümunələri\n\nİxtisasınızı seçin:",
         "example_uiux": (
@@ -259,6 +293,7 @@ TEXTS: Dict[str, Dict[str, str]] = {
         "report_too_short": "❌ Hesabat çox qısadır. Minimum 10 simvol.",
         "report_empty": "❌ Hesabat boş ola bilməz və ya yalnız boşluqlardan ibarət ola bilməz.",
         "not_authorized": "❌ Bu funksiyaya girişiniz yoxdur",
+        "finish_registration_first": "ℹ️ Zəhmət olmasa, əvvəlcə qeydiyyatı tamamlayın.",
         
         "help_text": (
             "❓ Kömək\n\n"
@@ -269,7 +304,6 @@ TEXTS: Dict[str, Dict[str, str]] = {
             "/report - Hesabat göndər\n"
             "/help - Bu mesajı göstər"
         ),
-        "finish_registration_first": "ℹ️ Zəhmət olmasa, əvvəlcə qeydiyyatı tamamlayın.",
     }
 }
 
