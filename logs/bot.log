@@ -15,3 +15,27 @@
 2025-10-27 12:03:57 | ERROR    | bot.database.connection:session:54 - Ошибка в сессии БД: unsupported operand type(s) for /: 'str' and 'int'
 2025-10-27 12:04:51 | INFO     | bot.services.scheduler_service:_send_hourly_reminders:194 - [reminder] отправлено 5620228351
 2025-10-27 12:05:51 | INFO     | bot.services.scheduler_service:_send_hourly_reminders:194 - [reminder] отправлено 5620228351
+2025-10-27 12:06:51 | INFO     | bot.services.scheduler_service:_send_hourly_reminders:194 - [reminder] отправлено 5620228351
+2025-10-27 12:07:51 | INFO     | bot.services.scheduler_service:_send_hourly_reminders:194 - [reminder] отправлено 5620228351
+2025-10-27 12:08:51 | INFO     | bot.services.scheduler_service:_send_hourly_reminders:194 - [reminder] отправлено 5620228351
+2025-10-27 12:09:51 | INFO     | bot.services.scheduler_service:_send_hourly_reminders:194 - [reminder] отправлено 5620228351
+2025-10-27 12:10:51 | INFO     | bot.services.scheduler_service:_send_hourly_reminders:194 - [reminder] отправлено 5620228351
+2025-10-27 12:11:20 | INFO     | bot.services.scheduler_service:shutdown:63 - Планировщик остановлен
+2025-10-27 12:11:20 | INFO     | __main__:on_shutdown:93 - Scheduler stopped
+2025-10-27 12:11:20 | INFO     | __main__:on_shutdown:106 - Bot shut down successfully
+2025-10-27 12:11:57 | INFO     | bot.database.connection:create_tables:40 - Таблицы базы данных успешно созданы
+2025-10-27 12:11:57 | INFO     | __main__:on_startup:64 - Database initialized
+2025-10-27 12:11:57 | INFO     | bot.services.scheduler_service:start:42 - APScheduler starting, current Baku time: 2025-10-27 16:11:57 +04
+2025-10-27 12:11:57 | INFO     | bot.services.scheduler_service:_schedule_daily_notifications:74 - Ежедневные уведомления запланированы на 15:30 и 15:32 (Baku)
+2025-10-27 12:11:57 | INFO     | bot.services.scheduler_service:_schedule_hourly_reminders:83 - Ежечасные напоминания каждые 1 мин.
+2025-10-27 12:11:57 | INFO     | bot.services.scheduler_service:_schedule_daily_admin_report:92 - Ежедневный отчёт админу запланирован на 23:59 (Baku).
+2025-10-27 12:11:57 | INFO     | bot.services.scheduler_service:_schedule_weekly_report:102 - Недельный отчёт запланирован на день недели=4 00:00 (Baku).
+2025-10-27 12:11:57 | INFO     | bot.services.scheduler_service:start:50 - Планировщик успешно запущен
+2025-10-27 12:11:57 | INFO     | __main__:on_startup:68 - Scheduler started
+2025-10-27 12:11:57 | INFO     | __main__:on_startup:81 - Bot started successfully
+2025-10-27 12:11:57 | INFO     | __main__:main:157 - Starting bot polling...
+2025-10-27 12:12:02 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-27 12:12:02 | INFO     | bot.middlewares.middlewares:__call__:24 - Сообщение от 436680563 (guseynov17): ⚙️ Админ-панель
+2025-10-27 12:12:03 | INFO     | bot.handlers.admin:cmd_admin:34 - ✅ Администратор 436680563 открыл админ-панель
+2025-10-27 12:12:06 | INFO     | bot.middlewares.middlewares:__call__:113 - [AdminCheck] tg_id=436680563 | is_admin=True | env_admin=True | db_admin=True | ADMIN_IDS=[436680563]
+2025-10-27 12:12:06 | INFO     | bot.middlewares.middlewares:__call__:24 - Сообщение от 436680563 (guseynov17): /report

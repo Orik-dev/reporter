@@ -1,12 +1,14 @@
+"""
+Планировщик задач - ИСПРАВЛЕННАЯ ВЕРСИЯ
+"""
 from datetime import datetime, timedelta, date
 import pytz
-from typing import List
+from typing import List, Dict
 from loguru import logger
 from aiogram import Bot
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
 from apscheduler.triggers.interval import IntervalTrigger
-from apscheduler.triggers.date import DateTrigger
 
 from config.settings import settings
 from bot.database import db_manager, UserRepository, DailyReportRepository
@@ -15,6 +17,7 @@ from bot.keyboards import get_report_type_keyboard
 from bot.services.deepseek_service import deepseek_service
 from bot.services.document_service import document_service
 from aiogram.types import BufferedInputFile
+
 
 class SchedulerService:
     """Сервис для планирования периодических задач"""
@@ -30,33 +33,21 @@ class SchedulerService:
                 "max_instances": 1,
             },
         )
+        # ✅ ДОБАВЛЕНО: Храним последнее время отправки напоминания каждому пользователю
+        self.last_reminder_time: Dict[int, datetime] = {}
 
     def start(self):
         """Запустить планировщик"""
         now_baku = datetime.now(self.timezone).strftime("%Y-%m-%d %H:%M:%S %Z")
-        logger.info(f"APSheduler starting, current Baku time: {now_baku}")
+        logger.info(f"APScheduler starting, current Baku time: {now_baku}")
 
         self._schedule_daily_notifications()
         self._schedule_hourly_reminders()
         self._schedule_daily_admin_report()
         self._schedule_weekly_report()
 
-        # # ТЕСТ-ПИНОК: единоразово вызовем задачи через N секунд после старта
-        # if settings.scheduler_start_kick_seconds > 0:
-        #     kick_time = datetime.now(self.timezone) + timedelta(seconds=settings.scheduler_start_kick_seconds)
-        #     self.scheduler.add_job(self._kick_all, DateTrigger(run_date=kick_time, timezone=self.timezone), id="kick_all_once")
-        #     logger.info(f"Kick-all scheduled at {kick_time.strftime('%H:%M:%S')} (Baku)")
-
         self.scheduler.start()
         logger.info("Планировщик успешно запущен")
-
-    async def _kick_all(self):
-        """Единоразовый запуск всех проверок — удобно для теста"""
-        logger.info("Kick-all: running notification + hourly reminders + admin daily report")
-        await self._send_daily_notifications("9:00-18:00")
-        await self._send_daily_notifications("10:00-19:00")
-        await self._send_hourly_reminders()
-        await self._send_daily_admin_report()
 
     def shutdown(self):
         self.scheduler.shutdown()
@@ -86,10 +77,10 @@ class SchedulerService:
         """Ежечасные напоминания (интервал)"""
         self.scheduler.add_job(
             self._send_hourly_reminders,
-            IntervalTrigger(minutes=settings.reminder_interval_minutes),
+            IntervalTrigger(minutes=settings.reminder_interval_minutes, timezone=self.timezone),
             id='hourly_reminders'
         )
-        logger.info(f"Ежечасные напоминания каждые {settings.reminder_interval_minutes} мин (только 18:00–23:59).")
+        logger.info(f"Ежечасные напоминания каждые {settings.reminder_interval_minutes} мин.")
 
     def _schedule_daily_admin_report(self):
         """Ежедневный отчёт админу в 23:59"""
@@ -141,59 +132,75 @@ class SchedulerService:
         except Exception as e:
             logger.error(f"Ошибка в задаче уведомлений: {e}")
 
-    # async def _send_hourly_reminders(self):
-    #     """Ежечасно — напоминания тем, кто не отправил отчёт (18:00–23:59)"""
-    #     try:
-    #         now_baku = datetime.now(self.timezone)
-    #         if not (18 <= now_baku.hour <= 23):
-    #             return
-
-    #         async for session in db_manager.get_session():
-    #             users = await UserRepository.get_all_active(session)
-    #             today = date.today()
-
-    #             for user in users:
-    #                 existing_report = await DailyReportRepository.get_by_date(session, user.telegram_id, today)
-    #                 if existing_report:
-    #                     continue
-
-    #                 try:
-    #                     await self.bot.send_message(
-    #                         chat_id=user.telegram_id,
-    #                         text=get_text("reminder", user.language),
-    #                         reply_markup=get_report_type_keyboard(user.language)
-    #                     )
-    #                     logger.info(f"[reminder] отправлено {user.telegram_id}")
-    #                 except Exception as tg_err:
-    #                     logger.error(f"[reminder] ошибка Telegram для {user.telegram_id}: {tg_err}")
-
-    #     except Exception as e:
-    #         logger.error(f"Ошибка в задаче ежечасных напоминаний: {e}")
-    
     async def _send_hourly_reminders(self):
+        """
+        ✅ ИСПРАВЛЕНО: Ежечасные напоминания с проверкой времени и частоты
+        - Отправляются только после конца рабочего дня и до 23:00
+        - Не чаще 1 раза в час одному пользователю
+        - Не отправляются админам
+        """
         try:
             now_baku = datetime.now(self.timezone)
+            current_hour = now_baku.hour
+            
+            # ✅ ИСПРАВЛЕНО: Проверка верхней границы - не отправлять после 23:00
+            if current_hour >= 23:
+                logger.debug(f"[reminder] Время {current_hour}:00 - слишком поздно, пропуск")
+                return
+            
             async for session in db_manager.get_session():
                 users = await UserRepository.get_all_active(session)
                 today = date.today()
+                
                 for user in users:
+                    # ✅ Не отправлять админам
                     if user.is_admin:
                         continue
+                    
+                    # Проверка, есть ли уже отчет
                     existing_report = await DailyReportRepository.get_by_date(session, user.telegram_id, today)
                     if existing_report:
+                        logger.debug(f"[reminder] {user.telegram_id} уже отправил отчет, пропуск")
                         continue
+                    
+                    # ✅ Проверка времени: напоминания только после конца рабочего дня
                     end_hour = 18 if user.work_time == "9:00-18:00" else 19
-                    if now_baku.hour < end_hour:
+                    if current_hour < end_hour:
+                        logger.debug(
+                            f"[reminder] {user.telegram_id} рабочий день не закончен "
+                            f"(current={current_hour}, end={end_hour}), пропуск"
+                        )
                         continue
+                    
+                    # ✅ ИСПРАВЛЕНО: Проверка частоты - не чаще раза в час
+                    last_reminder = self.last_reminder_time.get(user.telegram_id)
+                    if last_reminder:
+                        time_since_last = (now_baku - last_reminder).total_seconds()
+                        if time_since_last < 3600:  # Меньше часа
+                            logger.debug(
+                                f"[reminder] {user.telegram_id} недавно получил напоминание "
+                                f"({time_since_last/60:.1f} мин назад), пропуск"
+                            )
+                            continue
+                    
+                    # Отправляем напоминание
                     try:
                         await self.bot.send_message(
                             chat_id=user.telegram_id,
                             text=get_text("reminder", user.language),
                             reply_markup=get_report_type_keyboard(user.language)
                         )
-                        logger.info(f"[reminder] отправлено {user.telegram_id}")
+                        
+                        # ✅ Обновляем время последнего напоминания
+                        self.last_reminder_time[user.telegram_id] = now_baku
+                        
+                        logger.info(
+                            f"[reminder] отправлено {user.telegram_id} "
+                            f"(time={current_hour}:00, work_end={end_hour}:00)"
+                        )
                     except Exception as tg_err:
                         logger.error(f"[reminder] ошибка Telegram для {user.telegram_id}: {tg_err}")
+
         except Exception as e:
             logger.error(f"Ошибка в задаче ежечасных напоминаний: {e}")
 
